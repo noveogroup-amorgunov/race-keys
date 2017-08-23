@@ -1,24 +1,24 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-// import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import AppContainer from './containers/app-container';
+import AppContainer from './containers/AppContainer';
 import store, { history } from './store';
 
 /*
 <BrowserRouter>
     <AppContainer />
 </BrowserRouter>
-<ConnectedRouter history={history}>
+
 */
 
 render(
     <Provider store={store}>
-        <BrowserRouter>
+        <ConnectedRouter history={history}>
             <AppContainer />
-        </BrowserRouter>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );

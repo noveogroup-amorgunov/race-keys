@@ -1,7 +1,8 @@
 export const API_URL = process.env.API_URL;
 export const SOCKET_URL = process.env.SOCKET_URL;
-export const LOCAL_STORAGE_KEY = 'blog.app';
-export const ARTICLES_PER_PAGE = 2;
+export const LOCAL_STORAGE_KEY = 'race.keys';
+export const RACES_PER_PAGE = 5;
+
 export const Errors = {
     INVALID_USERNAME_OR_PASSWORD: 'INVALID_USERNAME_OR_PASSWORD',
     USERNAME_ALREADY_USED: 'USERNAME_ALREADY_USED',
@@ -17,14 +18,8 @@ export const Errors = {
 
 export const socketPrefix = 'server/';
 
-export const REST_ENDPOINTS = {
-    rooms: '/rooms',
-};
-
 export const gameStatuses = {
     inProcess: 'IN_PROCESS',
     finished: 'FINISHED',
     waitPlayers: 'WAIT_PLAYERS'
 };
-
-export const sides = ['top', 'left', 'right'];

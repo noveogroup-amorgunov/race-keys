@@ -11,6 +11,7 @@
       },
       sourceType: "module"
   },
+  "parser": "babel-eslint",
   "plugins": ["react"],
   "rules": {
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],

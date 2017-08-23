@@ -1,14 +1,12 @@
 require('dotenv-extended').load();
 
-const
-    path = require('path'),
-    webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const
-    publicFolder = path.resolve(__dirname, 'public'),
-    srcFolder = path.resolve(__dirname, 'src');
+const publicFolder = path.resolve(__dirname, 'public');
+const srcFolder = path.resolve(__dirname, 'src');
 
 const plugins = process.env.NODE_ENV === 'production' ? [
     new webpack.optimize.UglifyJsPlugin({
@@ -21,7 +19,6 @@ module.exports = {
     entry: [
         'babel-polyfill',
         './src/index.js',
-        // './src/assets/css/bootstrap.css',
         './src/assets/styles.scss'
     ],
     output: {
