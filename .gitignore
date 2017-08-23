@@ -1,0 +1,5 @@
+node_modules
+.idea
+frontend/public
+npm-debug.log
+.env
