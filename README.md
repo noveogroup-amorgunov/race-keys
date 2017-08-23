@@ -1,5 +1,17 @@
 # Race keys game
 
+## todolist
+
+- Move players and race store to mongoo from redis (In redis store only socketId -> userId)
+- Rename room to race entiry in server
+- Refactoring server actions, which send to client by socket.io
+- Add component for preview race RacePreviewComponent
+- Add component for race page
+- Add component for create new race
+- Refactoring main (move logic to app) reducer and write game ducks
+- Add styles (try bulma-react)
+- Add car images
+
 ## Requirements
 
 - Redis ([How install in Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04))
