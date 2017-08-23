@@ -1,4 +1,4 @@
-const { authMiddleware } = require('../app/middlewares');
+const { isAuthenticated } = require('../app/middlewares');
 const roomController = require('../app/controllers/room-controller');
 
 module.exports = (router) => {

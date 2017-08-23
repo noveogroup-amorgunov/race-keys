@@ -2,7 +2,7 @@ const
     errorHandlerMiddleware = require('./error-handler'),
     mongooseErrorHandlerMiddleware = require('./mongoose-error-handler'),
     responseMiddleware = require('./response-middleware'),
-    authMiddleware = require('./auth-middleware'),
+    isAuthenticated = require('./auth-middleware'),
     socketMiddleware = require('./socket-middleware'),
     notFoundMiddleware = require('./not-found-middleware');
 
@@ -12,5 +12,5 @@ module.exports = {
     responseMiddleware,
     notFoundMiddleware,
     socketMiddleware,
-    authMiddleware,
+    isAuthenticated,
 };

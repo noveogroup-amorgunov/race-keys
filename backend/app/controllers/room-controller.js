@@ -1,9 +1,8 @@
-const
-    _ = require('lodash'),
-    Room = require('../game/room'),
-    RoomModel = require('../models/room'),
-    { createNewRoom } = require('../socket-services'),
-    userRepository = require('../repositories/user-repository');
+const _ = require('lodash');
+const Room = require('../game/room');
+const RoomModel = require('../models/room');
+const { createNewRoom } = require('../socket-services');
+const userRepository = require('../repositories/user-repository');
 
 const {
     NotFoundException,
@@ -11,12 +10,13 @@ const {
 
 module.exports = {
     async getRooms(ctx) {
-        ctx.body = await Room.getAllOnlineRooms();
+        const data = await Room.getAllOnlineRooms();
+        ctx.body = { races: data, pagination: {} };
     },
 
     async getRoom(ctx) {
         const roomId = ctx.params.id;
-        const room = Room.getRoom(roomId);
+        const room = await Room.getRoom(roomId);
 
         if (!room) {
             throw new NotFoundException();

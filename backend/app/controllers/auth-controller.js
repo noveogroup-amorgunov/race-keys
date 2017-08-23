@@ -1,13 +1,14 @@
-const
-    _ = require('lodash'),
-    moment = require('moment'),
-    { Token, User } = require('mongoose').models,
-    userRepository = require('../repositories/user-repository'),
-    config = require('../../config'),
-    generateToken = require('../services/generate_token');
+const _ = require('lodash');
+const moment = require('moment');
+const { Token } = require('mongoose').models;
+const userRepository = require('../repositories/user-repository');
+const userFormatter = require('../formatters/user-formatter');
+const config = require('../../config');
+const errorMessages = require('../../config/error-messages');
+const generateToken = require('../services/generate_token');
 
 const {
-    UnauthorizedException,
+    BadRequestException,
 } = require('../exceptions');
 
 async function createAccessToken(user) {
@@ -25,12 +26,20 @@ async function createAccessToken(user) {
 module.exports = {
     async signup(ctx) {
         const { login, password } = ctx.request.body;
+        const checkUser = await userRepository.findByLogin(login);
 
-        const user = new User({ login, password });
-        await user.save();
+        if (checkUser) {
+            throw new BadRequestException(errorMessages.usernameAlreadyUsed);
+        }
 
-        ctx.body = {};
-        ctx.status = 204;
+        const user = await userRepository.createUser({ login, password });
+        const accessToken = await createAccessToken(user);
+
+        ctx.body = {
+            token: accessToken,
+            user: userFormatter.get(user),
+        };
+        ctx.status = 201;
     },
 
     async login(ctx) {
@@ -38,30 +47,19 @@ module.exports = {
         const user = await userRepository.findByLogin(login);
 
         if (!user || !user.password || !await user.comparePassword(password)) {
-            throw new UnauthorizedException();
+            throw new BadRequestException(errorMessages.invalidPassword);
         }
 
         const accessToken = await createAccessToken(user);
 
         ctx.body = {
             token: accessToken,
-            user,
+            user: userFormatter.get(user),
         };
     },
-    async resetPasswordRequest(ctx) {
-        // const { email } = ctx.request.body;
-        // await authService.resetPasswordRequest(email);
-        // ctx.status = 204;
-    },
-    async resetPassword(ctx) {
-        // const { resetToken, password } = ctx.request.body;
-        // const { user, accessToken } = await authService.resetPassword(resetToken, password);
-        // ctx.body = {
-        //     token: accessToken,
-        //     user,
-        // };
-    },
     async test(ctx) {
+        global.io.to('main').emit('action', { type: 'NEW_ROOM_CREATED' });
+
         ctx.body = ctx.state.user;
         ctx.status = 200;
     }

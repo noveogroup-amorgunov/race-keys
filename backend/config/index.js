@@ -21,12 +21,7 @@ module.exports = {
         port: process.env.SOCKET_PORT,
     },
     auth: {
-        deletePatientTokenLifetime: 30,
         tokenLifetime: 30, // in days
-        resetPassword: {
-            maxAttempts: 3, // 3 attempts per 1 day
-            tokenLifetime: 1 // in days
-        }
     },
     mongoose: {
         uri: mongoUri,
@@ -50,9 +45,5 @@ module.exports = {
     },
     pagination: {
         default: +process.env.PAGINATION_DEFAULT || 15,
-    },
-    timezones: {
-        defaultZone: 'Europe/London',
-        autocompleteMaxLength: isTest ? 5 : 20,
     },
 };

@@ -1,11 +1,10 @@
-const
-    Koa = require('koa'),
-    logger = require('winston'),
-    assert = require('assert'),
-    config = require('../config'),
-    mongoose = require('./mongoose'),
-    redis = require('./redis'),
-    socketHandler = require('../app/services/socket-handler');
+const Koa = require('koa');
+const logger = require('winston');
+const assert = require('assert');
+const config = require('../config');
+const mongoose = require('./mongoose');
+const redis = require('./redis');
+const socketHandler = require('../app/services/socket-handler');
 
 class Application extends Koa {
     async start() {

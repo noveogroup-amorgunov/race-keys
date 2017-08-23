@@ -1,4 +1,3 @@
-// const RedisService = require('ioredis');
 const bluebird = require('bluebird');
 const redis = require('redis');
 
@@ -16,8 +15,6 @@ class Redis {
 
     connect(config) {
         if (!this.client) {
-            // this.client = new RedisService(config);
-            // return this.client.connect();
             this.client = redis.createClient(config);
         }
         return this.client;
@@ -28,12 +25,6 @@ class Redis {
             this.client = null;
         }
     }
-    // async publish(channel, data = {}) {
-    //     if (!this.client) {
-    //         await this.connect();
-    //     }
-    //     return this.client.publish(channel, JSON.stringify(data));
-    // }
 }
 
 const redisService = new Redis();

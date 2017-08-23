@@ -5,7 +5,8 @@ const { User, Token } = require('../models');
 
 module.exports = {
     async createUser(data) {
-        return User.create(data);
+        const user = new User(data);
+        return user.save();
     },
     async findByLogin(login) {
         return User.findOne({ login });
@@ -24,8 +25,5 @@ module.exports = {
             return null;
         }
         return tokenWithUser.user;
-    },
-    async findByResetPasswordToken(resetPasswordToken) {
-        return User.findOne({ 'resetPassword.token': resetPasswordToken });
     },
 };

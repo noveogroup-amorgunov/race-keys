@@ -1,7 +1,6 @@
-const
-    mongoose = require('mongoose'),
-    config = require('../config'),
-    logger = require('winston');
+const mongoose = require('mongoose');
+const config = require('../config');
+const logger = require('winston');
 
 const mongooseLog = (collectionName, method, query, doc, options) => {
     let output = `[Mongo] ${collectionName}.${method}(${JSON.stringify(query)}, ${JSON.stringify(doc)})`;

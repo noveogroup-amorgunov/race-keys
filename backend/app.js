@@ -23,6 +23,10 @@ app.use(bodyParser());
 app.use(responseMiddleware);
 app.use(koaLogger());
 
+app.use(require('koa2-cors')({
+    allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD']
+}));
+
 require('./routes')(app);
 
 app.use(notFoundMiddleware); // 404
