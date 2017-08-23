@@ -114,7 +114,13 @@ const actions = {
                 resolve(dispatch(actions.logout()));
             });
         };
-    }
+    },
+    setSocketId(socketId) {
+        return {
+            type: types.SET_SOCKET_ID,
+            socketId
+        };
+    },
 };
 
 export default actions;

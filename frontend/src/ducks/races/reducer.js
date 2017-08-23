@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import types from './types';
 import service from './service';
 import actions from './actions';
@@ -8,6 +10,25 @@ const initialState = {
     currentRace: null,
     pagination: {}
 };
+
+function changeStateOnChangeRace(state, action) {
+    const items = [...state.items];
+    const index = _.findIndex(items, { id: action.race.id });
+    items.splice(index, 1, action.race);
+    return {
+        ...state,
+        items,
+    };
+}
+
+function changeStateOnDeleteRace(state, action) {
+    const items = [...state.items]
+        .filter(race => race.id !== action.race.id);
+    return {
+        ...state,
+        items,
+    };
+}
 
 export {
     service,
@@ -47,6 +68,16 @@ export default function races(state = initialState, action) {
                     race.id === action.raceId
                 )
             };
+        case types.NEW_ROOM_CREATED:
+            return {
+                ...state,
+                rooms: [...state.rooms, action.room]
+            };
+        case types.ROOM_CHANGED:
+            return changeStateOnChangeRace(state, action);
+        case types.ROOM_DELETED:
+            return changeStateOnDeleteRace(state, action);
+
         default:
             return state;
     }

@@ -6,6 +6,7 @@ const types = {
     REGISTER_SUCCESS: '@@auth/REGISTER_SUCCESS',
     REGISTER_ERROR: '@@auth/REGISTER_ERROR',
     LOGOUT: '@@auth/LOGOUT',
+    SET_SOCKET_ID: '@@auth/SET_SOCKET_ID',
 };
 
 export default types;

@@ -19,7 +19,7 @@ export const Errors = {
 export const socketPrefix = 'server/';
 
 export const gameStatuses = {
-    inProcess: 'IN_PROCESS',
-    finished: 'FINISHED',
-    waitPlayers: 'WAIT_PLAYERS'
+    IN_PROCESS: 1,
+    WAIT_PLAYERS: 2,
+    FINISHED: 3,
 };

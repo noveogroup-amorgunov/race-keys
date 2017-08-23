@@ -5,7 +5,7 @@ const
 
 module.exports = io => async (socket, next) => {
     console.log('a user connected: ' + socket.id);
-    // console.log(socket.request.headers);
+    console.log(socket.request.headers);
 
     const player = await Player.getPlayerBySocketId(socket.id);
 

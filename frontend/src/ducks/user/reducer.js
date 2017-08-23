@@ -5,7 +5,8 @@ import selectors from './selectors';
 
 const initialState = {
     id: null,
-    login: null
+    login: null,
+    socketId: null,
 };
 
 export {

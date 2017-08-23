@@ -1,29 +1,22 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import createSocketIoMiddleware from 'redux-socket.io';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import createHistory from 'history/createBrowserHistory';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 
-import { initialState as gameInitialState } from './ducks/game/reducer';
-import { initialState as mainInitialState } from './ducks/main/reducer';
-import reducers from './ducks/reducer';
+import { actions as authActions } from './ducks/auth/reducer';
 import { SOCKET_URL } from './constants';
+import reducers from './ducks/reducer';
 
 export const history = createHistory();
 
-const
-    historyMiddleware = routerMiddleware(history),
-    loggerMiddleware = createLogger(),
-    socketIoMiddleware = createSocketIoMiddleware(io(SOCKET_URL), '/');
+const socket = io(SOCKET_URL);
 
-
-const user = JSON.parse(window.localStorage.getItem('user'));
-const preloadedState = {
-    main: { ...mainInitialState, user: user || mainInitialState.user },
-    game: gameInitialState
-};
+const historyMiddleware = routerMiddleware(history);
+const loggerMiddleware = createLogger();
+const socketIoMiddleware = createSocketIoMiddleware(socket, '/');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -31,7 +24,7 @@ const store = createStore(
         ...reducers,
         router: routerReducer,
     }),
-    preloadedState,
+    // preloadedState,
     composeEnhancers(
         applyMiddleware(
             historyMiddleware,
@@ -40,6 +33,10 @@ const store = createStore(
             // loggerMiddleware
         )
     )
+);
+
+socket.on('connect', () =>
+    store.dispatch(authActions.setSocketId(socket.id))
 );
 
 export default store;
