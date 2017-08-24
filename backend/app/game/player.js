@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-// const { cardColors } = require('../constraints/game-actions');
+// const { cardColors } = require('../constraints/gameActions');
 const redis = require('../../bootstrap/redis');
 const { Player: PlayerModel } = require('mongoose').models;
 

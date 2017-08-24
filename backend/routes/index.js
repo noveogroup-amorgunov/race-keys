@@ -6,7 +6,7 @@ const router = new Router();
 
 require('./auth')(router);
 require('./user')(router);
-require('./room')(router);
+require('./race')(router);
 
 module.exports = (app) => {
     app.use(serve(`${__dirname}/resources`));

@@ -1,8 +1,7 @@
-const
-    _ = require('lodash'),
-    Player = require('./player'),
-    redis = require('../../bootstrap/redis'),
-    { Room: RoomModel } = require('mongoose').models;
+const _ = require('lodash');
+const Player = require('./player');
+const redis = require('../../bootstrap/redis');
+const { Room: RoomModel } = require('mongoose').models;
 
 class Room {
     constructor(data) {

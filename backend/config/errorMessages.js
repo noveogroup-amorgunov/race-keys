@@ -7,5 +7,7 @@ module.exports = {
     notFound: 'NOT_FOUND',
     forbidden: 'FORBIDDEN',
     badRequest: 'BAD_REQUEST',
-    unauthorized: 'UNAUTHORIZED'
+    unauthorized: 'UNAUTHORIZED',
+
+    raceNotFound: 'RACE_NOT_FOUND',
 };

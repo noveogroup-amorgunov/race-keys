@@ -4,7 +4,7 @@ const { Token } = require('mongoose').models;
 const userRepository = require('../repositories/user-repository');
 const userFormatter = require('../formatters/user-formatter');
 const config = require('../../config');
-const errorMessages = require('../../config/error-messages');
+const errorMessages = require('../../config/errorMessages');
 const generateToken = require('../services/generate_token');
 
 const {
@@ -58,7 +58,7 @@ module.exports = {
         };
     },
     async test(ctx) {
-        global.io.to('main').emit('action', { type: 'NEW_ROOM_CREATED' });
+        global.io.to('main').emit('action', { type: 'NEW_RACE_CREATED' });
 
         ctx.body = ctx.state.user;
         ctx.status = 200;

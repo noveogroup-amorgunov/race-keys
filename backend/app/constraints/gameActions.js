@@ -54,18 +54,18 @@ module.exports = {
         */
     },
     mainTypes: {
-        USER_LEAVES_ROOM: main('USER_LEAVES_ROOM'),
-        USER_ENTERED_ROOM: main('USER_ENTERED_ROOM'),
+        USER_LEAVES_RACE: main('USER_LEAVES_RACE'),
+        USER_ENTERED_RACE: main('USER_ENTERED_RACE'),
 
-        LEAVE_ROOM: toServerAction(main('LEAVE_ROOM')),
+        LEAVE_RACE: toServerAction(main('LEAVE_RACE')),
 
-        JOIN_ROOM_REQUEST: toServerAction(main('JOIN_ROOM_REQUEST')),
-        JOIN_ROOM_SUCCESS: main('JOIN_ROOM_SUCCESS'),
-        JOIN_ROOM_ERROR: main('JOIN_ROOM_ERROR'),
+        JOIN_RACE_REQUEST: toServerAction(main('JOIN_RACE_REQUEST')),
+        JOIN_RACE_SUCCESS: main('JOIN_RACE_SUCCESS'),
+        JOIN_RACE_ERROR: main('JOIN_RACE_ERROR'),
 
-        NEW_ROOM_CREATED: main('NEW_ROOM_CREATED'),
-        ROOM_CHANGED: main('ROOM_CHANGED'),
-        ROOM_DELETED: main('ROOM_DELETED'),
+        NEW_RACE_CREATED: main('NEW_RACE_CREATED'),
+        RACE_DELETED: main('RACE_DELETED'),
+        RACE_CHANGED: main('RACE_CHANGED'),
     },
     gameErrors: {
         /* NO_FREE_POSITIONS: 'ERR_NO_FREE_POSITION',
@@ -77,11 +77,11 @@ module.exports = {
         PUT_INVALID_POSITION: 'ERR_PUT_INVALID_POSITION',
         */
 
-        ROOM_DOES_NOT_EXIST: 'ERR_ROOM_DOES_NOT_EXIST',
-        PLAYER_DOES_NOT_EXIST: 'ERR_PLAYER_DOES_NOT_EXIST',
+        RACE_NOT_FOUND: 'RACE_NOT_FOUND',
+        PLAYER_NOT_FOUND: 'PLAYER_NOT_FOUND',
 
-        GAME_ALREADY_STARTED: 'ERR_GAME_ALREADY_STARTED',
-        GAME_NOT_STARTED: 'ERR_GAME_NOT_STARTED',
-        ROOM_FULL: 'ERR_ROOM_FULL',
+        GAME_ALREADY_STARTED: 'GAME_ALREADY_STARTED',
+        GAME_NOT_STARTED: 'GAME_NOT_STARTED',
+        RACE_FULL: 'RACE_FULL',
     },
 };

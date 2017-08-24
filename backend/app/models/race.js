@@ -10,10 +10,10 @@ const types = {
     SIMPLE: 1,
 };
 
-const roomSchema = mongoose.Schema({
-    start: Date,
-    end: Date,
-    players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+const raceSchema = mongoose.Schema({
+    startedAt: Date,
+    text: { type: mongoose.Schema.Types.ObjectId, ref: 'Text' },
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
     status: {
         type: Number,
         enum: Object.values(statuses),
@@ -28,9 +28,9 @@ const roomSchema = mongoose.Schema({
     timestamps: true,
 });
 
-const Room = mongoose.model('Room', roomSchema);
+const Race = mongoose.model('Race', raceSchema);
 
-Room.statuses = Object.freeze(statuses);
-Room.types = Object.freeze(types);
+Race.statuses = Object.freeze(statuses);
+Race.types = Object.freeze(types);
 
-module.exports = Room;
+module.exports = Race;

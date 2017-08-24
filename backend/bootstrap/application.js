@@ -4,7 +4,7 @@ const assert = require('assert');
 const config = require('../config');
 const mongoose = require('./mongoose');
 const redis = require('./redis');
-const socketHandler = require('../app/services/socket-handler');
+const socketHandler = require('../app/services/socketHandler');
 
 class Application extends Koa {
     async start() {

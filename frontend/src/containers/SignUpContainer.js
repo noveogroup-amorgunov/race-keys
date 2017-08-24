@@ -1,7 +1,8 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import SignUpComponent from '../components/SignUpComponent';
-import { actions, selectors } from '../ducks/auth';
+import React from 'react';
+
+import SignUpComponent from '@/components/SignUpComponent';
+import { actions, selectors } from '@/ducks/auth';
 
 
 function mapStateToProps(state) {

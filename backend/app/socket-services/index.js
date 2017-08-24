@@ -1,8 +1,9 @@
-const
-    createNewRoom = require('../socket-services/create-new-room'),
-    userLeavesRoom = require('../socket-services/user-leave-room');
+const userLeaveRace = require('../socket-services/userLeaveRace');
+const joinRaceRequest = require('../socket-services/joinRaceRequest');
+const userReadyToPlay = require('../socket-services/userReadyToPlay');
 
 module.exports = {
-    createNewRoom,
-    userLeavesRoom,
+    userLeaveRace,
+    joinRaceRequest,
+    userReadyToPlay,
 };
