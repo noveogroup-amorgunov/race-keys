@@ -2,7 +2,9 @@ import actions from './actions';
 
 export { actions };
 
-export default function app(state = {}, action) {
+export const initialState = {};
+
+export default function app(state = initialState, action) {
     switch (action.type) {
         case 'NEW_ROOM_CREATED':
             break;

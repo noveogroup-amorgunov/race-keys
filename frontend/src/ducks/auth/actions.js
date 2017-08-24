@@ -1,6 +1,6 @@
 import types from './types';
 import service from './service';
-import { LOCAL_STORAGE_KEY } from '../../constants';
+import { LOCAL_STORAGE_KEY } from '@/constants';
 
 const actions = {
     /**
@@ -48,7 +48,7 @@ const actions = {
             return service.requestLogin(credentials)
                 .then(
                     (response) => {
-                        console.log(response);
+                        // console.log(response);
                         window.localStorage.setItem(LOCAL_STORAGE_KEY, response.token);
                         return dispatch(actions.loginSuccess(response.user));
                     },

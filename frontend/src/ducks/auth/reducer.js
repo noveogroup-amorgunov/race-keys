@@ -1,21 +1,10 @@
+import userReducer, { types as userTypes, initialState as userInitialState } from '@/ducks/user';
 import types from './types';
-import service from './service';
-import actions from './actions';
-import selectors from './selectors';
-import userReducer, { types as userTypes, initialState as userInitialState } from '../user/reducer';
 
-const initialState = {
+export const initialState = {
     errorCode: null,
     isAuthenticated: false,
     user: userInitialState
-};
-
-export {
-    service,
-    types,
-    actions,
-    selectors,
-    initialState
 };
 
 export default function auth(state = initialState, action) {

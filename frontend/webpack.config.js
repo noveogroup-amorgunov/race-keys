@@ -91,10 +91,13 @@ module.exports = {
         port: process.env.PORT || 1234,
         // inline: false,
         contentBase: publicFolder,
-        historyApiFallback: true
+        historyApiFallback: true,
     },
     resolve: {
         modules: ['src', 'node_modules'],
-        extensions: ['*', '.js', '.jsx', '.json']
+        extensions: ['*', '.js', '.jsx', '.json'],
+        alias: {
+            '@': srcFolder,
+        }
     },
 };

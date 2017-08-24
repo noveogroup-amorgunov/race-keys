@@ -1,13 +1,11 @@
-import { bindActionCreators } from 'redux';
-import React from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import mainActions from '../ducks/main/actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import React from 'react';
 
-import AppComponent from '../components/AppComponent';
-// import { selectAppContainer } from '../ducks/main/selectors';
-import { selectors as userSelectors, actions as userActions } from '../ducks/user/reducer';
-import { selectors as authSelectors, actions as authActions } from '../ducks/auth/reducer';
+import { selectors as userSelectors, actions as userActions } from '@/ducks/user';
+import { selectors as authSelectors, actions as authActions } from '@/ducks/auth';
+import AppComponent from '@/components/AppComponent';
 
 class AppContainer extends React.Component {
     componentWillMount() {

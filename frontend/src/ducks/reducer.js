@@ -1,6 +1,6 @@
-import races from './races/reducer';
-import game from './game/reducer';
-import auth from './auth/reducer';
-import app from './app/reducer';
+import races from './races';
+import game from './game';
+import auth from './auth';
+import app from './app';
 
 export default ({ game, auth, races, app });

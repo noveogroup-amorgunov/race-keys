@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Errors, API_URL } from '../constants';
+import { Errors, API_URL } from '@/constants';
 
 export default function request(config) {
     const url = API_URL + config.url;

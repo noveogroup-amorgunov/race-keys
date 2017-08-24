@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
-import { Errors, LOCAL_STORAGE_KEY } from '../../constants';
-import { actions as authActions } from '../auth/reducer';
+import { Errors, LOCAL_STORAGE_KEY } from '@/constants';
+import { actions as authActions } from '@/ducks/auth';
 
 const actions = {
     errorHandler(errorCode) {

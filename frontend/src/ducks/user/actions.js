@@ -1,6 +1,6 @@
 import types from './types';
 import service from './service';
-import { LOCAL_STORAGE_KEY, Errors } from '../../constants';
+import { LOCAL_STORAGE_KEY, Errors } from '@/constants';
 
 const actions = {
     fetchUserRequest() {

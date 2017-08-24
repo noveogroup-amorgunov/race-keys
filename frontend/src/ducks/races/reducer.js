@@ -1,15 +1,5 @@
 import _ from 'lodash';
-
 import types from './types';
-import service from './service';
-import actions from './actions';
-import selectors from './selectors';
-
-const initialState = {
-    items: [],
-    currentRace: null,
-    pagination: {}
-};
 
 function changeStateOnChangeRace(state, action) {
     const items = [...state.items];
@@ -30,12 +20,10 @@ function changeStateOnDeleteRace(state, action) {
     };
 }
 
-export {
-    service,
-    types,
-    actions,
-    selectors,
-    initialState
+export const initialState = {
+    items: [],
+    currentRace: null,
+    pagination: {}
 };
 
 export default function races(state = initialState, action) {

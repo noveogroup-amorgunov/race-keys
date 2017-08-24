@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-// import {FormGroup, FormControl, Button, Col, Alert} from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import locale from '../locale';
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import locale from '@/locale';
 
 export default class LoginComponent extends React.Component {
     static propTypes = {

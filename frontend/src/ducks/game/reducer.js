@@ -1,11 +1,7 @@
-import _ from 'lodash';
-
+import { gameStatuses } from '@/constants';
 import types from './types';
-import actions from './actions';
-import selectors from './selectors';
-import { gameStatuses } from '../../constants';
 
-const initialState = {
+export const initialState = {
     my: {},
     players: [],
     playerPositions: [],
@@ -15,14 +11,7 @@ const initialState = {
     error: null,
 };
 
-export {
-    types,
-    actions,
-    selectors,
-    initialState
-};
-
-function reducer(state = {}, action) {
+export default function reducer(state = {}, action) {
     switch (action.type) {
         case types.LEAVE_ROOM:
             return {
@@ -63,8 +52,6 @@ function reducer(state = {}, action) {
             return state;
     }
 }
-
-export default reducer;
 
 
 /*

@@ -6,9 +6,9 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import io from 'socket.io-client';
 
-import { actions as authActions } from './ducks/auth/reducer';
-import { SOCKET_URL } from './constants';
-import reducers from './ducks/reducer';
+import { actions as authActions } from '@/ducks/auth';
+import { SOCKET_URL } from '@/constants';
+import reducers from '@/ducks/reducer';
 
 export const history = createHistory();
 
@@ -24,13 +24,12 @@ const store = createStore(
         ...reducers,
         router: routerReducer,
     }),
-    // preloadedState,
     composeEnhancers(
         applyMiddleware(
             historyMiddleware,
             thunkMiddleware,
             socketIoMiddleware,
-            // loggerMiddleware
+            loggerMiddleware
         )
     )
 );

@@ -1,6 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import React from 'react';
 
 export default class RoomPreviewComponent extends React.Component {
     static propTypes = {
