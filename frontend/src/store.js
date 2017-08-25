@@ -7,12 +7,12 @@ import thunkMiddleware from 'redux-thunk';
 import io from 'socket.io-client';
 
 import { actions as authActions } from '@/ducks/auth';
-import { SOCKET_URL } from '@/constants';
+import { SOCKET_URL, LOCAL_STORAGE_KEY } from '@/constants';
 import reducers from '@/ducks/reducer';
 
 export const history = createHistory();
 
-const socket = io(SOCKET_URL);
+const socket = io(SOCKET_URL, { query: `token=${window.localStorage.getItem(LOCAL_STORAGE_KEY) || ''}` });
 
 const historyMiddleware = routerMiddleware(history);
 const loggerMiddleware = createLogger();

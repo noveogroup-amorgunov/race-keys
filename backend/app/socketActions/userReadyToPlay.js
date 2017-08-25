@@ -20,7 +20,7 @@ module.exports = async (io, player, action) => {
         return;
     }
 
-    notify(gameTypes.USER_CHANGE_READY_STATUS, { player }, player.raceId);
+    notify(gameTypes.USER_CHANGE_READY_STATUS, { player: player.toJson() }, player.raceId);
 
     if (race.isAllPlayersReadyToPlay()) {
         const players = await race.getPlayers();
@@ -33,6 +33,6 @@ module.exports = async (io, player, action) => {
             notify(gameTypes.START_GAME, gameState, player.socketId);
         });
 
-        notify(mainTypes.RACE_CHANGED, { race });
+        notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
     }
 };

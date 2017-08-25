@@ -1,7 +1,7 @@
 const { isAuthenticated } = require('../app/middlewares');
-const validator = require('../app/middlewares/validator-middleware');
-const authValidatorRules = require('../app/validators/auth-validator');
-const authController = require('../app/controllers/auth-controller');
+const validator = require('../app/middlewares/validatorMiddleware');
+const authValidatorRules = require('../app/validators/authValidator');
+const authController = require('../app/controllers/authController');
 
 module.exports = (router) => {
     router.post('/auth/login', validator(authValidatorRules.login), authController.login);

@@ -1,4 +1,4 @@
-const userFormatter = require('../formatters/user-formatter');
+const userFormatter = require('../formatters/userFormatter');
 
 module.exports = {
     async me(ctx) {

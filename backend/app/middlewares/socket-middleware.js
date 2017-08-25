@@ -49,7 +49,6 @@ module.exports = async (socket, next) => {
     await client.subscribe(socket.user._id.toString());
     socket.redisClient = client;
 
-
     socket.on('disconnect', async () => {
         const user = await Player.getPlayerBySocketId(client.id);
         if (user !== null) {

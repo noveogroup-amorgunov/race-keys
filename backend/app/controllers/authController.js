@@ -1,11 +1,11 @@
 const _ = require('lodash');
 const moment = require('moment');
 const { Token } = require('mongoose').models;
-const userRepository = require('../repositories/user-repository');
-const userFormatter = require('../formatters/user-formatter');
+const userRepository = require('../repositories/userRepository');
+const userFormatter = require('../formatters/userFormatter');
 const config = require('../../config');
 const errorMessages = require('../../config/errorMessages');
-const generateToken = require('../services/generate_token');
+const generateToken = require('../services/generateToken');
 
 const {
     BadRequestException,

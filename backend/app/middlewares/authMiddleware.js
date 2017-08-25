@@ -1,4 +1,4 @@
-const UserRepository = require('../repositories/user-repository');
+const UserRepository = require('../repositories/userRepository');
 const { UnauthorizedException } = require('../exceptions');
 
 const { Token } = require('mongoose').models;

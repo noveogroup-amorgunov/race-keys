@@ -1,17 +1,18 @@
-import AppContainer from './AppContainer';
-import LoginContainer from './LoginContainer';
 import SignUpContainer from './SignUpContainer';
+import LoginContainer from './LoginContainer';
 import RacesContainer from './RacesContainer';
+import RaceContainer from './RaceContainer';
+import AppContainer from './AppContainer';
+
 // import CreateArticleContainer from './CreateArticleContainer';
-// import ArticleContainer from './ArticleContainer';
 // import EditArticleContainer from './EditArticleContainer';
 
 export {
-    AppContainer,
-    LoginContainer,
     SignUpContainer,
+    LoginContainer,
     RacesContainer,
+    RaceContainer,
+    AppContainer,
     // CreateArticleContainer,
-    // ArticleContainer,
     // EditArticleContainer
 };
