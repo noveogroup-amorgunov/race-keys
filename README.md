@@ -26,6 +26,7 @@ Create `.env` file (example in `.env.defaults`) and install dependencies for fro
 $ cd backend
 $ cp .env.defaults .env
 $ npm install
+$ npm run migrate
 
 $ cd frontend
 $ cp .env.defaults .env

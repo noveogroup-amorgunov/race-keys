@@ -19,15 +19,16 @@ function AppComponent(props) {
                 isAuthenticated={props.isAuthenticated}
                 user={props.user}
                 onLogout={props.onLogout} />
-
-            <Route exact path='/' component={RacesContainer}/>
-            <Route exact path='/login' component={LoginContainer}/>
-            <Route exact path='/signup' component={SignUpContainer}/>
-
-            <Switch>
-                <Route path='/race/new' component={CreateRaceContainer}/>
-                <Route path='/race/:id' component={RaceContainer}/>
-            </Switch>
+            <main>
+                <Route exact path='/' component={RacesContainer}/>
+                <Route exact path='/login' component={LoginContainer}/>
+                <Route exact path='/signup' component={SignUpContainer}/>
+                <Switch>
+                    <Route path='/race/new' component={CreateRaceContainer}/>
+                    <Route path='/race/:id' component={RaceContainer}/>
+                </Switch>
+            </main>
+            <footer></footer>
         </div>
     );
 }

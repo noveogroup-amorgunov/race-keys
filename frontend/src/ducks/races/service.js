@@ -9,7 +9,7 @@ const service = {
     fetchRaces(limit = 5, offset = 0) {
         console.log('service::fetchRaces');
         return request({
-            url: `/rooms?limit=${limit}&offset=${offset}`
+            url: `/races/open?limit=${limit}&offset=${offset}`
         });
     },
 
@@ -21,7 +21,7 @@ const service = {
     createRace(token, raceData) {
         return request({
             method: 'post',
-            url: '/rooms',
+            url: '/races',
             data: raceData,
             headers: {
                 authorization: token
