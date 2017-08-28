@@ -1,9 +1,6 @@
 module.exports = {
     get(race) {
-        return {
-            id: race._id,
-            status: race.status,
-        };
+        return race.toJson();
     },
 
     list(races) {

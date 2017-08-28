@@ -19,6 +19,7 @@ module.exports = async (io, player, socket) => {
         notify(mainTypes.USER_LEAVES_RACE, { player: player.toJson() }, player.raceId);
 
         // TODO: HANDLE REDIS STORE
+        // await player.remove();
         await race.removePlayer(player);
 
         if (race.isEmptyRace()) {

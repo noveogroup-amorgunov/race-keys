@@ -16,7 +16,7 @@ const dontReport = [
     PermissionDeniedException,
     UnprocessableEntityException,
     NotFoundException,
-    ConflictException
+    ConflictException,
 ];
 
 module.exports = async (ctx, next) => {

@@ -24,7 +24,7 @@ module.exports = async (io, action, socket) => {
     // find player by room and socketId
     let player = await playerRepository.getPlayerBySocketId(socketId);
 
-    // find uesr by userToken and connect him to player entity
+    // find user by userToken and connect him to player entity
     if (!player && socket.handshake.query.token) {
         const user = await userRepository.findByNotExpiredToken(socket.handshake.query.token);
         player = await playerRepository.getPlayerByRaceAndUserId(race.id, user.id);

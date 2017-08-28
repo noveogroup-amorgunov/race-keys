@@ -34,6 +34,7 @@ raceSchema.methods.getPlayers = function getPlayers() {
 
 raceSchema.methods.toJson = function toJson() {
     return {
+        id: this._id,
         startedAt: this.startedAt,
         text: this.text.text,
         players: this.getPlayers(),

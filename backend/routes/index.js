@@ -1,6 +1,5 @@
-const
-    Router = require('koa-router'),
-    serve = require('koa-static');
+const Router = require('koa-router');
+const serve = require('koa-static');
 
 const router = new Router();
 
