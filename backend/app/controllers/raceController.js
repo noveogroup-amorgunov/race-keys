@@ -1,20 +1,16 @@
-const { Race } = require('mongoose').models;
-const _ = require('lodash');
-
 const raceRepository = require('../repositories/raceRepository');
 const raceFormatter = require('../formatters/raceFormatter');
 const errorMessages = require('../../config/errorMessages');
-const gameActions = require('../constraints/gameActions');
 const { notify } = require('../services/notifyService');
-
-const {
-    NotFoundException,
-} = require('../exceptions');
+const { NotFoundException } = require('../exceptions');
+const gameActions = require('../../config/gameTypes');
+const { Race } = require('../models');
 
 module.exports = {
     async getOpenRaces(ctx) {
         const data = await raceRepository.getRacesByStatus(Race.statuses.WAIT_PLAYERS);
-        ctx.body = { races: data, pagination: {} };
+        ctx.body = { races: data };
+        ctx.state.meta = {};
     },
 
     async getRace(ctx) {
@@ -28,8 +24,7 @@ module.exports = {
     },
 
     async createRace(ctx) {
-        const race = await (new Race()).save();
-
+        const race = await raceRepository.createRace();
         await notify(gameActions.mainTypes.NEW_RACE_CREATED, { race });
 
         ctx.body = raceFormatter.get(race);

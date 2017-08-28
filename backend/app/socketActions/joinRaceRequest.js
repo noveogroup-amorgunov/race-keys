@@ -1,5 +1,5 @@
 const { Player } = require('mongoose').models;
-const { mainTypes, gameErrors, gameTypes } = require('../constraints/gameActions');
+const { mainTypes, gameErrors, gameTypes } = require('../../config/gameTypes');
 const playerRepository = require('../repositories/playerRepository');
 const raceRepository = require('../repositories/raceRepository');
 const userRepository = require('../repositories/userRepository');

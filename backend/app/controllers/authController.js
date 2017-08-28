@@ -1,27 +1,8 @@
 const _ = require('lodash');
-const moment = require('moment');
-const { Token } = require('mongoose').models;
 const userRepository = require('../repositories/userRepository');
 const userFormatter = require('../formatters/userFormatter');
-const config = require('../../config');
 const errorMessages = require('../../config/errorMessages');
-const generateToken = require('../services/generateToken');
-
-const {
-    BadRequestException,
-} = require('../exceptions');
-
-async function createAccessToken(user) {
-    const token = await generateToken(24);
-    const expiresIn = moment().add(config.auth.tokenLifetime, 'd').toDate();
-    await Token.create({
-        token,
-        expiresIn,
-        user: user._id,
-        type: Token.types.ACCESS
-    });
-    return token;
-}
+const { BadRequestException } = require('../exceptions');
 
 module.exports = {
     async signup(ctx) {
@@ -33,7 +14,7 @@ module.exports = {
         }
 
         const user = await userRepository.createUser({ login, password });
-        const accessToken = await createAccessToken(user);
+        const accessToken = await userRepository.createAccessToken(user);
 
         ctx.body = {
             token: accessToken,
@@ -50,7 +31,7 @@ module.exports = {
             throw new BadRequestException(errorMessages.invalidPassword);
         }
 
-        const accessToken = await createAccessToken(user);
+        const accessToken = await userRepository.createAccessToken(user);
 
         ctx.body = {
             token: accessToken,

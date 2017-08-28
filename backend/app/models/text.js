@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const textSchema = mongoose.Schema({
     text: String,
+    source: String,
 }, {
     timestamps: true,
 });

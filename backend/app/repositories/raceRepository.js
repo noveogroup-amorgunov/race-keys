@@ -1,4 +1,4 @@
-const { Race } = require('mongoose').models;
+const { Race, Text } = require('../models');
 const _ = require('lodash');
 
 module.exports = {
@@ -8,5 +8,10 @@ module.exports = {
 
     async getRaceById(raceId) {
         return Race.findById(raceId).populate('players');
+    },
+
+    async createRace() {
+        const text = await Text.findOne();
+        return (new Race({ text: text.id })).save();
     },
 };

@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { Race } = require('mongoose').models;
-const { mainTypes, gameErrors, gameTypes } = require('../constraints/gameActions');
+const { mainTypes, gameErrors, gameTypes } = require('../../config/gameTypes');
 const raceRepository = require('../repositories/raceRepository');
 const { notify } = require('../services/notifyService');
 

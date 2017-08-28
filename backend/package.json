@@ -10,6 +10,7 @@
     "dotenv-extended": "^2.0.1",
     "ioredis": "^3.1.4",
     "joi": "^10.6.0",
+    "joi-objectid": "^2.0.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-logger": "^3.0.1",
@@ -30,11 +31,13 @@
   "devDependencies": {
     "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.1",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint-plugin-import": "^2.7.0",
+    "migrate": "^0.2.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/app.js"
+    "start": "node bin/app.js",
+    "migrate": "./node_modules/.bin/migrate --template-file migrations/template.js"
   },
   "keywords": [],
   "author": "",

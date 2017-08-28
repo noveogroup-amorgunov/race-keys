@@ -1,5 +1,5 @@
 const logger = require('winston');
-const { mainTypes, gameTypes } = require('../constraints/gameActions');
+const { mainTypes, gameTypes } = require('../../config/gameTypes');
 const playerRepository = require('../repositories/playerRepository');
 
 const {

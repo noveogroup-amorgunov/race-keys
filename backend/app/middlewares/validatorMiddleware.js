@@ -2,6 +2,8 @@ const _ = require('lodash');
 const Joi = require('joi');
 const { UnprocessableEntityException } = require('../exceptions');
 
+Joi.objectId = require('joi-objectid')(Joi);
+
 module.exports = rules => async (ctx, next) => {
     const request = {};
 
