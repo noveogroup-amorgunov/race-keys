@@ -1,3 +1,7 @@
+import { socketPrefix } from '../../constants';
+
+const toServer = actionType => socketPrefix + actionType;
+
 const types = {
     FETCH_RACE_LIST_REQUEST: '@@races/FETCH_RACE_LIST_REQUEST',
     FETCH_RACE_LIST_SUCCESS: '@@races/FETCH_RACE_LIST_SUCCESS',
@@ -10,9 +14,17 @@ const types = {
     SET_CURRENT_RACE_BY_ID: '@@races/SET_CURRENT_RACE_BY_ID',
     SET_CURRENT_RACE_AS_OBJECT: '@@races/SET_CURRENT_RACE_AS_OBJECT',
 
-    NEW_ROOM_CREATED: '@@races/NEW_ROOM_CREATED',
-    ROOM_CHANGED: '@@races/ROOM_CHANGED',
-    ROOM_DELETED: '@@races/ROOM_DELETED',
+    NEW_RACE_CREATED: '@@races/NEW_RACE_CREATED',
+    RACE_DELETED: '@@races/RACE_DELETED',
+    RACE_CHANGED: '@@races/RACE_CHANGED',
+
+    /**
+     * Actions, which user send to server
+     */
+
+    READY_TO_PLAY: toServer('@@game/READY_TO_PLAY'),
+    LEAVE_RACE: toServer('@@races/LEAVE_RACE'),
+    JOIN_RACE_REQUEST: toServer('@@races/JOIN_RACE_REQUEST'),
 };
 
 export default types;

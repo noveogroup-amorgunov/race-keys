@@ -10,7 +10,7 @@ class RacesContainer extends React.Component {
         fetchRaces: PropTypes.func.isRequired,
         setCurrentRaceById: PropTypes.func.isRequired,
         races: PropTypes.array.isRequired,
-        pagination: PropTypes.object.isRequired,
+        // pagination: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
     };
 
@@ -21,8 +21,9 @@ class RacesContainer extends React.Component {
     }
 
     _handleRouteChange = (raceId) => {
+        console.log('go to race page');
         this.props.setCurrentRaceById(raceId);
-        this.props.history.push(`/races/${raceId}`);
+        this.props.history.push(`/race/${raceId}`);
     }
     render() {
         // pagination={pagination}

@@ -7,9 +7,10 @@ const service = {
      * @return {Promise.<Object>}
      */
     fetchRaces(limit = 5, offset = 0) {
-        console.log('service::fetchRaces');
+        // console.log('service::fetchRaces');
         return request({
-            url: `/races/open?limit=${limit}&offset=${offset}`
+            // url: `/races/open?limit=${limit}&offset=${offset}`
+            url: '/races/open'
         });
     },
 

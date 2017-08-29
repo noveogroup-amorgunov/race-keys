@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import RacesComponent from '@/components/RacesComponent';
+import RaceComponent from '@/components/RaceComponent';
 import { actions, selectors } from '@/ducks/races';
 
-class RacesContainer extends React.Component {
+class RaceContainer extends React.Component {
     componentWillMount() {
+        console.log('join to race: ' + this.props.match.params.id);
         const socketId = window.localStorage.getItem('socketId');
         this.props.joinRace(
             this.props.match.params.id,
@@ -24,6 +25,7 @@ class RacesContainer extends React.Component {
     }
 
     componentWillUnmount() {
+        console.log('leave race');
         this.props.leaveRace();
     }
 
@@ -33,7 +35,6 @@ class RacesContainer extends React.Component {
     }*/
 
     render() {
-        return (<div>RaceGameComponent</div>);
         /*
         return !this.props.currentArticle
             ? <Redirect to='/'/>
@@ -41,29 +42,27 @@ class RacesContainer extends React.Component {
                 {...this.props.currentArticle}
                 goToEdit={this._changeRouteToEdit}
                 userId={this.props.userId}
-            />
+            />*/
         return (
-            <RacesComponent
-                races={races}
-                
-                onRouteChange={this._handleRouteChange}
-                onPageChange={fetchRaces} />
+            <RaceComponent
+                race={this.props.currentRace}
+                joinRace={this.props.joinRace}
+                leaveRace={this.props.leaveRace} />
         );
-        */
     }
 }
 
 function mapStateToProps(state) {
     return {
         currentRace: selectors.selectCurrentRace(state),
-        selectCurrentRaceId: selectors.selectCurrentRaceId(state),
+        // selectCurrentRaceId: selectors.selectCurrentRaceId(state),
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        // joinRace: actions 
-        // leaveRace: actions
+        joinRace: data => dispatch(actions.joinRaceRequest(data)),
+        leaveRace: () => dispatch(actions.leaveRace()),
     };
     /*
         fetchRaces: bindActionCreators(actions.fetchRaces, dispatch),
@@ -72,4 +71,4 @@ function mapDispatchToProps(dispatch) {
     */
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RacesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RaceContainer);

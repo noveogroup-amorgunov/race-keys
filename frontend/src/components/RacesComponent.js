@@ -6,8 +6,8 @@ function RacesComponent(props) {
     // const { pageCount, offset, limit, rowCount } = props.pagination;
     return (
         <div>
-            {props.races.map(races =>
-                (<RacePreviewComponent key={races.id} onRouteChange={props.onRouteChange} {...races} />)
+            {props.races.map(race =>
+                (<RacePreviewComponent id={race.id} key={race.id} onRouteChange={props.onRouteChange} {...race} />)
             )}
 
             {/* rowCount > limit &&

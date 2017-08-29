@@ -66,6 +66,23 @@ const actions = {
             raceId
         };
     },
+    joinRaceRequest(id, socketId) {
+        return {
+            type: types.JOIN_RACE_REQUEST,
+            raceId: id,
+            socketId,
+        };
+    },
+    readyToPlay() {
+        return {
+            type: types.READY_TO_PLAY
+        };
+    },
+    leaveRace() {
+        return {
+            type: types.LEAVE_RACE
+        };
+    },
 };
 
 export default actions;

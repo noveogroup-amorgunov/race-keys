@@ -2,14 +2,16 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import React from 'react';
 
-export default class RoomPreviewComponent extends React.Component {
+export default class RacePreviewComponent extends React.Component {
     static propTypes = {
-        type: PropTypes.string.isRequired,
+        // type: PropTypes.string.isRequired,
         players: PropTypes.array.isRequired,
-        user: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        /* user: PropTypes.shape({
             username: PropTypes.string.isRequired
         }).isRequired,
-        createdAt: PropTypes.string.isRequired,
+        */
+        // createdAt: PropTypes.string.isRequired,
         onRouteChange: PropTypes.func.isRequired,
     };
 
@@ -19,23 +21,22 @@ export default class RoomPreviewComponent extends React.Component {
         return (
             <div className='race'>
                 <div className='race-header'>
-                    <div className='no-padding race-title race-preview-title text-ellipsis'>
-                        {this.props.title}
+                    <div className='race-title race-preview-title'>
+                        {this.props.id}
                     </div>
                     <div className='no-padding'>
                         <div className='article-meta article-preview-meta text-ellipsis'>
-                            {this.props.user.username}
+                            {this.props.players.length}
                         </div>
                         <div className='article-meta article-preview-meta'>
-                            {moment(this.props.created_at).format('DD-MM-YYYY')}
+                            {moment(this.props.createdAt).format('DD-MM-YYYY')}
                         </div>
                     </div>
                 </div>
-                <div className='race-body'></div>
                 <button
                     className='success'
-                    onClick={this.props.onRouteChange.bind(null, this.props.title, this.props.id)} >
-                    Read more
+                    onClick={this.props.onRouteChange.bind(null, this.props.id)} >
+                    Enter
                 </button>
             </div>
         );

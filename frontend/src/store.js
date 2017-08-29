@@ -16,7 +16,7 @@ const socket = io(SOCKET_URL, { query: `token=${window.localStorage.getItem(LOCA
 
 const historyMiddleware = routerMiddleware(history);
 const loggerMiddleware = createLogger();
-const socketIoMiddleware = createSocketIoMiddleware(socket, '/');
+const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -29,7 +29,7 @@ const store = createStore(
             historyMiddleware,
             thunkMiddleware,
             socketIoMiddleware,
-            loggerMiddleware
+            // loggerMiddleware
         )
     )
 );

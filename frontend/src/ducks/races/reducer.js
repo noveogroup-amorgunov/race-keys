@@ -44,9 +44,10 @@ export default function races(state = initialState, action) {
                 ...state,
                 currentRace: {
                     ...state.currentRace,
-                    // title: action.race.title,
-                    // image_url: action.race.image_url,
-                    // content: action.race.content
+                    players: action.race.players,
+                    text: action.race.text,
+                    id: action.race.id,
+                    status: action.race.status,
                 }
             };
         case types.SET_CURRENT_RACE_BY_ID:
@@ -56,14 +57,14 @@ export default function races(state = initialState, action) {
                     race.id === action.raceId
                 )
             };
-        case types.NEW_ROOM_CREATED:
+        case types.NEW_RACE_CREATED:
             return {
                 ...state,
-                rooms: [...state.rooms, action.room]
+                items: [...state.items, action.race]
             };
-        case types.ROOM_CHANGED:
+        case types.RACE_DELETED:
             return changeStateOnChangeRace(state, action);
-        case types.ROOM_DELETED:
+        case types.RACE_CHANGED:
             return changeStateOnDeleteRace(state, action);
 
         default:

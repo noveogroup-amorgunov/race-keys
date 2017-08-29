@@ -23,9 +23,9 @@ function AppComponent(props) {
                 <Route exact path='/' component={RacesContainer}/>
                 <Route exact path='/login' component={LoginContainer}/>
                 <Route exact path='/signup' component={SignUpContainer}/>
+                <Route exact path='/race/:id' component={RaceContainer}/>
                 <Switch>
                     <Route path='/race/new' component={CreateRaceContainer}/>
-                    <Route path='/race/:id' component={RaceContainer}/>
                 </Switch>
             </main>
             <footer></footer>

@@ -8,11 +8,6 @@ const types = {
      * Actions, which user send to server
      */
 
-    JOIN_ROOM_REQUEST: toServer('@@game/JOIN_ROOM_REQUEST'),
-    READY_TO_PLAY: toServer('@@game/READY_TO_PLAY'),
-    LEAVE_ROOM: toServer('@@game/LEAVE_ROOM'),
-
-
     PUT_CARD_REQUEST: toServer('@@game/PUT_CARD_REQUEST'),
     SHUFFLE_CARDS_REQUEST: toServer('@@game/SHUFFLE_CARDS_REQUEST'),
     GET_ONE_CARD_REQUEST: toServer('@@game/GET_ONE_CARD_REQUEST'),
