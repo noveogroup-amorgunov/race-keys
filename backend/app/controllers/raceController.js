@@ -25,9 +25,10 @@ module.exports = {
 
     async createRace(ctx) {
         const race = await raceRepository.createRace();
-        await notify(gameActions.mainTypes.NEW_RACE_CREATED, { race });
+        const formattedRace = { race: raceFormatter.get(race) };
+        await notify(gameActions.mainTypes.NEW_RACE_CREATED, formattedRace);
 
-        ctx.body = raceFormatter.get(race);
+        ctx.body = formattedRace;
         ctx.status = 201;
     },
 };

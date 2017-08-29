@@ -12,6 +12,8 @@ module.exports = {
 
     async createRace() {
         const text = await Text.findOne();
-        return (new Race({ text: text.id })).save();
+        const race = await (new Race({ text: text.id })).save();
+
+        return Race.findById(race.id).populate(['players', 'text']);
     },
 };

@@ -3,9 +3,7 @@ import LoginContainer from './LoginContainer';
 import RacesContainer from './RacesContainer';
 import RaceContainer from './RaceContainer';
 import AppContainer from './AppContainer';
-
-// import CreateArticleContainer from './CreateArticleContainer';
-// import EditArticleContainer from './EditArticleContainer';
+import CreateRaceContainer from './CreateRaceContainer';
 
 export {
     SignUpContainer,
@@ -13,6 +11,5 @@ export {
     RacesContainer,
     RaceContainer,
     AppContainer,
-    // CreateArticleContainer,
-    // EditArticleContainer
+    CreateRaceContainer,
 };

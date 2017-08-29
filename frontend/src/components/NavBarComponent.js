@@ -10,7 +10,7 @@ function NavBarComponent(props) {
                 {props.isAuthenticated
                     ?
                     <div className="header__buttons">
-                        <span>Hello, {props.user.login}!</span>
+                        <span>Hello, <strong>{props.user.login}!</strong></span>
                         <NavLink className="button" onClick={props.onLogout} to='#'>Logout</NavLink>
                         <NavLink className="button" to='/race/new'>Create race</NavLink>
                     </div>

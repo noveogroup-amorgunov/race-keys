@@ -87,10 +87,10 @@ export default class RegisterComponent extends React.Component {
                     value={form.confirmPassword}
                     onChange={this._handleInputChange.bind(this, 'confirmPassword')}
                 />
-                {errorMessage && <span className="danger">
+                {errorMessage && <div className="danger">
                     {errorMessage}
-                </span>}
-                <button className='primary' type='submit'>
+                </div>}
+                <button className='button' type='submit'>
                     Register
                 </button>
                 <div className='form-link-message'>

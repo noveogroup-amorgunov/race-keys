@@ -74,10 +74,10 @@ export default class LoginComponent extends React.Component {
                     value={form.password}
                     onChange={this._handleInputChange.bind(this, 'password')}
                 />
-                {errorMessage && <span className="danger">
+                {errorMessage && <div className="danger">
                     {errorMessage}
-                </span>}
-                <button className='primary' type='submit'>
+                </div>}
+                <button className='button' type='submit'>
                     Login
                 </button>
                 <div className='form-link-message'>

@@ -11,6 +11,8 @@
 - Refactoring main (move logic to app) reducer and write game ducks
 - Add styles (try bulma-react)
 - Add car images
+- Fix: load race (if races is not loaded) and set currentRace
+- Fix: load game state with races (?) new action
 
 ## Requirements
 

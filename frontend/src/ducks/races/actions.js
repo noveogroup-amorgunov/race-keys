@@ -22,7 +22,6 @@ const actions = {
         };
     },
     fetchRaces(pageNumber = 1) {
-        console.log('actions::fetchRaces');
         return (dispatch) => {
             dispatch(actions.fetchRaceListRequest());
             return service.fetchRaces(RACES_PER_PAGE, (pageNumber - 1) * RACES_PER_PAGE)

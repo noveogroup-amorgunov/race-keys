@@ -10,28 +10,22 @@ class RacesContainer extends React.Component {
         fetchRaces: PropTypes.func.isRequired,
         setCurrentRaceById: PropTypes.func.isRequired,
         races: PropTypes.array.isRequired,
-        // pagination: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
     };
 
     componentWillMount() {
-        console.log('RacesContainer::fetchRaces');
-        console.log(this.props.fetchRaces);
         this.props.fetchRaces();
     }
 
     _handleRouteChange = (raceId) => {
-        console.log('go to race page');
         this.props.setCurrentRaceById(raceId);
         this.props.history.push(`/race/${raceId}`);
     }
     render() {
-        // pagination={pagination}
-        const { races, /*pagination,*/ fetchRaces } = this.props;
+        const { races, fetchRaces } = this.props;
         return (
             <RacesComponent
                 races={races}
-                
                 onRouteChange={this._handleRouteChange}
                 onPageChange={fetchRaces} />
         );

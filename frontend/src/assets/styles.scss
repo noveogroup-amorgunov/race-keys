@@ -15,13 +15,17 @@ body {
 html, body {
     width: 100%;
     height: 100%;
+    background-color: #fafafa;
 }
 
 main {
-    max-width: 1260px;
+    background-color: #fff;
+    // max-width: 1260px;
+    max-width: 1024px;
     width: auto;
     margin: 0 auto;
     padding: 30px;
+    height: 90%;
 }
 
 .footer {
@@ -51,6 +55,10 @@ main {
 
         .button {
             margin-left: 10px;
+        }
+
+        span {
+            line-height: 36px;
         }
     }
 
@@ -129,4 +137,44 @@ main {
 .button:hover {
     color: #207FC2;
     border: 1px solid #339ce5;
+}
+
+input {
+    -webkit-appearance: textfield;
+    outline: 0;
+    padding: 10px 20px;
+    width: 100%;
+    border: 1px solid #999;
+}
+
+form {
+    input, button {
+        margin-bottom: 10px;
+    }
+}
+
+#root {
+    height: 100%;
+    & > div {
+        height: 100%;
+    }
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.danger {
+    color: red;
+    padding-bottom: 5px;
+}
+
+.race {
+    width: 30%;
+    display: inline-block;
+    background-color: #fafafa;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 2px;
 }

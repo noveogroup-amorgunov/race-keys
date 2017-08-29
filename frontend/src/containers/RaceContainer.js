@@ -6,8 +6,15 @@ import RaceComponent from '@/components/RaceComponent';
 import { actions, selectors } from '@/ducks/races';
 
 class RaceContainer extends React.Component {
+    static propTypes = {
+        currentRace: PropTypes.object.isRequired,
+        joinRace: PropTypes.func.isRequired,
+        leaveRace: PropTypes.func.isRequired,
+        readyToPlay: PropTypes.func.isRequired,
+    };
+
     componentWillMount() {
-        console.log('join to race: ' + this.props.match.params.id);
+        console.log(`join to race: ${this.props.match.params.id}`);
         const socketId = window.localStorage.getItem('socketId');
         this.props.joinRace(
             this.props.match.params.id,
@@ -46,8 +53,7 @@ class RaceContainer extends React.Component {
         return (
             <RaceComponent
                 race={this.props.currentRace}
-                joinRace={this.props.joinRace}
-                leaveRace={this.props.leaveRace} />
+                readyToPlay={this.props.readyToPlay} />
         );
     }
 }
@@ -61,8 +67,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        fetchRaces: bindActionCreators(actions.fetchRaces, dispatch),
         joinRace: data => dispatch(actions.joinRaceRequest(data)),
         leaveRace: () => dispatch(actions.leaveRace()),
+        readyToPlay: () => dispatch(actions.readyToPlay()),
     };
     /*
         fetchRaces: bindActionCreators(actions.fetchRaces, dispatch),

@@ -26,7 +26,7 @@ export default class RacePreviewComponent extends React.Component {
                     </div>
                     <div className='no-padding'>
                         <div className='article-meta article-preview-meta text-ellipsis'>
-                            {this.props.players.length}
+                            Players: {this.props.players.length}
                         </div>
                         <div className='article-meta article-preview-meta'>
                             {moment(this.props.createdAt).format('DD-MM-YYYY')}
@@ -34,7 +34,7 @@ export default class RacePreviewComponent extends React.Component {
                     </div>
                 </div>
                 <button
-                    className='success'
+                    className='button'
                     onClick={this.props.onRouteChange.bind(null, this.props.id)} >
                     Enter
                 </button>
