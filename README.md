@@ -2,9 +2,9 @@
 
 ## todolist
 
-- Move players and race store to mongoo from redis (In redis store only socketId -> userId)
-- Rename room to race entiry in server
-- Refactoring server actions, which send to client by socket.io
+- ~Move players and race store to mongoo from redis (In redis store only socketId -> userId)~
+- ~Rename room to race entiry in server~
+- ~Refactoring server actions, which send to client by socket.io~
 - Add component for preview race RacePreviewComponent
 - Add component for race page
 - Add component for create new race
