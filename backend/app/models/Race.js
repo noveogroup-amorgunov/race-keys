@@ -49,7 +49,7 @@ raceSchema.methods.addPlayer = async function addPlayer(player) {
 
     this.players.push(player);
     await player.setRace(this.id).save();
-    return this;
+    return Promise.resolve(this);
 };
 
 raceSchema.methods.removePlayer = async function removePlayer(player) {

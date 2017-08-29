@@ -1,9 +1,10 @@
-const BadRequestException = require('./bad-request-exception');
-const UnauthorizedException = require('./unauthorized-exception');
-const PermissionDeniedException = require('./permission-denied-exception');
-const UnprocessableEntityException = require('./unprocessable-entity-exception');
-const NotFoundException = require('./not-found-exception');
-const ConflictException = require('./conflict-exception');
+const BadRequestException = require('./badRequestException');
+const UnauthorizedException = require('./unauthorizedException');
+const PermissionDeniedException = require('./permissionDeniedException');
+const UnprocessableEntityException = require('./unprocessableEntityException');
+const NotFoundException = require('./notFoundException');
+const ConflictException = require('./conflictException');
+const SocketException = require('./socketException');
 
 module.exports = {
     BadRequestException,
@@ -12,4 +13,5 @@ module.exports = {
     UnprocessableEntityException,
     NotFoundException,
     ConflictException,
+    SocketException,
 };

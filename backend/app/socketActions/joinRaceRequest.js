@@ -10,6 +10,7 @@ const maxPlayersInOneRace = 8;
 module.exports = async (io, action, socket) => {
     const raceId = action.raceId;
     const socketId = action.socketId || socket.id;
+    let user;
 
     const updateSocket = socketId !== socket.id;
     const race = await raceRepository.getRaceById(raceId);
@@ -24,8 +25,10 @@ module.exports = async (io, action, socket) => {
 
     // find user by userToken and connect him to player entity
     if (!player && socket.handshake.query.token) {
-        const user = await userRepository.findByNotExpiredToken(socket.handshake.query.token);
-        player = await playerRepository.getPlayerByRaceAndUserId(race.id, user.id);
+        user = await userRepository.findByNotExpiredToken(socket.handshake.query.token);
+        if (user) {
+            player = await playerRepository.getPlayerByRaceAndUserId(race.id, user.id);
+        }
     }
 
     // TODO: change socketId -> if user reload page with game
@@ -42,13 +45,10 @@ module.exports = async (io, action, socket) => {
             // if (player) {
             // } else {}
 
-            player = new Player({});
-            await player.save();
-
-            await playerRepository.addPlayer(socket.id, player.id);
+            player = await playerRepository.createPlayer(socket.id, user);
 
             await race.addPlayer(player);
-            race.save();
+            await race.save();
 
             socket.join(raceId);
             gameState = await race.getGameState(player);
@@ -64,8 +64,8 @@ module.exports = async (io, action, socket) => {
             }
 
             // delete old user socketId and add new socketId
-            await playerRepository.removePlayerBySocketId(socketId);
-            await playerRepository.addPlayer(socket.id, player.id);
+            player.set('socketId', socket.id);
+            await player.save();
 
             gameState = await race.getGameState(player);
 

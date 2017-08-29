@@ -14,9 +14,6 @@ const {
 
 module.exports = io => async (socket, next) => {
     logger.debug(`User connected: ${socket.id}`);
-    // console.log(socket.handshake.query.token);
-
-    if (socket.handshake.query.token) {}
 
     // if (!socket.handshake.query.token) {
     //     return next(new SocketException(socket, 'unauthorized'));

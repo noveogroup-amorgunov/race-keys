@@ -1,8 +1,7 @@
-const
-    mongoose = require('mongoose'),
-    bcrypt = require('bcrypt'),
-    mongoosePaginate = require('mongoose-paginate'),
-    moment = require('moment');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const mongoosePaginate = require('mongoose-paginate');
+const moment = require('moment');
 
 const userSchema = mongoose.Schema({
     name: String,

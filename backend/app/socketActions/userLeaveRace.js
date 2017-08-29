@@ -19,16 +19,17 @@ module.exports = async (io, player, socket) => {
         socket.leave(player.raceId);
         notify(mainTypes.USER_LEAVES_RACE, { player: player.toJson() }, player.raceId);
 
-        // TODO: HANDLE REDIS STORE
         await race.removePlayer(player);
+        await race.save();
         await playerRepository.removePlayerBySocketId(player.socketId);
-        await player.remove();
 
-        if (race.isEmptyRace()) {
+        notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
+
+        /* if (race.isEmptyRace()) {
             notify(mainTypes.RACE_DELETED, { raceId: race.id });
             await race.remove();
         } else {
             notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
-        }
+        } */
     }
 };
