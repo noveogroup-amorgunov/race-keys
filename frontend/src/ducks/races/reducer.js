@@ -63,9 +63,9 @@ export default function races(state = initialState, action) {
                 items: [...state.items, action.race]
             };
         case types.RACE_DELETED:
-            return changeStateOnChangeRace(state, action);
-        case types.RACE_CHANGED:
             return changeStateOnDeleteRace(state, action);
+        case types.RACE_CHANGED:
+            return changeStateOnChangeRace(state, action);
 
         default:
             return state;
