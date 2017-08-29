@@ -9,7 +9,7 @@ const { Race } = require('../models');
 module.exports = {
     async getOpenRaces(ctx) {
         const data = await raceRepository.getRacesByStatus(Race.statuses.WAIT_PLAYERS);
-        ctx.body = { races: data };
+        ctx.body = { races: raceFormatter.list(data) };
         ctx.state.meta = {};
     },
 
@@ -20,7 +20,7 @@ module.exports = {
             throw new NotFoundException(errorMessages.raceNotFound);
         }
 
-        ctx.body = race;
+        ctx.body = raceFormatter.get(race);
     },
 
     async createRace(ctx) {

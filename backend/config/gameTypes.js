@@ -3,7 +3,7 @@ const socketPrefix = 'server/';
 const toServerAction = action => socketPrefix + action;
 
 const game = action => `@@game/${action}`;
-const main = action => `@@main/${action}`;
+const main = action => `@@races/${action}`;
 
 module.exports = {
     socketPrefix,

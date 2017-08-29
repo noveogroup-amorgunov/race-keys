@@ -34,7 +34,7 @@ module.exports = io => async (socket, next) => {
     });
 
     socket.on('action', async (action) => {
-        logger.debug(`New action from client: ${action}`);
+        logger.debug(`New action from client: ${JSON.stringify(action)}`);
 
         if (action.type === mainTypes.JOIN_RACE_REQUEST) {
             joinRaceRequest(io, action, socket);
@@ -43,29 +43,32 @@ module.exports = io => async (socket, next) => {
 
         const player = await playerRepository.getPlayerBySocketId(socket.id);
 
-        if (player !== null) {
-            switch (action.type) {
-                case gameTypes.READY_TO_PLAY:
-                    userReadyToPlay(io, player, action);
-                    break;
-                case mainTypes.LEAVE_RACE:
-                    userLeaveRace(io, player, socket);
-                    break;
-                case gameTypes.CHANGE_POSITION_REQUEST:
-                    userMovingForward.putCardRequest(io, player, action);
-                    break;
-                case gameTypes.FINISH_REQUEST:
-                    userFinishRace.putCardFromPackRequest(io, player, action);
-                    break;
-                case gameTypes.ADD_ERROR_REQUEST:
-                    userMakeErrorInText(io, player, action);
-                    break;
-                default:
-                    logger.warn('Unknown action: ', action);
-                    break;
-            }
-        } else {
+        if (player === null) {
             logger.warn('Player doesn\'t exists: ', socket.id, action);
+            return;
+        }
+
+        player.socketId = socket.id;
+
+        switch (action.type) {
+            case gameTypes.READY_TO_PLAY:
+                userReadyToPlay(io, player, action);
+                break;
+            case mainTypes.LEAVE_RACE:
+                userLeaveRace(io, player, socket);
+                break;
+            case gameTypes.CHANGE_POSITION_REQUEST:
+                userMovingForward.putCardRequest(io, player, action);
+                break;
+            case gameTypes.FINISH_REQUEST:
+                userFinishRace.putCardFromPackRequest(io, player, action);
+                break;
+            case gameTypes.ADD_ERROR_REQUEST:
+                userMakeErrorInText(io, player, action);
+                break;
+            default:
+                logger.warn('Unknown action: ', action);
+                break;
         }
     });
 

@@ -2,6 +2,7 @@ const _ = require('lodash');
 const { Race } = require('mongoose').models;
 const { mainTypes, gameErrors } = require('../../config/gameTypes');
 const raceRepository = require('../repositories/raceRepository');
+const playerRepository = require('../repositories/playerRepository');
 const { notify } = require('../services/notifyService');
 
 module.exports = async (io, player, socket) => {
@@ -19,8 +20,9 @@ module.exports = async (io, player, socket) => {
         notify(mainTypes.USER_LEAVES_RACE, { player: player.toJson() }, player.raceId);
 
         // TODO: HANDLE REDIS STORE
-        // await player.remove();
         await race.removePlayer(player);
+        await playerRepository.removePlayerBySocketId(player.socketId);
+        await player.remove();
 
         if (race.isEmptyRace()) {
             notify(mainTypes.RACE_DELETED, { raceId: race.id });

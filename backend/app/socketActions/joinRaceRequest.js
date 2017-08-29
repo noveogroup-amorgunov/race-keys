@@ -1,4 +1,4 @@
-const { Player } = require('mongoose').models;
+const { Player, Race } = require('mongoose').models;
 const { mainTypes, gameErrors, gameTypes } = require('../../config/gameTypes');
 const playerRepository = require('../repositories/playerRepository');
 const raceRepository = require('../repositories/raceRepository');
@@ -8,10 +8,8 @@ const { notify } = require('../services/notifyService');
 const maxPlayersInOneRace = 8;
 
 module.exports = async (io, action, socket) => {
-    const {
-        raceId,
-        socketId,
-    } = action;
+    const raceId = action.raceId;
+    const socketId = action.socketId || socket.id;
 
     const updateSocket = socketId !== socket.id;
     const race = await raceRepository.getRaceById(raceId);
@@ -34,7 +32,7 @@ module.exports = async (io, action, socket) => {
     let gameState;
 
     switch (race.status) {
-        case race.statuses.WAIT_PLAYERS:
+        case Race.statuses.WAIT_PLAYERS:
             if (!player && race.players.length >= maxPlayersInOneRace) {
                 notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.RACE_FULL }, socket.id);
                 return;
@@ -49,7 +47,8 @@ module.exports = async (io, action, socket) => {
 
             await playerRepository.addPlayer(socket.id, player.id);
 
-            await race.addPlayer(player).save();
+            await race.addPlayer(player);
+            race.save();
 
             socket.join(raceId);
             gameState = await race.getGameState(player);
@@ -58,7 +57,7 @@ module.exports = async (io, action, socket) => {
             notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
             notify(mainTypes.USER_ENTERED_RACE, { player: player.toJson() }, player.raceId);
             break;
-        case race.statuses.IN_PROCESS:
+        case Race.statuses.IN_PROCESS:
             if (player === null) {
                 notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
                 return;
@@ -76,7 +75,7 @@ module.exports = async (io, action, socket) => {
             notify(mainTypes.JOIN_RACE_SUCCESS, gameState, socket.id);
 
             break;
-        case race.statuses.FINISHED:
+        case Race.statuses.FINISHED:
             if (player === null) {
                 notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
                 return;

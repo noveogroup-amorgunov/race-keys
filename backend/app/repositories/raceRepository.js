@@ -3,11 +3,11 @@ const _ = require('lodash');
 
 module.exports = {
     async getRacesByStatus(status) {
-        return Race.find({ status }).populate('players');
+        return Race.find({ status }).populate(['players', 'text']);
     },
 
     async getRaceById(raceId) {
-        return Race.findById(raceId).populate('players');
+        return Race.findById(raceId).populate(['players', 'text']);
     },
 
     async createRace() {

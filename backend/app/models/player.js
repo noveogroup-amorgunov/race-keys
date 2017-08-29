@@ -38,6 +38,12 @@ const playerSchema = mongoose.Schema({
     timestamps: true,
 });
 
+playerSchema
+    .virtual('raceId')
+    .get(function get() {
+        return this.race;
+    });
+
 // TODO: refactoring these methods
 playerSchema.methods.reset = function reset(data = {}) {
     this.set('readyToPlay', data.readyToPlay || false);
