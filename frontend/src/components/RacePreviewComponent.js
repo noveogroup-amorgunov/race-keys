@@ -1,6 +1,9 @@
+import TimeAgo from 'timeago-react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import React from 'react';
+
+import { gameStatuses } from '@/constants';
+import locale from '@/locale';
 
 export default class RacePreviewComponent extends React.Component {
     static propTypes = {
@@ -18,18 +21,21 @@ export default class RacePreviewComponent extends React.Component {
     static PREVIEW_CONTENT_LENGTH = 300;
 
     render() {
+        const { id, status, players, createdAt } = this.props;
+        const statusCode = Object.keys(gameStatuses).find(key => gameStatuses[key] === status);
         return (
-            <div className='race'>
+            <div className='race-preview'>
                 <div className='race-header'>
                     <div className='race-title race-preview-title'>
-                        {this.props.id}
+                        {id}
                     </div>
                     <div className='no-padding'>
                         <div className='article-meta article-preview-meta text-ellipsis'>
-                            Players: {this.props.players.length}
+                            Players: {players.length}<br />
+                            Status: {locale.gameStatuses[statusCode]}
                         </div>
                         <div className='article-meta article-preview-meta'>
-                            {moment(this.props.createdAt).format('DD-MM-YYYY')}
+                            <TimeAgo datetime={createdAt} />
                         </div>
                     </div>
                 </div>

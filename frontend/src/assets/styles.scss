@@ -48,6 +48,7 @@ main {
         text-align: left;
         padding: 0 20px;
         margin: 0 auto;
+        height: 30px;
     }
 
     &__buttons {
@@ -63,10 +64,36 @@ main {
     }
 
     &__logo {
-        height: 30px;
+        margin-top: 5px;
         width: 100px;
-        background: #999;
-        display: inline-block;
+        float: left;
+
+        a {
+            width: 100px;
+            color: #999;
+            display: inline-block;
+            font-weight: bold;
+            line-height: 34px;
+
+            height: 20px;
+            line-height: 23px;
+
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            border-right: .15em solid #999; /* The typwriter cursor */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+            letter-spacing: .10em; /* Adjust as needed */
+            animation: 
+                // typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+            /*Set our animation play state to paused initially */
+            animation-play-state: paused; 
+
+            &:hover {
+              /* Toggle our animation play state to running when we are hovering over our sticker */
+              animation-play-state: running;
+            }
+        }
     }
 }
 
@@ -171,10 +198,116 @@ form {
 }
 
 .race {
+
+}
+
+.race-preview {
     width: 30%;
     display: inline-block;
     background-color: #fafafa;
     padding: 10px;
     margin: 10px;
+    border-bottom: 5px solid #eee;
     border-radius: 2px;
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #999; }
+}
+
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.race-preview-title {
+    font-size: .8em;
+    font-weight: bold;
+    color: #999;
+}
+
+.car-wrapper {
+    position: relative;
+}
+
+.car {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 50px;
+    border: 0px;
+    background: url('http://klavogonki.ru/img/cars/22-3.png');
+}
+
+.stripe {
+    width: 96%;
+    height: 60px;
+    border-bottom: 2px dashed #45bfef;
+    padding-left: 100px;
+    position: relative;
+}
+
+.stripes {
+    width: 100%;
+    position: relative;
+}
+
+.stripe-desc {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    width: 80px;
+    height: 30px;
+    // border-bottom: 2px dashed red;
+
+    &-stats {
+        font-size: .8em;
+        color: #999;
+        display: block;
+        margin-left: 14px;
+        margin-top: -4px;
+    }
+}
+
+.stripe-ready {
+    border-radius: 50%;
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    margin-right: 6px;
+    background-color: red;
+    &-yes {
+        background-color: #33a9ec;
+    }
+}
+
+.finish-line {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    background: url('./images/finish-line.png');
+    background-position: -2px 0px;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 17px;
+    background-color: #231f20;
+
+    &:after {
+        content: 'finish';
+        display: block;
+        position: absolute;
+        top: -14px;
+        left: -6px;
+        color: #666;
+        font-weight: bold;
+        font-size: .8em;
+    }
+}
+
+.hint {
+    color: #aaa;
 }

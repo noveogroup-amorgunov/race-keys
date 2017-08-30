@@ -5,14 +5,15 @@
 - ~Move players and race store to mongoo from redis (In redis store only socketId -> userId)~
 - ~Rename room to race entiry in server~
 - ~Refactoring server actions, which send to client by socket.io~
-- Add component for preview race RacePreviewComponent
+- ~Add component for preview race RacePreviewComponent~
 - Add component for race page
-- Add component for create new race
+- ~Add component for create new race~
 - Refactoring main (move logic to app) reducer and write game ducks
 - Add styles (try bulma-react)
 - Add car images
-- Fix: load race (if races is not loaded) and set currentRace
-- Fix: load game state with races (?) new action
+- ~Fix: load race (if races is not loaded) and set currentRace~
+- ~Fix: load game state with races (?) new action (NOT NEEDED)~
+- Fix LEAVE_RACE if server is reloaded (uodate socket id)
 
 ## Requirements
 

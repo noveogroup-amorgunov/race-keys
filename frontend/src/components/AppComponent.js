@@ -20,7 +20,7 @@ function AppComponent(props) {
                 user={props.user}
                 onLogout={props.onLogout} />
             <main>
-                <Route exact path='/' component={RacesContainer}/>
+                <Route exact path='/' render={p => <RacesContainer isAuthenticated={props.isAuthenticated} {...p}/>}/>
                 <Route exact path='/login' component={LoginContainer}/>
                 <Route exact path='/signup' component={SignUpContainer}/>
                 <Switch>

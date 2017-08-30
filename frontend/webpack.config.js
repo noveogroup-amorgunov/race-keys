@@ -29,6 +29,10 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.(jpg|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                use: 'file-loader'
+            },
+            {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
@@ -60,10 +64,6 @@ module.exports = {
                     }],
                 })
             },
-            {
-                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-                use: 'file-loader'
-            }
         ]
     },
     plugins: [

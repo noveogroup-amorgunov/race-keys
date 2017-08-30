@@ -6,7 +6,7 @@ function NavBarComponent(props) {
     return (
         <header className="header">
             <div className="header__content">
-                <Link to='/' className="header__logo" alt="Race keys"></Link>
+                <div className="header__logo"><Link to='/' alt="Race keys">RACE KEYS</Link></div>
                 {props.isAuthenticated
                     ?
                     <div className="header__buttons">

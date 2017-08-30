@@ -2,16 +2,31 @@ import { request } from '../../helpers';
 
 const service = {
     /**
-     * @param  {Number} limit
-     * @param  {Number} offset
      * @return {Promise.<Object>}
      */
-    fetchRaces(limit = 5, offset = 0) {
-        // console.log('service::fetchRaces');
+    fetchRaces() {
+        return request({ url: '/races/open' });
+    },
+
+    /**
+     * @param {String} token
+     * @return {Promise.<Object>}
+     */
+    fetchNotFinishedRaces(token) {
         return request({
-            // url: `/races/open?limit=${limit}&offset=${offset}`
-            url: '/races/open'
+            url: '/races/not-finished',
+            headers: {
+                authorization: token
+            }
         });
+    },
+
+    /**
+     * @param  {String} id
+     * @return {Promise.<Object>}
+     */
+    fetchRace(id) {
+        return request({ url: `/races/${id}` });
     },
 
     /**

@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import locale from '@/locale';
+import { Errors } from '@/constants';
+
 import RacePreviewComponent from './RacePreviewComponent';
 
 function RacesComponent(props) {
-    // const { pageCount, offset, limit, rowCount } = props.pagination;
+    if (!props.races.length) {
+        return (<div>{locale.errors[Errors.RACES_NOT_EXISTS]}</div>);
+    }
+
     return (
         <div>
             {props.races.map(race =>

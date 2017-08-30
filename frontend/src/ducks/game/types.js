@@ -19,14 +19,6 @@ const types = {
      * Actions, which server send to client side
      */
 
-    JOIN_ROOM_SUCCESS: '@@main/JOIN_ROOM_SUCCESS',
-    JOIN_ROOM_ERROR: '@@main/JOIN_ROOM_ERROR',
-    START_GAME: '@@game/START_GAME',
-    GAME_OVER: '@@game/GAME_OVER',
-    USER_ENTERED_ROOM: '@@main/USER_ENTERED_ROOM',
-    USER_READY_TO_PLAY: '@@game/USER_READY_TO_PLAY',
-    READY_TO_PLAY_ERROR: '@@game/READY_TO_PLAY_ERROR',
-
     NEW_CARD_ON_BOARD: '@@game/NEW_CARD_ON_BOARD',
 
     DISCARD_PACK: '@@game/DISCARD_PACK',

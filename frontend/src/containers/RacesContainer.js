@@ -10,17 +10,39 @@ class RacesContainer extends React.Component {
         fetchRaces: PropTypes.func.isRequired,
         setCurrentRaceById: PropTypes.func.isRequired,
         races: PropTypes.array.isRequired,
-        history: PropTypes.object.isRequired
+        history: PropTypes.object.isRequired,
+        isAuthenticated: PropTypes.bool.isRequired,
     };
 
     componentWillMount() {
         this.props.fetchRaces();
     }
 
+    /*componentWillReceiveProps(nextProps) {
+        if (nextProps.isAuthenticated !== this.props.isAuthenticated) {
+            this._fetchRaces(nextProps.isAuthenticated);
+        }
+    }
+
+    _isAuthenticated() {
+        console.log(`_isAuthenticated: ${this.props.isAuthenticated}`);
+        return this.props.isAuthenticated;
+    }
+
+    _fetchRaces(isAuthenticated) {
+        if (isAuthenticated) {
+            this.props.fetchNotFinishedRaces();
+        } else {
+            this.props.fetchRaces();
+        }
+    }
+    */
+
     _handleRouteChange = (raceId) => {
         this.props.setCurrentRaceById(raceId);
         this.props.history.push(`/race/${raceId}`);
     }
+
     render() {
         const { races, fetchRaces } = this.props;
         return (
@@ -41,7 +63,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         fetchRaces: bindActionCreators(actions.fetchRaces, dispatch),
-        setCurrentRaceById: actions.setCurrentRaceById
+        fetchNotFinishedRaces: bindActionCreators(actions.fetchNotFinishedRaces, dispatch),
+        setCurrentRaceById: bindActionCreators(actions.setCurrentRaceById, dispatch),
     };
 }
 

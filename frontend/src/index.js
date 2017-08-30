@@ -7,13 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import AppContainer from './containers/AppContainer';
 import store, { history } from './store';
 
-/*
-<BrowserRouter>
-    <AppContainer />
-</BrowserRouter>
-
-*/
-
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>

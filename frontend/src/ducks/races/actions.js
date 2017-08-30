@@ -8,17 +8,28 @@ const actions = {
             type: types.FETCH_RACE_LIST_REQUEST
         };
     },
-    fetchRaceListSuccess({ races, pagination }) {
+    fetchRaceListSuccess({ races }) {
         return {
             type: types.FETCH_RACE_LIST_SUCCESS,
             races,
-            pagination
         };
     },
     fetchRaceListError(errorCode) {
         return {
             type: types.FETCH_RACE_LIST_ERROR,
             errorCode
+        };
+    },
+    fetchNotFinishedRaces() {
+        console.log('fetchNotFinishedRaces');
+        return (dispatch) => {
+            const token = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+            dispatch(actions.fetchRaceListRequest());
+            return service.fetchNotFinishedRaces(token)
+                .then(
+                    response => dispatch(actions.fetchRaceListSuccess(response)),
+                    error => dispatch(actions.fetchRaceListError(error.code))
+                );
         };
     },
     fetchRaces(pageNumber = 1) {
@@ -28,6 +39,33 @@ const actions = {
                 .then(
                     response => dispatch(actions.fetchRaceListSuccess(response)),
                     error => dispatch(actions.fetchRaceListError(error.code))
+                );
+        };
+    },
+    fetchRaceRequest() {
+        return {
+            type: types.FETCH_RACE_REQUEST
+        };
+    },
+    fetchRaceSuccess({ race }) {
+        return {
+            type: types.FETCH_RACE_SUCCESS,
+            race,
+        };
+    },
+    fetchRaceError(errorCode) {
+        return {
+            type: types.FETCH_RACE_ERROR,
+            errorCode
+        };
+    },
+    fetchRace(id) {
+        return (dispatch) => {
+            dispatch(actions.fetchRaceRequest());
+            return service.fetchRace(id)
+                .then(
+                    response => dispatch(actions.fetchRaceSuccess(response)),
+                    error => dispatch(actions.fetchRaceError(error.code))
                 );
         };
     },

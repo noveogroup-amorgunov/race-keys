@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import uniqBy from 'lodash.uniqby';
+
 import types from './types';
 
 function changeStateOnChangeRace(state, action) {
@@ -23,21 +25,102 @@ function changeStateOnDeleteRace(state, action) {
 export const initialState = {
     items: [],
     currentRace: null,
-    pagination: {}
+    currentRaceState: {
+        me: null,
+        others: [],
+        game: {
+            players: [],
+        }
+    },
+    errorCode: null,
 };
 
 export default function races(state = initialState, action) {
     switch (action.type) {
+        case types.START_GAME:
+            return {
+                ...state,
+                currentRaceState: {
+                    ...state.currentRaceState,
+                    game: action.game,
+                }
+            };
+        case types.USER_CHANGE_READY_STATUS:
+            return {
+                ...state,
+                currentRaceState: {
+                    ...state.currentRaceState,
+                    others: state.currentRaceState.others.map(player => ({
+                        ...player,
+                        readyToPlay: action.player.id === player.id ? true : player.readyToPlay
+                    })),
+                }
+            };
+        case types.READY_TO_PLAY_SUCCESS:
+            return {
+                ...state,
+                currentRaceState: {
+                    ...state.currentRaceState,
+                    me: { ...state.currentRaceState.me, readyToPlay: true },
+                }
+            };
+        case types.LEAVE_RACE:
+            return {
+                ...initialState,
+                items: state.items,
+            };
+        case types.USER_LEAVES_RACE:
+            return {
+                ...state,
+                currentRaceState: {
+                    ...state.currentRaceState,
+                    others: state.currentRaceState.others.filter(player => player.id !== action.player.id),
+                }
+            };
+        case types.USER_ENTERED_RACE:
+            if (action.player.id === state.currentRaceState.me.id) {
+                return state;
+            }
+            return {
+                ...state,
+                currentRaceState: {
+                    ...state.currentRaceState,
+                    others: uniqBy([...state.currentRaceState.others, action.player], 'id'),
+                }
+            };
+        case types.JOIN_RACE_SUCCESS:
+            return {
+                ...state,
+                currentRaceState: action.gameState,
+            };
+        case types.JOIN_RACE_ERROR:
+            return {
+                ...state,
+                errorCode: action.error,
+            };
+        case types.FETCH_RACE_SUCCESS:
+            return {
+                ...state,
+                items: [...state.items, action.race],
+                currentRace: action.race,
+                errorCode: null,
+            };
+        case types.FETCH_RACE_ERROR:
+            return {
+                ...state,
+                errorCode: action.errorCode,
+            };
         case types.FETCH_RACE_LIST_SUCCESS:
             return {
                 ...state,
                 items: action.races,
-                pagination: action.pagination
+                errorCode: null,
             };
         case types.CREATE_RACE_SUCCESS:
             return {
                 ...state,
-                currentRace: action.race
+                currentRace: action.race,
+                errorCode: null,
             };
         case types.EDIT_RACE_SUCCESS:
             return {
@@ -55,7 +138,8 @@ export default function races(state = initialState, action) {
                 ...state,
                 currentRace: state.items.find(race =>
                     race.id === action.raceId
-                )
+                ),
+                errorCode: null,
             };
         case types.NEW_RACE_CREATED:
             return {
