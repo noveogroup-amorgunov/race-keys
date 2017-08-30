@@ -14,6 +14,7 @@ const {
 
 module.exports = io => async (socket, next) => {
     logger.debug(`User connected: ${socket.id}`);
+    logger.debug(`Token: ${socket.handshake.query.token}`);
 
     // add user to main page
     socket.join('main');

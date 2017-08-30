@@ -4,7 +4,7 @@ const selectors = {
     },
     selectAuthState(state) {
         return state.auth.isAuthenticated;
-    }
+    },
 };
 
 export default selectors;

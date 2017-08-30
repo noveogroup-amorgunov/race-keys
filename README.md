@@ -11,14 +11,15 @@
 - ~Add styles (try bulma-react)~
 - ~Fix: load race (if races is not loaded) and set currentRace~
 - ~Fix: load game state with races (?) new action (NOT NEEDED)~
-- Add car images
 - ~Refactoring main (move logic to app) reducer and~ write game ducks
-- Fix LEAVE_RACE if server is reloaded (uodate socket id)
-- Show authorized user IN_PROCESS races in main page
+- ~Show authorized user IN_PROCESS races in main page~
+- Add car images
 - Move game logic to project
 - Collect uesrs stats
 - Add styles for RaceComponent
-- Fix: after create new race, click to "ready" and leave race, user can't "ready" to new race..
+- Bug: LEAVE_RACE if server is reloaded (uodate socket id)
+- Bug: after create new race, click to "ready" and leave race, user can't "ready" to new race..
+- Bug: add socket token after login / remove token after logout
 
 
 ## Requirements

@@ -15,28 +15,22 @@ class RacesContainer extends React.Component {
     };
 
     componentWillMount() {
-        this.props.fetchRaces();
+        this._fetchRaces();
     }
 
-    /*componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.isAuthenticated !== this.props.isAuthenticated) {
             this._fetchRaces(nextProps.isAuthenticated);
         }
     }
 
-    _isAuthenticated() {
-        console.log(`_isAuthenticated: ${this.props.isAuthenticated}`);
-        return this.props.isAuthenticated;
-    }
-
     _fetchRaces(isAuthenticated) {
-        if (isAuthenticated) {
+        if ((typeof isAuthenticated === 'boolean' && isAuthenticated) || this.props.isAuthenticated) {
             this.props.fetchNotFinishedRaces();
         } else {
             this.props.fetchRaces();
         }
     }
-    */
 
     _handleRouteChange = (raceId) => {
         this.props.setCurrentRaceById(raceId);
@@ -49,7 +43,7 @@ class RacesContainer extends React.Component {
             <RacesComponent
                 races={races}
                 onRouteChange={this._handleRouteChange}
-                onPageChange={fetchRaces} />
+                onPageChange={this._fetchRaces} />
         );
     }
 }

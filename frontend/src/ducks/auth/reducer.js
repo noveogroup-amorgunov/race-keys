@@ -4,7 +4,7 @@ import types from './types';
 export const initialState = {
     errorCode: null,
     isAuthenticated: false,
-    user: userInitialState
+    user: userInitialState,
 };
 
 export default function auth(state = initialState, action) {

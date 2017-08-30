@@ -11,10 +11,15 @@ module.exports = {
     async getNotFinishedRacesByUser(user) {
         const userPlayers = await Player.find({ user });
         return Race
-            .find({
-                status: { $ne: Race.statuses.FINISHED },
-                players: { $in: userPlayers.map(player => player.id) },
-            })
+            .find({ $or: [
+                {
+                    status: Race.statuses.IN_PROCESS,
+                    players: { $in: userPlayers.map(player => player.id) },
+                },
+                {
+                    status: Race.statuses.WAIT_PLAYERS,
+                }
+            ] })
             .populate(['players', 'text']);
     },
 

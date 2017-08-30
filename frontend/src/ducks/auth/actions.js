@@ -118,7 +118,7 @@ const actions = {
     setSocketId(socketId) {
         return {
             type: types.SET_SOCKET_ID,
-            socketId
+            socketId,
         };
     },
 };

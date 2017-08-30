@@ -7,7 +7,7 @@ import { actions, selectors } from '@/ducks/auth';
 function mapStateToProps(state) {
     return {
         errorCode: selectors.selectErrorCode(state),
-        isAuthenticated: selectors.selectAuthState(state)
+        isAuthenticated: selectors.selectAuthState(state),
     };
 }
 
