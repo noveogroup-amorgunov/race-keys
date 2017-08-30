@@ -18,6 +18,7 @@
 - Move game logic to project
 - Collect uesrs stats
 - Add styles for RaceComponent
+- Fix: after create new race, click to "ready" and leave race, user can't "ready" to new race..
 
 
 ## Requirements
