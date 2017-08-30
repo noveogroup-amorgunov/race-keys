@@ -1,19 +1,24 @@
 # Race keys game
 
-## todolist
+## @todolist
 
 - ~Move players and race store to mongoo from redis (In redis store only socketId -> userId)~
 - ~Rename room to race entiry in server~
 - ~Refactoring server actions, which send to client by socket.io~
 - ~Add component for preview race RacePreviewComponent~
-- Add component for race page
+- ~Add component for race page~
 - ~Add component for create new race~
-- Refactoring main (move logic to app) reducer and write game ducks
-- Add styles (try bulma-react)
-- Add car images
+- ~Add styles (try bulma-react)~
 - ~Fix: load race (if races is not loaded) and set currentRace~
 - ~Fix: load game state with races (?) new action (NOT NEEDED)~
+- Add car images
+- ~Refactoring main (move logic to app) reducer and~ write game ducks
 - Fix LEAVE_RACE if server is reloaded (uodate socket id)
+- Show authorized user IN_PROCESS races in main page
+- Move game logic to project
+- Collect uesrs stats
+- Add styles for RaceComponent
+
 
 ## Requirements
 
@@ -36,6 +41,8 @@ $ cp .env.defaults .env
 $ npm install
 ```
 
+or just run `$ bash install.sh`.
+
 ## Usage
 
 Run application with follow command (run api and socket servers):
@@ -43,8 +50,8 @@ Run application with follow command (run api and socket servers):
 
 ```bash
 $ cd backend
-$ npm start
+$ npm start # run api server
 
 $ cd frontend
-$ npm start
+$ npm start # run webpack-dev-server
 ```
