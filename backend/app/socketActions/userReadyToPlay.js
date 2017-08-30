@@ -11,26 +11,25 @@ module.exports = async (io, player, action) => {
     const race = await raceRepository.getRaceById(player.raceId);
 
     if (race === null) {
-        notify(mainTypes.READY_TO_PLAY_ERROR, { error: gameErrors.RACE_NOT_FOUND }, player.socketId);
+        notify(gameTypes.READY_TO_PLAY_ERROR, { error: gameErrors.RACE_NOT_FOUND }, player.socketId);
         return;
     }
 
     if (race.status !== Race.statuses.WAIT_PLAYERS) {
-        notify(mainTypes.READY_TO_PLAY_ERROR, { error: gameErrors.GAME_ALREADY_STARTED }, player.socketId);
+        notify(gameTypes.READY_TO_PLAY_ERROR, { error: gameErrors.GAME_ALREADY_STARTED }, player.socketId);
         return;
     }
 
     notify(gameTypes.USER_CHANGE_READY_STATUS, { player: player.toJson() }, player.raceId);
-
+    notify(gameTypes.READY_TO_PLAY_SUCCESS, {}, player.socketId);
     if (race.isAllPlayersReadyToPlay()) {
-        const players = await race.getPlayers();
-        await race.startGame();
+        race.startGame();
+        await race.save();
 
-        players.forEach(async (pl) => {
+        race.getPlayers().forEach(async (pl) => {
             await pl.startGame();
-            const gameState = await race.getGameState(player);
-
-            notify(gameTypes.START_GAME, gameState, player.socketId);
+            const gameState = await race.getGameState(pl);
+            notify(gameTypes.START_GAME, gameState, pl.socketId);
         });
 
         notify(mainTypes.RACE_CHANGED, { race: race.toJson() });

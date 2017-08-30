@@ -34,6 +34,7 @@ const playerSchema = mongoose.Schema({
     finishedTime: Date,
     socketId: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    name: String,
 }, {
     timestamps: true,
 });
@@ -67,6 +68,7 @@ playerSchema.methods.isFinished = function isFinished() {
 
 playerSchema.methods.toJson = function toJson() {
     return {
+        id: this.id,
         readyToPlay: this.readyToPlay,
         race: this.race,
         place: this.place,
@@ -75,7 +77,7 @@ playerSchema.methods.toJson = function toJson() {
         finished: this.finished,
         finishedTime: this.finishedTime,
         socketId: this.socketId,
-        user: this.user,
+        username: this.name,
     };
 };
 

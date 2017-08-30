@@ -10,6 +10,13 @@ module.exports = {
     gameTypes: {
         READY_TO_PLAY: toServerAction(game('READY_TO_PLAY')),
         READY_TO_PLAY_ERROR: game('READY_TO_PLAY_ERROR'),
+        READY_TO_PLAY_SUCCESS: game('READY_TO_PLAY_SUCCESS'),
+
+        LEAVE_RACE: toServerAction(game('LEAVE_RACE')),
+
+        JOIN_RACE_REQUEST: toServerAction(game('JOIN_RACE_REQUEST')),
+        JOIN_RACE_SUCCESS: game('JOIN_RACE_SUCCESS'),
+        JOIN_RACE_ERROR: game('JOIN_RACE_ERROR'),
 
         START_GAME: game('START_GAME'),
         GAME_OVER: game('GAME_OVER'),
@@ -32,12 +39,6 @@ module.exports = {
     mainTypes: {
         USER_LEAVES_RACE: main('USER_LEAVES_RACE'),
         USER_ENTERED_RACE: main('USER_ENTERED_RACE'),
-
-        LEAVE_RACE: toServerAction(main('LEAVE_RACE')),
-
-        JOIN_RACE_REQUEST: toServerAction(main('JOIN_RACE_REQUEST')),
-        JOIN_RACE_SUCCESS: main('JOIN_RACE_SUCCESS'),
-        JOIN_RACE_ERROR: main('JOIN_RACE_ERROR'),
 
         NEW_RACE_CREATED: main('NEW_RACE_CREATED'),
         RACE_DELETED: main('RACE_DELETED'),

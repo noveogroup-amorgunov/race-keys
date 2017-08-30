@@ -6,5 +6,6 @@ const { isAuthenticated } = require('../app/middlewares');
 module.exports = (router) => {
     router.post('/races', raceController.createRace);
     router.get('/races/open', raceController.getOpenRaces);
+    router.get('/races/not-finished', isAuthenticated, raceController.getNotFinishedRaces);
     router.get('/races/:id', validator(raceValidatorRules.getRace), raceController.getRace);
 };

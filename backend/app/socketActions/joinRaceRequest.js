@@ -16,7 +16,7 @@ module.exports = async (io, action, socket) => {
     const race = await raceRepository.getRaceById(raceId);
 
     if (race === null) {
-        notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.RACE_NOT_FOUND }, socket.id);
+        notify(gameTypes.JOIN_RACE_ERROR, { error: gameErrors.RACE_NOT_FOUND }, socket.id);
         return;
     }
 
@@ -53,13 +53,13 @@ module.exports = async (io, action, socket) => {
             socket.join(raceId);
             gameState = await race.getGameState(player);
 
-            notify(mainTypes.JOIN_RACE_SUCCESS, { gameState, socketId: socket.id }, socket.id);
+            notify(gameTypes.JOIN_RACE_SUCCESS, { gameState, socketId: socket.id }, socket.id);
             notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
             notify(mainTypes.USER_ENTERED_RACE, { player: player.toJson() }, player.raceId);
             break;
         case Race.statuses.IN_PROCESS:
             if (player === null) {
-                notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
+                notify(gameTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
                 return;
             }
 
@@ -71,13 +71,15 @@ module.exports = async (io, action, socket) => {
 
             socket.join(raceId);
 
-            notify(mainTypes.USER_ENTERED_RACE, { player: player.toJson() }, player.raceId);
-            notify(mainTypes.JOIN_RACE_SUCCESS, gameState, socket.id);
+            notify(gameTypes.JOIN_RACE_SUCCESS, { gameState, socketId: socket.id }, socket.id);
+            setTimeout(() =>
+                notify(mainTypes.USER_ENTERED_RACE, { player: player.toJson() }, player.raceId),
+                50);
 
             break;
         case Race.statuses.FINISHED:
             if (player === null) {
-                notify(mainTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
+                notify(gameTypes.JOIN_RACE_ERROR, { error: gameErrors.PLAYER_NOT_FOUND }, socket.id);
                 return;
             }
 

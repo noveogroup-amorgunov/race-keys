@@ -36,6 +36,7 @@ raceSchema.methods.toJson = function toJson() {
     return {
         id: this._id,
         startedAt: this.startedAt,
+        createdAt: this.createdAt,
         text: this.text.text,
         players: this.getPlayers().map(player => player.toJson()),
         status: this.status,
@@ -72,7 +73,7 @@ raceSchema.methods.startGame = function startGame() {
     return this;
 };
 
-raceSchema.methods.endGame = function startGame() {
+raceSchema.methods.endGame = function endGame() {
     this.status = statuses.FINISHED;
     return this;
 };
@@ -93,24 +94,24 @@ raceSchema.methods.playerFinishRace = async function playerFinishRace(player) {
 };
 
 raceSchema.methods.isAllPlayersReadyToPlay = function isAllPlayersReadyToPlay() {
-    if (!this.players.legnth) {
+    if (!this.players.length) {
         return false;
     }
     return this.players.every(player => player.readyToPlay);
 };
 
 raceSchema.methods.isEmptyRace = function isEmptyRace() {
-    return !this.players.legnth;
+    return !this.players.length;
 };
 
 raceSchema.methods.getGameState = function getGameState(player) {
     const players = this.getPlayers();
 
     return {
-        me: { data: player.toJson() },
+        me: player.toJson(),
         others: players
             .filter(p => p.id !== player.id)
-            .map(p => ({ data: p.toJson() })),
+            .map(p => p.toJson()),
         game: this.toJson(),
     };
 };

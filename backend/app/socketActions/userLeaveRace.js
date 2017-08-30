@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { Race } = require('mongoose').models;
-const { mainTypes, gameErrors } = require('../../config/gameTypes');
+const { mainTypes, gameTypes, gameErrors } = require('../../config/gameTypes');
 const raceRepository = require('../repositories/raceRepository');
 const playerRepository = require('../repositories/playerRepository');
 const { notify } = require('../services/notifyService');
@@ -9,7 +9,7 @@ module.exports = async (io, player, socket) => {
     const race = await raceRepository.getRaceById(player.raceId);
 
     if (race === null) {
-        notify(mainTypes.LEAVE_RACE_ERROR, { error: gameErrors.RACE_NOT_FOUND }, player.socketId);
+        notify(gameTypes.LEAVE_RACE_ERROR, { error: gameErrors.RACE_NOT_FOUND }, player.socketId);
         return;
     }
 
@@ -22,6 +22,18 @@ module.exports = async (io, player, socket) => {
         await race.removePlayer(player);
         await race.save();
         await playerRepository.removePlayerBySocketId(player.socketId);
+
+
+        // start game, if all other players is ready to play
+        if (race.isAllPlayersReadyToPlay() && !race.isEmptyRace()) {
+            race.startGame();
+            await race.save();
+
+            race.getPlayers().forEach(async (pl) => {
+                const gameState = await race.getGameState(pl);
+                notify(gameTypes.START_GAME, gameState, pl.socketId);
+            });
+        }
 
         notify(mainTypes.RACE_CHANGED, { race: race.toJson() });
 

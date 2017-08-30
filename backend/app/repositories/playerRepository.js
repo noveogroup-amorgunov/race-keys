@@ -2,7 +2,7 @@ const { Player } = require('../models');
 
 module.exports = {
     async createPlayer(socketId, user) {
-        const player = new Player({ socketId, user });
+        const player = new Player({ socketId, user, name: (user ? user.login : 'Guest') });
         return player.save();
     },
     async getPlayerBySocketId(socketId) {

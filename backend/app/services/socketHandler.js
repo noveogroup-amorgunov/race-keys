@@ -1,5 +1,5 @@
 const logger = require('winston');
-const { mainTypes, gameTypes } = require('../../config/gameTypes');
+const { gameTypes } = require('../../config/gameTypes');
 const playerRepository = require('../repositories/playerRepository');
 
 const {
@@ -15,10 +15,6 @@ const {
 module.exports = io => async (socket, next) => {
     logger.debug(`User connected: ${socket.id}`);
 
-    // if (!socket.handshake.query.token) {
-    //     return next(new SocketException(socket, 'unauthorized'));
-    // }
-
     // add user to main page
     socket.join('main');
 
@@ -33,7 +29,7 @@ module.exports = io => async (socket, next) => {
     socket.on('action', async (action) => {
         logger.debug(`New action from client: ${JSON.stringify(action)}`);
 
-        if (action.type === mainTypes.JOIN_RACE_REQUEST) {
+        if (action.type === gameTypes.JOIN_RACE_REQUEST) {
             joinRaceRequest(io, action, socket);
             return;
         }
@@ -51,7 +47,7 @@ module.exports = io => async (socket, next) => {
             case gameTypes.READY_TO_PLAY:
                 userReadyToPlay(io, player, action);
                 break;
-            case mainTypes.LEAVE_RACE:
+            case gameTypes.LEAVE_RACE:
                 userLeaveRace(io, player, socket);
                 break;
             case gameTypes.CHANGE_POSITION_REQUEST:

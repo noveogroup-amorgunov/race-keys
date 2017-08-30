@@ -13,6 +13,12 @@ module.exports = {
         ctx.state.meta = {};
     },
 
+    async getNotFinishedRaces(ctx) {
+        const data = await raceRepository.getNotFinishedRacesByUser(ctx.state.user.id);
+        ctx.body = { races: raceFormatter.list(data) };
+        ctx.state.meta = {};
+    },
+
     async getRace(ctx) {
         const race = await raceRepository.getRaceById(ctx.params.id);
 
@@ -20,7 +26,7 @@ module.exports = {
             throw new NotFoundException(errorMessages.raceNotFound);
         }
 
-        ctx.body = raceFormatter.get(race);
+        ctx.body = { race: raceFormatter.get(race) };
     },
 
     async createRace(ctx) {
