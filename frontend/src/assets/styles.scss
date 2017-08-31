@@ -317,3 +317,30 @@ form {
 .hint {
     color: #aaa;
 }
+
+.share, .text-wrapper {
+    margin: 25px 10px;
+    background: #f3f3f3;
+    padding: 20px;
+    width: 50%;
+    text-align: center;
+
+
+
+    input {
+        margin-top: 10px;
+    }
+
+    span {
+        color: #999;
+    }
+}
+
+.text-wrapper {
+    text-align: left;
+}
+
+.share {
+    float: right;
+    width: 40%;
+}

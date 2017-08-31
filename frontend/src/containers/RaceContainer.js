@@ -12,6 +12,9 @@ class RaceContainer extends React.Component {
         joinRace: PropTypes.func.isRequired,
         leaveRace: PropTypes.func.isRequired,
         readyToPlay: PropTypes.func.isRequired,
+        // makeErrorInText: PropTypes.func.makeErrorInText,
+        // movingForward: PropTypes.func.movingForward,
+        // finishRace: PropTypes.func.finishRace,
     };
 
     constructor(props) {
@@ -48,6 +51,9 @@ class RaceContainer extends React.Component {
                 race={this.props.currentRace}
                 errorCode={this.props.errorCode}
                 gameState={this.props.currentRaceState}
+                makeErrorInText={this.props.makeErrorInText}
+                movingForward={this.props.movingForward}
+                finishRace={this.props.finishRace}
                 readyToPlay={this.props.readyToPlay.bind(this, this.raceId)} />
         );
     }
@@ -61,6 +67,9 @@ export default connect(state => ({
 }), {
     fetchRace: actions.fetchRace,
     joinRace: actions.joinRaceRequest,
+    makeErrorInText: actions.makeErrorInTextRequest,
+    movingForward: actions.movingForwardRequest,
+    finishRace: actions.finishRaceRequest,
     leaveRace: actions.leaveRace,
     readyToPlay: actions.readyToPlay,
 })(RaceContainer);

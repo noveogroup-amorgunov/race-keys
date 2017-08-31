@@ -81,6 +81,7 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
                 API_URL: JSON.stringify(process.env.API_URL),
                 SOCKET_URL: JSON.stringify(process.env.SOCKET_URL),
+                HOST_URL: JSON.stringify(`http://${process.env.HOST}:${process.env.PORT}`),
             },
         }),
 

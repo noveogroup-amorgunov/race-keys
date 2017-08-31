@@ -21,7 +21,7 @@
 - Add styles for RaceComponent
 - Bug: LEAVE_RACE if server is reloaded (uodate socket id)
 - Feature: select car into sign up
-- Feature: Show link to friend when race WAIT_PLAYERS
+- ~Feature: Show link to friend when race WAIT_PLAYERS~
 
 
 ## Requirements

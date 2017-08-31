@@ -1,5 +1,6 @@
 export const API_URL = process.env.API_URL;
 export const SOCKET_URL = process.env.SOCKET_URL;
+export const HOST_URL = process.env.HOST_URL;
 
 export const SOCKET_STORE_KEY = 'socket';
 export const LOCAL_STORAGE_KEY = 'race.keys';
