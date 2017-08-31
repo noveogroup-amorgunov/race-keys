@@ -33,6 +33,10 @@ const types = {
     LEAVE_RACE: toServer('@@game/LEAVE_RACE'),
     JOIN_RACE_REQUEST: toServer('@@game/JOIN_RACE_REQUEST'),
 
+    ADD_ERROR_REQUEST: toServer('@@game/ADD_ERROR_REQUEST'),
+    CHANGE_POSITION_REQUEST: toServer('@@game/CHANGE_POSITION_REQUEST'),
+    FINISH_REQUEST: toServer('@@game/FINISH_REQUEST'),
+
     /**
      * Actions, which server send to client side
      */
@@ -48,6 +52,13 @@ const types = {
 
     START_GAME: '@@game/START_GAME',
     GAME_OVER: '@@game/GAME_OVER',
+
+    CHANGE_POSITION_SUCCESS: '@@game/CHANGE_POSITION_SUCCESS',
+    CHANGE_POSITION_ERROR: '@@game/CHANGE_POSITION_ERROR',
+    FINISH_SUCCESS: '@@game/FINISH_SUCCESS',
+    FINISH_ERROR: '@@game/FINISH_ERROR',
+    ADD_ERROR_SUCCESS: '@@game/ADD_ERROR_SUCCESS',
+    ADD_ERROR_ERROR: '@@game/ADD_ERROR_ERROR',
 
 };
 

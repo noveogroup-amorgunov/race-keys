@@ -102,23 +102,41 @@ const actions = {
             raceId
         };
     },
-    joinRaceRequest(id, socketId) {
+    joinRaceRequest(raceId, socketId) {
         return {
             type: types.JOIN_RACE_REQUEST,
-            raceId: id,
+            raceId,
             socketId,
         };
     },
-    readyToPlay(id) {
+    readyToPlay(raceId) {
         return {
             type: types.READY_TO_PLAY,
-            raceId: id,
+            raceId,
         };
     },
-    leaveRace(id) {
+    leaveRace(raceId) {
         return {
             type: types.LEAVE_RACE,
-            raceId: id,
+            raceId,
+        };
+    },
+    makeErrorInTextRequest(raceId) {
+        return {
+            type: types.ADD_ERROR_REQUEST,
+            raceId,
+        };
+    },
+    movingForwardRequest(raceId) {
+        return {
+            type: types.CHANGE_POSITION_REQUEST,
+            raceId,
+        };
+    },
+    finishRaceRequest(raceId) {
+        return {
+            type: types.FINISH_REQUEST,
+            raceId,
         };
     },
 };
