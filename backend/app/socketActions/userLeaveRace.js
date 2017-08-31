@@ -21,7 +21,7 @@ module.exports = async (io, player, socket) => {
 
         await race.removePlayer(player);
         await race.save();
-        await playerRepository.removePlayerBySocketId(player.socketId);
+        await playerRepository.removePlayerBySocketIdAndRace(player.socketId, race.id);
 
 
         // start game, if all other players is ready to play

@@ -1,23 +1,5 @@
 const mongoose = require('mongoose');
 
-/*
-// tests
-
-const user1 = new Player({ userId }, 'awesomeSocketId');
-await user1.save();
-
-const player = await Player.getPlayerBySocketId('awesomeSocketId');
-console.log(player.toJson());
-
-const players = await Player.getAllPlayers();
-constole.log(players.length);
-
-user1.remove();
-
-const playersAfterDelete = await Player.getAllPlayers();
-constole.log(playersAfterDelete.length);
-*/
-
 const playerSchema = mongoose.Schema({
     readyToPlay: {
         type: Boolean,

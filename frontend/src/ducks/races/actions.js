@@ -109,14 +109,16 @@ const actions = {
             socketId,
         };
     },
-    readyToPlay() {
+    readyToPlay(id) {
         return {
-            type: types.READY_TO_PLAY
+            type: types.READY_TO_PLAY,
+            raceId: id,
         };
     },
-    leaveRace() {
+    leaveRace(id) {
         return {
-            type: types.LEAVE_RACE
+            type: types.LEAVE_RACE,
+            raceId: id,
         };
     },
 };

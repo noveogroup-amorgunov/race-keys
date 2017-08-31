@@ -21,21 +21,26 @@ module.exports = io => async (socket, next) => {
 
     socket.on('disconnect', async () => {
         logger.debug(`User disconnected: ${socket.id}`);
-        const player = await playerRepository.getPlayerBySocketId(socket.id);
-        if (player !== null) {
-            await userLeaveRace(io, player, socket);
+        const players = await playerRepository.getPlayersBySocketId(socket.id);
+        if (players.length) {
+            players.forEach(async (player) => {
+                await userLeaveRace(io, player, socket);
+            });
         }
     });
 
     socket.on('action', async (action) => {
-        logger.debug(`New action from client: ${JSON.stringify(action)}`);
+        logger.debug(`CLIENT ACTION: ${JSON.stringify(action)}`);
 
         if (action.type === gameTypes.JOIN_RACE_REQUEST) {
             joinRaceRequest(io, action, socket);
             return;
         }
 
-        const player = await playerRepository.getPlayerBySocketId(socket.id);
+        const player = await playerRepository.getPlayerBySocketIdAndRace(
+            socket.id,
+            action.raceId
+        );
 
         if (player === null) {
             logger.warn('Player doesn\'t exists: ', socket.id, action);
