@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import RacesComponent from '@/components/RacesComponent';
 import { actions, selectors } from '@/ducks/races';
 
@@ -38,28 +38,19 @@ class RacesContainer extends React.Component {
     }
 
     render() {
-        const { races, fetchRaces } = this.props;
         return (
             <RacesComponent
-                races={races}
+                races={this.props.races}
                 onRouteChange={this._handleRouteChange}
                 onPageChange={this._fetchRaces} />
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        ...selectors.selectRaces(state)
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchRaces: bindActionCreators(actions.fetchRaces, dispatch),
-        fetchNotFinishedRaces: bindActionCreators(actions.fetchNotFinishedRaces, dispatch),
-        setCurrentRaceById: bindActionCreators(actions.setCurrentRaceById, dispatch),
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RacesContainer);
+export default connect(state => ({
+    ...selectors.selectRaces(state)
+}), {
+    fetchRaces: actions.fetchRaces,
+    fetchNotFinishedRaces: actions.fetchNotFinishedRaces,
+    setCurrentRaceById: actions.setCurrentRaceById,
+})(RacesContainer);

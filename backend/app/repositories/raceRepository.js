@@ -20,6 +20,7 @@ module.exports = {
                     status: Race.statuses.WAIT_PLAYERS,
                 }
             ] })
+            .sort('status')
             .populate(['players', 'text']);
     },
 

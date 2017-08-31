@@ -1,4 +1,5 @@
-import { request } from '../../helpers';
+import { request, Store } from '@/helpers';
+import { SOCKET_STORE_KEY } from '@/constants';
 
 const service = {
     /**
@@ -22,6 +23,18 @@ const service = {
             url: '/auth/signup',
             data: credentials
         });
+    },
+
+    /**
+     * @param  {String} token
+     * @return {Promise}
+     */
+    socketReconnect(token = '') {
+        const socket = (new Store()).find(SOCKET_STORE_KEY);
+        socket.io.opts.query = { token };
+        socket.disconnect();
+        socket.connect();
+        return Promise.resolve();
     }
 };
 

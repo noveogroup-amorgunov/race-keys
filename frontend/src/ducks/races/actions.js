@@ -21,7 +21,6 @@ const actions = {
         };
     },
     fetchNotFinishedRaces() {
-        console.log('fetchNotFinishedRaces');
         return (dispatch) => {
             const token = window.localStorage.getItem(LOCAL_STORAGE_KEY);
             dispatch(actions.fetchRaceListRequest());

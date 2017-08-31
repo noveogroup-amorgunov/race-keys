@@ -7,8 +7,9 @@ import thunkMiddleware from 'redux-thunk';
 import io from 'socket.io-client';
 
 import { actions as authActions } from '@/ducks/auth';
-import { SOCKET_URL, LOCAL_STORAGE_KEY } from '@/constants';
+import { SOCKET_URL, SOCKET_STORE_KEY, LOCAL_STORAGE_KEY } from '@/constants';
 import reducers from '@/ducks/reducer';
+import { Store } from '@/helpers';
 
 export const history = createHistory();
 
@@ -18,7 +19,7 @@ const historyMiddleware = routerMiddleware(history);
 const loggerMiddleware = createLogger();
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
 const store = createStore(
     combineReducers({
         ...reducers,
@@ -34,8 +35,9 @@ const store = createStore(
     )
 );
 
-socket.on('connect', () =>
-    store.dispatch(authActions.setSocketId(socket.id))
-);
+socket.on('connect', () => {
+    store.dispatch(authActions.setSocketId(socket.id));
+    (new Store()).put(SOCKET_STORE_KEY, socket, { serialize: false });
+});
 
 export default store;

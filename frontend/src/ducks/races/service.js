@@ -13,6 +13,9 @@ const service = {
      * @return {Promise.<Object>}
      */
     fetchNotFinishedRaces(token) {
+        if (!token) {
+            return service.fetchRaces();
+        }
         return request({
             url: '/races/not-finished',
             headers: {

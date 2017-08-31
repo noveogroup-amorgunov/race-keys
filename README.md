@@ -20,6 +20,7 @@
 - Bug: LEAVE_RACE if server is reloaded (uodate socket id)
 - Bug: after create new race, click to "ready" and leave race, user can't "ready" to new race..
 - Bug: add socket token after login / remove token after logout
+- ?
 
 
 ## Requirements

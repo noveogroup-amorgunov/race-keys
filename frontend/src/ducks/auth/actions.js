@@ -34,11 +34,6 @@ const actions = {
         };
     },
     /**
-     * @typedef {Object} UserCredentials
-     * @property {string} login
-     * @property {string} password
-     */
-    /**
      * @param {UserCredentials} credentials
      * @return {Object}
      */
@@ -48,8 +43,8 @@ const actions = {
             return service.requestLogin(credentials)
                 .then(
                     (response) => {
-                        // console.log(response);
                         window.localStorage.setItem(LOCAL_STORAGE_KEY, response.token);
+                        dispatch(actions.socketReconnect(response.token));
                         return dispatch(actions.loginSuccess(response.user));
                     },
                     (error) => {
@@ -96,6 +91,7 @@ const actions = {
                 .then(
                     (response) => {
                         window.localStorage.setItem(LOCAL_STORAGE_KEY, response.token);
+                        dispatch(actions.socketReconnect(response.token));
                         return dispatch(actions.registerSuccess(response.user));
                     },
                     error => dispatch(actions.registerError(error.code))
@@ -110,6 +106,7 @@ const actions = {
     logoutUser() {
         return (dispatch) => {
             window.localStorage.removeItem(LOCAL_STORAGE_KEY);
+            dispatch(actions.socketReconnect());
             return new Promise((resolve) => {
                 resolve(dispatch(actions.logout()));
             });
@@ -121,6 +118,15 @@ const actions = {
             socketId,
         };
     },
+    socketReconnect(token) {
+        return dispatch => service.socketReconnect(token)
+            .then(() => dispatch(actions.socketReconnectSuccess()));
+    },
+    socketReconnectSuccess() {
+        return {
+            type: types.SOCKET_RECONNECT_SUCESS
+        };
+    }
 };
 
 export default actions;

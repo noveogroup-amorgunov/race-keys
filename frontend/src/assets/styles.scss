@@ -198,7 +198,9 @@ form {
 }
 
 .race {
-
+    &-header {
+        margin-bottom: 5px;
+    }
 }
 
 .race-preview {
@@ -209,6 +211,10 @@ form {
     margin: 10px;
     border-bottom: 5px solid #eee;
     border-radius: 2px;
+
+    &-in-process {
+        background-color: #faffae;
+    }
 }
 
 /* The typewriter cursor effect */
