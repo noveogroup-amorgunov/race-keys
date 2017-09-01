@@ -38,19 +38,11 @@ module.exports = io => async (socket, next) => {
             return;
         }
 
-        let player = await playerRepository.getPlayerBySocketIdAndRace(
-            socket.id,
-            action.raceId
-        );
-
-        // find user by userToken and connect him to player entity
-        if (!player && socket.handshake.query.token) {
-            const user = await userRepository.findByNotExpiredToken(socket.handshake.query.token);
-
-            if (user) {
-                player = await playerRepository.getPlayerByRaceAndUserId(action.raceId, user.id);
-            }
-        }
+        const { player } = await playerRepository.getPlayerWithUser({
+            socketId: socket.id,
+            raceId: action.raceId,
+            userToken: socket.handshake.query.token
+        });
 
         if (player === null) {
             logger.warn('Player doesn\'t exists: ', socket.id, action);

@@ -18,17 +18,19 @@
 - ~Move game logic to project~
 - ~Add styles for RaceComponent~
 - ~Feature: Show link to friend when race WAIT_PLAYERS~
+- ~Task: create `playerRepository.getPlayer` method~
+- ~Feature: Add music error when user make mistake~
+
 - Task: Add car images
 - Feature: Collect users stats
 - Bug: LEAVE_RACE if server is reloaded (uodate socket id)
 - Feature: Select car into sign up
-- Feature: Add music error when user make mistake
 - Bug: save position to server as count of enter chars and parse it in frontend
 - Task: Add finish popup
 - Task: Update players state
 - Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
 - Bug: set initial state to game by collection's doc data
-- Task: create `playerRepository.getPlayer` method
+- Feature: global loader
 
 
 ## Requirements
