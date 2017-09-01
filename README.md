@@ -20,7 +20,6 @@
 - ~Feature: Show link to friend when race WAIT_PLAYERS~
 - ~Task: create `playerRepository.getPlayer` method~
 - ~Feature: Add music error when user make mistake~
-
 - Task: Add car images
 - Feature: Collect users stats
 - Bug: LEAVE_RACE if server is reloaded (uodate socket id)

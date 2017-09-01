@@ -53,6 +53,7 @@ export default class RaceComponent extends React.Component {
 
     displayErrorText(show = false) {
         ReactDOM.findDOMNode(this.refs.textInput).className = show ? 'error' : '';
+        ReactDOM.findDOMNode(this.refs.errorHint).className = show ? 'danger' : 'danger hidden';
         console.log(`displayErrorText: ${show}`);
     }
 
@@ -125,7 +126,8 @@ export default class RaceComponent extends React.Component {
                         </div>
                         <br/>
                         <br/>
-                        <span>Type text here as fast as possible:</span>
+                        <span className="hint">Type text here as fast as possible:</span>&nbsp;&nbsp;
+                        <span ref="errorHint" className="danger hidden"><strong>Fix mistake!</strong></span>
                         <input readOnly={status === gameStatuses.WAIT_PLAYERS} ref="textInput" onChange={::this.onChange} />
                     </div>
                 </div>
