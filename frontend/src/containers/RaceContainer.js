@@ -51,9 +51,9 @@ class RaceContainer extends React.Component {
                 race={this.props.currentRace}
                 errorCode={this.props.errorCode}
                 gameState={this.props.currentRaceState}
-                makeErrorInText={this.props.makeErrorInText}
-                movingForward={this.props.movingForward}
-                finishRace={this.props.finishRace}
+                makeErrorInText={this.props.makeErrorInText.bind(this, this.raceId)}
+                movingForward={this.props.movingForward.bind(this, this.raceId)}
+                finishRace={this.props.finishRace.bind(this, this.raceId)}
                 readyToPlay={this.props.readyToPlay.bind(this, this.raceId)} />
         );
     }

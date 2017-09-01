@@ -22,6 +22,31 @@ function changeStateOnDeleteRace(state, action) {
     };
 }
 
+function changePlayerStateOnGameActions(state, action) {
+    return {
+        ...state,
+        currentRaceState: {
+            ...state.currentRaceState,
+            me: {
+                ...state.currentRaceState.me,
+                ...action.player
+            },
+        }
+    };
+}
+
+function changePlayersState(state, action) {
+    console.log(action);
+    return {
+        ...state,
+        currentRaceState: {
+            ...state.currentRaceState,
+            others: action.data.players
+                .filter(player => player.id !== state.currentRaceState.me.id),
+        }
+    };
+}
+
 export const initialState = {
     items: [],
     currentRace: null,
@@ -37,6 +62,14 @@ export const initialState = {
 
 export default function races(state = initialState, action) {
     switch (action.type) {
+        case types.PLAYERS_CHANGE_STATE:
+            return changePlayersState(state, action);
+        case types.CHANGE_POSITION_SUCCESS:
+            return changePlayerStateOnGameActions(state, action);
+        case types.FINISH_SUCCESS:
+            return changePlayerStateOnGameActions(state, action);
+        case types.ADD_ERROR_SUCCESS:
+            return changePlayerStateOnGameActions(state, action);
         case types.START_GAME:
             return {
                 ...state,

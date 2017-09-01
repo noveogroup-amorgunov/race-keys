@@ -21,21 +21,29 @@ export default class RaceComponent extends React.Component {
         document.execCommand('copy');
     }
 
+    initGame(sourceText) {
+        this.game = new Game({ sourceText });
+
+        this.game.on('displayErrorText', this.displayErrorText.bind(this));
+        this.game.on('makeErrorInText', this.props.makeErrorInText);
+        this.game.on('movingForward', this.props.movingForward);
+        this.game.on('finishRace', this.props.finishRace);
+        this.game.on('clearInput', this.clearInput.bind(this));
+        this.game.on('highlightCompletedChunks', this.highlightCompletedChunks.bind(this));
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.gameState
-            && this.props.gameState
-            && nextProps.gameState.game.status === gameStatuses.IN_PROCESS
-            && this.props.gameState.game.status === gameStatuses.WAIT_PLAYERS) {
-            this.game = new Game({
-                callback: {
-                    makeErrorInText: this.props.makeErrorInText,
-                    movingForward: this.props.movingForward,
-                    finishRace: this.props.finishRace,
-                    clearInput: this.clearInput,
-                    displayErrorText: this.displayErrorText,
-                    highlightCompletedChunks: this.highlightCompletedChunks
-                }
-            });
+        if (!this.game && nextProps.gameState.game.text && (
+            nextProps.gameState.game.status === gameStatuses.IN_PROCESS ||
+            this.props.gameState.game.status === gameStatuses.IN_PROCESS)
+        ) {
+            this.initGame(nextProps.gameState.game.text);
+        }
+    }
+
+    componentWillMount() {
+        if (this.props.gameState.game.text && this.props.gameState.game.status === gameStatuses.IN_PROCESS) {
+            this.initGame(this.props.gameState.game.text);
         }
     }
 
@@ -44,7 +52,8 @@ export default class RaceComponent extends React.Component {
     }
 
     displayErrorText(show = false) {
-
+        ReactDOM.findDOMNode(this.refs.textInput).className = show ? 'error' : '';
+        console.log(`displayErrorText: ${show}`);
     }
 
     highlightCompletedChunks(text, chunks, currentChunkIndex) {
@@ -54,7 +63,7 @@ export default class RaceComponent extends React.Component {
             .reduce((acc, item) => acc + item.length, 0);
 
         const formattedText = `${text.substring(0, start)}<span>${text.substring(start, end)}</span>${text.substring(end, text.length)}`;
-        ReactDOM.findDOMNode(this.refs.textInput).innerHTML(formattedText);
+        ReactDOM.findDOMNode(this.refs.text).innerHTML = formattedText;
     }
 
     onChange(event) {
@@ -107,27 +116,35 @@ export default class RaceComponent extends React.Component {
 
                 <div className="text-wrapper">
                     <div>
-                        <div className="text">
+                        <div ref="text" className="text">
                             {text}
                         </div>
                         <br/>
                         <br/>
                         <span>Type text here as fast as possible:</span>
-                        <input readOnly={status === gameStatuses.WAIT_PLAYERS} ref="textInput" onChange={this.onChange} />
+                        <input readOnly={status === gameStatuses.WAIT_PLAYERS} ref="textInput" onChange={::this.onChange} />
                     </div>
                 </div>
 
                 {!me.readyToPlay
                     ? (<a onClick={this.props.readyToPlay} className="button">Ready to play</a>)
-                    : (<div>You are ready to play!</div>)
+                    : (<div className="-wait-players">You are ready to play!</div>)
                 }
 
                 <div className="stripes">
                     <div className="finish-line"></div>
                     <RaceStripeComponent
+                        {...me}
                         isCurrentPlayer={true}
+                        sourceText={text}
                         readyToPlay={me.readyToPlay} />
-                    {players.map(player => (<RaceStripeComponent readyToPlay={player.readyToPlay} name={player.username} key={player.id} />))}
+                    {players.map(player => (
+                        <RaceStripeComponent
+                            {...player}
+                            sourceText={text}
+                            readyToPlay={player.readyToPlay}
+                            key={player.id}
+                        />))}
                 </div>
 
                 <br/><br/>{JSON.stringify(gameState)}
@@ -136,18 +153,7 @@ export default class RaceComponent extends React.Component {
     }
 }
 
-/*
-id: this.id,
-readyToPlay: this.readyToPlay,
-race: this.race,
-place: this.place,
-position: this.position,
-errorsInPrint: this.errorsInPrint,
-finished: this.finished,
-finishedTime: this.finishedTime,
-socketId: this.socketId,
-username: this.name,
-*/
+
 
 /*
 const $input = document.querySelector('input');

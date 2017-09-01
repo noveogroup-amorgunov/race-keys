@@ -1,6 +1,7 @@
 const logger = require('winston');
 const { gameTypes } = require('../../config/gameTypes');
 const playerRepository = require('../repositories/playerRepository');
+const userRepository = require('../repositories/userRepository');
 
 const {
     userLeaveRace,
@@ -37,10 +38,19 @@ module.exports = io => async (socket, next) => {
             return;
         }
 
-        const player = await playerRepository.getPlayerBySocketIdAndRace(
+        let player = await playerRepository.getPlayerBySocketIdAndRace(
             socket.id,
             action.raceId
         );
+
+        // find user by userToken and connect him to player entity
+        if (!player && socket.handshake.query.token) {
+            const user = await userRepository.findByNotExpiredToken(socket.handshake.query.token);
+
+            if (user) {
+                player = await playerRepository.getPlayerByRaceAndUserId(action.raceId, user.id);
+            }
+        }
 
         if (player === null) {
             logger.warn('Player doesn\'t exists: ', socket.id, action);
@@ -48,6 +58,7 @@ module.exports = io => async (socket, next) => {
         }
 
         player.socketId = socket.id;
+        await player.save();
 
         switch (action.type) {
             case gameTypes.READY_TO_PLAY:
@@ -57,10 +68,10 @@ module.exports = io => async (socket, next) => {
                 userLeaveRace(io, player, socket);
                 break;
             case gameTypes.CHANGE_POSITION_REQUEST:
-                userMovingForward.putCardRequest(io, player, action);
+                userMovingForward(io, player, action);
                 break;
             case gameTypes.FINISH_REQUEST:
-                userFinishRace.putCardFromPackRequest(io, player, action);
+                userFinishRace(io, player, action);
                 break;
             case gameTypes.ADD_ERROR_REQUEST:
                 userMakeErrorInText(io, player, action);

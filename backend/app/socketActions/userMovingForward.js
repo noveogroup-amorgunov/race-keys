@@ -17,6 +17,7 @@ module.exports = async (io, player, action) => {
     }
 
     await player.changePositionInText(action.position).save();
+
     const commonGameState = await race.getCommonGameState();
 
     notify(gameTypes.CHANGE_POSITION_SUCCESS, { player: player.toJson() }, player.socketId);

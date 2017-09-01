@@ -120,7 +120,7 @@ const actions = {
     },
     socketReconnect(token) {
         return dispatch => service.socketReconnect(token)
-            .then(() => dispatch(actions.socketReconnectSuccess()));
+            .then(() => dispatch(actions.setSocketId()));
     },
     socketReconnectSuccess() {
         return {

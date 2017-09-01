@@ -1,78 +1,51 @@
-function getNewCarPosition(data) {
-    data.currentPosition += data.step;
-    return `${+data.currentPosition}px`;
-}
+const EventEmitter = require('events').EventEmitter;
 
-class Game {
-    constructor(options) {
-        this.selectors = {
-            $car: options.car,
-            $text: options.text,
-            $race: options.race,
-            $error: options.error,
+class Game extends EventEmitter {
+    constructor({ callbacks, sourceText, data = {} }) {
+        super();
+        this.data = {
+            currentPosition: data.currentPosition || 0,
+            currentIndex: data.currentIndex || 0,
+            currentChunkIndex: data.currentChunkIndex || 0,
+            chunks: sourceText.split(' ').map(word => `${word} `),
+            sourceText,
+            isError: false,
+            step: 2.59,
         };
-        this.callbacks = options.callbacks;
-        this.reset();
-
-        /*
-        makeErrorInText: this.props.makeErrorInText,
-        movingForward: this.props.movingForward,
-        finishRace: this.props.finishRace,
-        clearInput: this.clearInput,
-        displayErrorText: this.displayErrorText,
-        */
     }
 
-    reset() {
-        const sourceText = this.selectors.$text.innerText;
-        const raceLengthInPx = this.selectors.$race.offsetWidth - 120;
-
-        this.selectors.$text.innerHTML = this.selectors.$text.innerText;
-
-        this.callbacks.clearInput();
-        this.selectors.$car.style.left = 0;
-
-        this.data = {
-            currentPosition: 0,
-            currentIndex: 0,
-            currentChunkIndex: 0,
-            errors: [],
-            speed: 0,
-            chunks: sourceText.split(' ').map(a => a + ' '),
-            step: raceLengthInPx / sourceText.length,
-            sourceText,
-            textLength: sourceText.length,
-        };
+    setStep(raceLengthInPx) {
+        this.data.step = raceLengthInPx / this.sourceText.length;
     }
 
     userEnterNewChar(char) {
-        const { $text } = this.selectors;
         const data = this.data;
 
         if (data.chunks[data.currentChunkIndex][data.currentIndex] === char) {
-            this.callbacks.displayErrorText(false);
+            this.emit('displayErrorText', false);
+            data.isError = false;
             if (data.currentChunkIndex === data.chunks.length - 1 && data.currentIndex === data.chunks[data.currentChunkIndex].length - 2) {
-                highlightCompletedChunks($text, data.sourceText, data.chunks, data.currentChunkIndex);
-                this.callbacks.clearInput();
-                this.callbacks.finishRace();
+                this.emit('highlightCompletedChunks', data.sourceText, data.chunks, data.currentChunkIndex);
+                this.emit('clearInput');
+                this.emit('finishRace');
                 return;
             }
 
             if (char === ' ') {
-                highlightCompletedChunks($text, data.sourceText, data.chunks, data.currentChunkIndex);
-                this.callbacks.clearInput();
+                this.emit('highlightCompletedChunks', data.sourceText, data.chunks, data.currentChunkIndex);
+                this.emit('clearInput');
                 data.currentChunkIndex++;
                 data.currentIndex = 0;
             } else {
                 data.currentIndex++;
             }
 
-            changeCarPosition(this.selectors.$car, data);
-        } else {
-            if ($error.innerText === '') {
-                data.errors.push('error');
-            }
-            this.callbacks.displayErrorText(true);
+            data.currentPosition += data.step;
+            this.emit('movingForward', data.currentPosition);
+        } else if (!data.isError) {
+            data.isError = true;
+            this.emit('makeErrorInText');
+            this.emit('displayErrorText', true);
         }
         return false;
     }
@@ -80,54 +53,8 @@ class Game {
 
 export default Game;
 
+
 /*
-<button class="start">start</button>
-<div class="text"><span></span>In an expression, you can tag entities to make them appear in the Recast.</div>
-<input type="text" />
-<div class="error"></div>
-<div class="race">
-<div class="car">
-  <div class="car-body">
-  </div>
-</div>
-</div>
-
-
-.race {
-  background: white;
-  width: 100%;
-  position: relative;
-  height: 50px;
-}
-
-.car {
-  background: rgb(119, 119, 119);
-  overflow: hidden;
-  width: 100px;
-  height: 50px;
-  position: relative;
-  transition: opacity 0.5s;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  transition: all 0.1s;
-}
-
-.car-body {
-  background: white url('http://klavogonki.ru/img/cars/19-1.png') no-repeat;
-  background: white url('http://klavogonki.ru/img/cars/35-1.png') no-repeat;
-  background: white url('http://klavogonki.ru/img/cars/22-3.png') no-repeat;
-  background: white url('http://klavogonki.ru/img/cars/23.png') no-repeat;
-  background-color: transparent;
-  height: 50px;
-  width: 150px;
-}
-
-.text span {
-  background-color: #f5f5ba;
-}
-
-
 const $input = document.querySelector('input');
 const $car = document.querySelector('.car');
 const $text = document.querySelector('.text');

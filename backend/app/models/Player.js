@@ -27,22 +27,10 @@ playerSchema
         return this.race;
     });
 
-// TODO: refactoring these methods
-playerSchema.methods.reset = function reset(data = {}) {
-    this.set('readyToPlay', data.readyToPlay || false);
-
-    this.set('place', data.place || -1);
-    this.set('position', data.position || -1);
-    this.set('errorsInPrint', data.errorsInPrint || 0);
-    this.set('finished', data.finished || false);
-    this.set('finishedTime', data.finishedTime);
-    this.set('socketId', data.socketId);
-    this.set('user', data.user);
-};
+// TODO: refactoring this method
 playerSchema.methods.startGame = function startGame() {
     return this.finished;
 };
-
 
 playerSchema.methods.isFinished = function isFinished() {
     return this.finished;
@@ -87,7 +75,7 @@ playerSchema.methods.finish = function readyToPlay(place, time) {
 };
 
 playerSchema.methods.makeErrorInText = function makeErrorInText() {
-    this.set('errorsInPrint', this.errorsInPrint + 1);
+    this.set('errorsInPrint', (this.errorsInPrint || 0) + 1);
     return this;
 };
 

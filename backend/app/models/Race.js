@@ -116,13 +116,21 @@ raceSchema.methods.getGameState = function getGameState(player) {
     };
 };
 
-raceSchema.methods.getCommonGameState = function getCommonGameState() {
+raceSchema.methods.getCommonGameState = async function getCommonGameState() {
+    await this.updatePlayersData();
     const players = this.getPlayers();
 
     return {
-        players: players.map(p => ({ data: p.toJson() })),
+        players: players.map(p => p.toJson()),
         game: this.toJson(),
     };
+};
+
+raceSchema.methods.updatePlayersData = async function updatePlayersData() {
+    this.players = this.players.map(async (player) => {
+        return mongoose.models.Player.findById(player.id);
+    });
+    await this.save;
 };
 
 raceSchema.methods.isInProcess = function isInProcess() {

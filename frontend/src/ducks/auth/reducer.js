@@ -47,7 +47,10 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                user: userReducer(state.user, action)
+                user: {
+                    ...state.user,
+                    ...userReducer(state.user, action)
+                }
             };
         case types.SET_SOCKET_ID:
             return {

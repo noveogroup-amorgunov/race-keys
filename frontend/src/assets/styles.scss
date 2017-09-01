@@ -237,6 +237,8 @@ form {
 
 .car-wrapper {
     position: relative;
+    height: 100%;
+    width: 100%;
 }
 
 .car {
@@ -246,7 +248,20 @@ form {
     width: 100px;
     height: 50px;
     border: 0px;
-    background: url('http://klavogonki.ru/img/cars/22-3.png');
+    background: rgb(119, 119, 119);
+    overflow: hidden;
+    transition: opacity 0.5s;
+    transition: all 0.1s;
+}
+
+.car-body {
+    background: white url('http://klavogonki.ru/img/cars/19-1.png') no-repeat;
+    // background: white url('http://klavogonki.ru/img/cars/35-1.png') no-repeat;
+    // background: white url('http://klavogonki.ru/img/cars/22-3.png') no-repeat;
+    // background: white url('http://klavogonki.ru/img/cars/23.png') no-repeat;
+    background-color: transparent;
+    height: 50px;
+    width: 150px;
 }
 
 .stripe {
@@ -331,6 +346,11 @@ form {
         margin-top: 10px;
     }
 
+    input.error {
+        border: 1px solid red;
+        background: rgb(255, 249, 249);
+    }
+
     span {
         color: #999;
     }
@@ -338,9 +358,19 @@ form {
 
 .text-wrapper {
     text-align: left;
+
+    .text {
+        span {
+            background-color: #f5f5ba;
+        }
+    }
 }
 
 .share {
     float: right;
     width: 40%;
+}
+
+.-wait-players {
+
 }

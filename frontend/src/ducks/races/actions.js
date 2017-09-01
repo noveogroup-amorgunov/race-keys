@@ -127,10 +127,11 @@ const actions = {
             raceId,
         };
     },
-    movingForwardRequest(raceId) {
+    movingForwardRequest(raceId, position) {
         return {
             type: types.CHANGE_POSITION_REQUEST,
             raceId,
+            position,
         };
     },
     finishRaceRequest(raceId) {

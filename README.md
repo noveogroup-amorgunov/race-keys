@@ -15,13 +15,20 @@
 - ~Show authorized user IN_PROCESS races in main page~
 - ~Bug: add socket token after login / remove token after logout~
 - ~Bug: after create new race, click to "ready" and leave race, user can't "ready" to new race.. *was few players on one user, so find player by race*~
-- Add car images
-- Move game logic to project
-- Collect uesrs stats
-- Add styles for RaceComponent
-- Bug: LEAVE_RACE if server is reloaded (uodate socket id)
-- Feature: select car into sign up
+- ~Move game logic to project~
+- ~Add styles for RaceComponent~
 - ~Feature: Show link to friend when race WAIT_PLAYERS~
+- Task: Add car images
+- Feature: Collect users stats
+- Bug: LEAVE_RACE if server is reloaded (uodate socket id)
+- Feature: Select car into sign up
+- Feature: Add music error when user make mistake
+- Bug: save position to server as count of enter chars and parse it in frontend
+- Task: Add finish popup
+- Task: Update players state
+- Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
+- Bug: set initial state to game by collection's doc data
+- Task: create `playerRepository.getPlayer` method
 
 
 ## Requirements
