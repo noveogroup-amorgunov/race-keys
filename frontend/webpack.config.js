@@ -29,7 +29,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.(jpg|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                test: /\.(mp3|jpg|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
                 use: 'file-loader'
             },
             {

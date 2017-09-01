@@ -1,7 +1,8 @@
-const EventEmitter = require('events').EventEmitter;
+import { EventEmitter } from 'events';
+import soundFile from '../assets/sounds/typo.mp3';
 
 class Game extends EventEmitter {
-    constructor({ callbacks, sourceText, data = {} }) {
+    constructor({ sourceText, data = {} }) {
         super();
         this.data = {
             currentPosition: data.currentPosition || 0,
@@ -12,6 +13,7 @@ class Game extends EventEmitter {
             isError: false,
             step: 2.59,
         };
+        this.errorSound = new Audio(soundFile);
     }
 
     setStep(raceLengthInPx) {
@@ -44,6 +46,7 @@ class Game extends EventEmitter {
             this.emit('movingForward', data.currentPosition);
         } else if (!data.isError) {
             data.isError = true;
+            this.errorSound.play();
             this.emit('makeErrorInText');
             this.emit('displayErrorText', true);
         }

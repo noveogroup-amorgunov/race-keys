@@ -84,6 +84,10 @@ export default class RaceComponent extends React.Component {
             return (<span>Loading</span>);
         }
 
+        if (this.props.gameState.game.status === gameStatuses.FINISHED) {
+            return (<div>Game has already ended</div>);
+        }
+
         const gameState = this.props.gameState;
         const { me, others: players } = gameState;
         const { status, text } = gameState.game;
