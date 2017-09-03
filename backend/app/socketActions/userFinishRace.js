@@ -19,6 +19,10 @@ module.exports = async (io, player, action) => {
     const { player: updatedPlayer } = await race.playerFinishRace(player);
     const commonGameState = await race.getCommonGameState();
 
-    notify(gameTypes.FINISH_SUCCESS, { data: updatedPlayer.toJson() }, player.socketId);
-    notify(gameTypes.PLAYERS_CHANGE_STATE, { data: commonGameState }, player.roomId);
+    notify(gameTypes.FINISH_SUCCESS, { player: updatedPlayer.toJson() }, player.socketId);
+    notify(gameTypes.PLAYERS_CHANGE_STATE, { data: commonGameState }, player.raceId);
+
+    if (race.status === Race.statuses.FINISHED) {
+        notify(gameTypes.GAME_OVER, { data: race.toJson() }, player.raceId);
+    }
 };

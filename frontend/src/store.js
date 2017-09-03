@@ -7,6 +7,7 @@ import thunkMiddleware from 'redux-thunk';
 import io from 'socket.io-client';
 
 import { actions as authActions } from '@/ducks/auth';
+import { actions as appActions } from '@/ducks/app';
 import { SOCKET_URL, SOCKET_STORE_KEY, LOCAL_STORAGE_KEY } from '@/constants';
 import reducers from '@/ducks/reducer';
 import { Store } from '@/helpers';
@@ -38,6 +39,10 @@ const store = createStore(
 socket.on('connect', () => {
     store.dispatch(authActions.setSocketId(socket.id));
     (new Store()).put(SOCKET_STORE_KEY, socket, { serialize: false });
+});
+
+window.addEventListener('resize', () => {
+    store.dispatch(appActions.screenResize(window.innerWidth));
 });
 
 export default store;

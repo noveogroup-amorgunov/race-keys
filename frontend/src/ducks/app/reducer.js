@@ -1,14 +1,16 @@
 import actions from './actions';
+import types from './types';
 
-export { actions };
-
-export const initialState = {};
+export const initialState = {
+    screenWidth: typeof window === 'object' ? window.innerWidth : null
+};
 
 export default function app(state = initialState, action) {
     switch (action.type) {
-        // test action
-        case 'NEW_RACE_CREATED':
-            break;
+        case types.SCREEN_RESIZE:
+            return Object.assign({}, state, {
+                screenWidth: action.screenWidth
+            });
         default:
             return state;
     }

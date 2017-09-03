@@ -239,6 +239,10 @@ form {
     position: relative;
     height: 100%;
     width: 100%;
+
+    &-finished {
+        opacity: 0.5;
+    }
 }
 
 .car {
@@ -280,10 +284,11 @@ form {
 .stripe-desc {
     position: absolute;
     left: 8px;
-    bottom: 8px;
+    bottom: 7px;
     width: 80px;
     height: 30px;
     // border-bottom: 2px dashed red;
+    text-align: right;
 
     &-stats {
         font-size: .8em;
@@ -292,6 +297,23 @@ form {
         margin-left: 14px;
         margin-top: -4px;
     }
+
+    span {
+        position: relative;
+    }
+}
+
+.stripe-result {
+    position: absolute;
+    bottom: 8px;
+    height: 30px;
+
+    font-size: 1.3em;
+    font-weight: bold;
+
+    position: absolute;
+    left: 8px;
+    width: 60%;
 }
 
 .stripe-ready {
@@ -304,6 +326,15 @@ form {
     &-yes {
         background-color: #33a9ec;
     }
+}
+
+.award {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: -13px;
+    top: 5px;
+    background: white url(http://klavogonki.ru/img/awards-4.gif) no-repeat 0% 0%;
 }
 
 .finish-line {
@@ -364,6 +395,13 @@ form {
             background-color: #f5f5ba;
         }
     }
+}
+
+.text-finished, .text-wait-players {
+    text-align: center;
+    overflow: hidden;
+    min-height: 90px;
+    line-height: 30px;
 }
 
 .share {

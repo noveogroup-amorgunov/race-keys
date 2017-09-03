@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 import { Errors, LOCAL_STORAGE_KEY } from '@/constants';
 import { actions as authActions } from '@/ducks/auth';
+import types from './types';
 
 const actions = {
     errorHandler(errorCode) {
@@ -18,6 +19,12 @@ const actions = {
                     break;
                 default:
             }
+        };
+    },
+    screenResize(width) {
+        return {
+            type: types.SCREEN_RESIZE,
+            screenWidth: width
         };
     }
 };

@@ -21,5 +21,5 @@ module.exports = async (io, player, action) => {
     const commonGameState = await race.getCommonGameState();
 
     notify(gameTypes.CHANGE_POSITION_SUCCESS, { player: player.toJson() }, player.socketId);
-    notify(gameTypes.PLAYERS_CHANGE_STATE, { data: commonGameState }, player.roomId);
+    notify(gameTypes.PLAYERS_CHANGE_STATE, { data: commonGameState }, player.raceId);
 };

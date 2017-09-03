@@ -20,16 +20,21 @@
 - ~Feature: Show link to friend when race WAIT_PLAYERS~
 - ~Task: create `playerRepository.getPlayer` method~
 - ~Feature: Add music error when user make mistake~
-- Task: Add car images
-- Feature: Collect users stats
-- Bug: LEAVE_RACE if server is reloaded (uodate socket id)
-- Feature: Select car into sign up
-- Bug: save position to server as count of enter chars and parse it in frontend
-- Task: Add finish popup
-- Task: Update players state
-- Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
-- Bug: set initial state to game by collection's doc data
-- Feature: global loader
+- ~Feature: To update width of screen update step~
+- ~Bug: save position to server as count of enter chars and parse it in frontend~
+- ~Bug: set initial state to game by collection's doc data~
+- ~Task: Text from SOURCE!~
+- ~Bug: Hide text before start~
+- 1 Task: Add car images
+- 2 Feature: Collect users stats
+- 3 Bug: LEAVE_RACE if server is reloaded (uodate socket id)
+- 4 Feature: Select car into sign up
+- 5 Task: Add finish popup
+- 6 Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
+- 7 Feature: global loader
+- 8 Task: Add timer
+- 9 Task: Update players state
+- 10 Bug: move and crop images to server
 
 
 ## Requirements

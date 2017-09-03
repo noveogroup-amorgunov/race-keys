@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import RaceComponent from '@/components/RaceComponent';
 import { actions, selectors } from '@/ducks/races';
+import { selectors as appSelectors } from '@/ducks/app';
 
 
 class RaceContainer extends React.Component {
@@ -23,11 +24,13 @@ class RaceContainer extends React.Component {
     }
 
     componentWillMount() {
-        console.log(`join to race: ${this.raceId}`);
+        // console.log(`join to race: ${this.raceId}`);
         const next = this.props.isFetched ? Promise.resolve() : this.props.fetchRace(this.raceId);
         next.then(() => {
-            const socketId = window.localStorage.getItem('socketId');
-            this.props.joinRace(this.raceId, socketId);
+            setTimeout(() => {
+                const socketId = window.localStorage.getItem('socketId');
+                this.props.joinRace(this.raceId, socketId);
+            }, 150);
         });
     }
 
@@ -41,7 +44,7 @@ class RaceContainer extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log(`leave race: ${this.raceId}`);
+        // console.log(`leave race: ${this.raceId}`);
         this.props.leaveRace(this.raceId);
     }
 
@@ -64,6 +67,7 @@ export default connect(state => ({
     isFetched: selectors.isFetchedRaces(state),
     errorCode: selectors.selectErrorCode(state),
     currentRaceState: selectors.selectCurrentRaceState(state),
+    screenWidth: appSelectors.selectScreenWidth(state),
 }), {
     fetchRace: actions.fetchRace,
     joinRace: actions.joinRaceRequest,

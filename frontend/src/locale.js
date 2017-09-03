@@ -7,7 +7,7 @@ export default {
         USERNAME_ALREADY_USED: 'This login has already used',
         RACE_NOT_FOUND: 'Sorry, but race isn\'t found',
         RACES_NOT_EXISTS: 'Sorry, races doen\'t exists.',
-        PLAYER_NOT_FOUND: 'Sorry, game has already started',
+        PLAYER_NOT_FOUND: 'Sorry, game has already started or finished',
     },
     gameStatuses: {
         IN_PROCESS: 'In progress',

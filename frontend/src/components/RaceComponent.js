@@ -21,15 +21,21 @@ export default class RaceComponent extends React.Component {
         document.execCommand('copy');
     }
 
-    initGame(sourceText) {
-        this.game = new Game({ sourceText });
+    initGame(sourceText, position) {
+        this.game = new Game({ sourceText, position });
 
         this.game.on('displayErrorText', this.displayErrorText.bind(this));
         this.game.on('makeErrorInText', this.props.makeErrorInText);
         this.game.on('movingForward', this.props.movingForward);
-        this.game.on('finishRace', this.props.finishRace);
         this.game.on('clearInput', this.clearInput.bind(this));
         this.game.on('highlightCompletedChunks', this.highlightCompletedChunks.bind(this));
+        this.game.on('finishRace', () => {
+            ReactDOM.findDOMNode(this.refs.textInput).readOnly = true;
+            this.props.finishRace();
+        });
+
+        this.game.start();
+        setTimeout(() => ReactDOM.findDOMNode(this.refs.textInput).focus(), 150);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -37,13 +43,19 @@ export default class RaceComponent extends React.Component {
             nextProps.gameState.game.status === gameStatuses.IN_PROCESS ||
             this.props.gameState.game.status === gameStatuses.IN_PROCESS)
         ) {
-            this.initGame(nextProps.gameState.game.text);
+            this.initGame(
+                nextProps.gameState.game.text,
+                nextProps.gameState.me.position,
+            );
         }
     }
 
     componentWillMount() {
         if (this.props.gameState.game.text && this.props.gameState.game.status === gameStatuses.IN_PROCESS) {
-            this.initGame(this.props.gameState.game.text);
+            this.initGame(
+                this.props.gameState.game.text,
+                this.props.gameState.me.position,
+            );
         }
     }
 
@@ -54,17 +66,20 @@ export default class RaceComponent extends React.Component {
     displayErrorText(show = false) {
         ReactDOM.findDOMNode(this.refs.textInput).className = show ? 'error' : '';
         ReactDOM.findDOMNode(this.refs.errorHint).className = show ? 'danger' : 'danger hidden';
-        console.log(`displayErrorText: ${show}`);
+        // console.log(`displayErrorText: ${show}`);
     }
 
     highlightCompletedChunks(text, chunks, currentChunkIndex) {
+        // console.log(`currentChunkIndex: ${currentChunkIndex}`);
         const start = 0;
         const end = chunks
             .slice(0, currentChunkIndex + 1)
             .reduce((acc, item) => acc + item.length, 0);
 
         const formattedText = `${text.substring(0, start)}<span>${text.substring(start, end)}</span>${text.substring(end, text.length)}`;
-        ReactDOM.findDOMNode(this.refs.text).innerHTML = formattedText;
+        setTimeout(() => {
+            (ReactDOM.findDOMNode(this.refs.text).innerHTML = formattedText);
+        }, 150);
     }
 
     onChange(event) {
@@ -91,7 +106,7 @@ export default class RaceComponent extends React.Component {
 
         const gameState = this.props.gameState;
         const { me, others: players } = gameState;
-        const { status, text } = gameState.game;
+        const { status, text, textSource } = gameState.game;
 
         return (
             <div className='race'>
@@ -118,18 +133,30 @@ export default class RaceComponent extends React.Component {
                         </div>
                     )
                 }
-
                 <div className="text-wrapper">
-                    <div>
-                        <div ref="text" className="text">
-                            {text}
-                        </div>
-                        <br/>
-                        <br/>
-                        <span className="hint">Type text here as fast as possible:</span>&nbsp;&nbsp;
-                        <span ref="errorHint" className="danger hidden"><strong>Fix mistake!</strong></span>
-                        <input readOnly={status === gameStatuses.WAIT_PLAYERS} ref="textInput" onChange={::this.onChange} />
-                    </div>
+                    {status === gameStatuses.IN_PROCESS && !me.finished &&
+                        (<div>
+                            <div ref="text" className="text">
+                                {text}
+                            </div>
+                            <br/>
+                            <br/>
+                            <span className="hint">Type text here as fast as possible:</span>&nbsp;&nbsp;
+                            <span ref="errorHint" className="danger hidden"><strong>Fix mistake!</strong></span>
+                            <input readOnly={status === gameStatuses.WAIT_PLAYERS} ref="textInput" onChange={::this.onChange} />
+                        </div>)
+                    }
+                    {status === gameStatuses.WAIT_PLAYERS &&
+                        (<div className="text-wait-players">
+                            <div className="hint">Text hidden before start of game!</div>
+                        </div>)
+                    }
+                    {me.finished &&
+                        (<div className="text-finished">
+                            <div className="hint">You typed text from:</div>
+                            {textSource}
+                        </div>)
+                    }
                 </div>
 
                 {!me.readyToPlay
@@ -143,29 +170,20 @@ export default class RaceComponent extends React.Component {
                         {...me}
                         isCurrentPlayer={true}
                         sourceText={text}
+                        screenWidth={this.props.screenWidth}
                         readyToPlay={me.readyToPlay} />
                     {players.map(player => (
                         <RaceStripeComponent
                             {...player}
                             sourceText={text}
+                            screenWidth={this.props.screenWidth}
                             readyToPlay={player.readyToPlay}
                             key={player.id}
                         />))}
                 </div>
 
-                <br/><br/>{JSON.stringify(gameState)}
+                {/* <br/><br/>{JSON.stringify(gameState)} */}
             </div>
         );
     }
 }
-
-
-
-/*
-const $input = document.querySelector('input');
-const $car = document.querySelector('.car');
-const $text = document.querySelector('.text');
-const $race = document.querySelector('.race');
-const $error = document.querySelector('.error');
-const $start = document.querySelector('.start');
-*/

@@ -36,7 +36,7 @@ function changePlayerStateOnGameActions(state, action) {
 }
 
 function changePlayersState(state, action) {
-    console.log(action);
+    // console.log(action);
     return {
         ...state,
         currentRaceState: {
@@ -77,6 +77,10 @@ export default function races(state = initialState, action) {
                     ...state.currentRaceState,
                     game: action.game,
                 }
+            };
+        case types.GAME_OVER:
+            return {
+                ...state,
             };
         case types.USER_CHANGE_READY_STATUS:
             return {
