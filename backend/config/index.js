@@ -19,10 +19,6 @@ module.exports = {
     socket: {
         host: process.env.SOCKET_HOST,
         port: process.env.SOCKET_PORT,
-        rooms: {
-            main: 'main',
-            race: 'race-{id}',
-        }
     },
     auth: {
         tokenLifetime: 30, // in days

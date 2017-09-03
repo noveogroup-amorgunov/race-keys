@@ -1,9 +1,22 @@
-const { Player } = require('../models');
+const { Player, Car } = require('../models');
 const userRepository = require('./userRepository');
 
 module.exports = {
     async createPlayer(socketId, user) {
-        const player = new Player({ socketId, user, name: (user ? user.login : 'Guest') });
+        const data = { socketId, user };
+
+        const car = await (user && user.game.car ?
+            Car.findById(user.game.car) :
+            Car.getRandom());
+        data.carModel = car.model;
+
+        if (user) {
+            data.name = user.login;
+            data.racesCount = user.game.races;
+            data.averageSpeed = user.game.averageSpeed;
+        }
+
+        const player = new Player(data);
         return player.save();
     },
     async getPlayerBySocketId(socketId) {
@@ -22,7 +35,7 @@ module.exports = {
         return Player.findOne({ race: raceId, user: userId });
     },
     async getPlayerWithUser({ socketId, raceId, userToken }) {
-        // find player by room and socketId
+        // find player by raceId and socketId
         let player = await this.getPlayerBySocketIdAndRace(socketId, raceId);
         let user;
 

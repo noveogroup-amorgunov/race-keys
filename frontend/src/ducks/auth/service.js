@@ -17,11 +17,11 @@ const service = {
      * @param {UserCredentials} credentials
      * @return {Promise.<Object>}
      */
-    requestRegister(credentials) {
+    requestRegister(credentials, car) {
         return request({
             method: 'post',
             url: '/auth/signup',
-            data: credentials
+            data: Object.assign(credentials, { car }),
         });
     },
 

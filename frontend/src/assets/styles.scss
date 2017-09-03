@@ -259,13 +259,60 @@ form {
 }
 
 .car-body {
-    background: white url('http://klavogonki.ru/img/cars/19-1.png') no-repeat;
-    // background: white url('http://klavogonki.ru/img/cars/35-1.png') no-repeat;
-    // background: white url('http://klavogonki.ru/img/cars/22-3.png') no-repeat;
-    // background: white url('http://klavogonki.ru/img/cars/23.png') no-repeat;
+    background: white url('./images/cars/1.png') no-repeat;
     background-color: transparent;
     height: 50px;
     width: 150px;
+}
+
+.car-body-1 {
+    background: white url('./images/cars/1.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-2 {
+    background: white url('./images/cars/2.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-3 {
+    background: white url('./images/cars/3.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-4 {
+    background: white url('./images/cars/4.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-5 {
+    background: white url('./images/cars/5.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-6 {
+    background: white url('./images/cars/6.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-7 {
+    background: white url('./images/cars/7.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-8 {
+    background: white url('./images/cars/8.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-9 {
+    background: white url('./images/cars/9.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-10 {
+    background: white url('./images/cars/10.png') no-repeat;
+    background-color: transparent;
 }
 
 .stripe {
@@ -415,4 +462,29 @@ form {
 
 .hidden {
     display: none;
+}
+
+.light {
+    background: #aaa;
+    border: 0px solid #aaa;
+    height: 1px;
+}
+
+.car-list {
+    position: relative;
+
+    .car {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .active .car {
+        background-color: #1763e4;
+    }
+
+    &-item {
+        display: inline-block;
+        height: auto;
+        width: auto;
+    }
 }

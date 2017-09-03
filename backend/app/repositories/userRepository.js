@@ -1,11 +1,13 @@
 const moment = require('moment');
 const generateToken = require('../services/generateToken');
-const { User, Token } = require('../models');
+const { User, Token, Car } = require('../models');
 const config = require('../../config');
 
 module.exports = {
     async createUser(data) {
-        const user = new User(data);
+        const car = await Car.findOne({ model: data.car });
+        const fields = car ? Object.assign(data, { 'game.car': car.id }) : data;
+        const user = new User(fields);
         return user.save();
     },
 

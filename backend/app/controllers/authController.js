@@ -6,14 +6,14 @@ const { BadRequestException } = require('../exceptions');
 
 module.exports = {
     async signup(ctx) {
-        const { login, password } = ctx.request.body;
+        const { login, password, car } = ctx.request.body;
         const checkUser = await userRepository.findByLogin(login);
 
         if (checkUser) {
             throw new BadRequestException(errorMessages.usernameAlreadyUsed);
         }
 
-        const user = await userRepository.createUser({ login, password });
+        const user = await userRepository.createUser({ login, password, car });
         const accessToken = await userRepository.createAccessToken(user);
 
         ctx.body = {

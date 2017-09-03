@@ -82,12 +82,13 @@ const actions = {
     },
     /**
      * @param {UserCredentials} credentials
+     * @param {ObjectId} car
      * @return {Object}
      */
-    register(credentials) {
+    register(credentials, car) {
         return (dispatch) => {
             dispatch(actions.registerRequest());
-            return service.requestRegister(credentials)
+            return service.requestRegister(credentials, car)
                 .then(
                     (response) => {
                         window.localStorage.setItem(LOCAL_STORAGE_KEY, response.token);

@@ -17,7 +17,13 @@ const playerSchema = mongoose.Schema({
     finishedTime: Number,
     socketId: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    name: String,
+    carModel: String,
+    racesCount: Number,
+    averageSpeed: Number,
+    name: {
+        type: String,
+        default: 'Guest'
+    }
 }, {
     timestamps: true,
 });
@@ -50,6 +56,9 @@ playerSchema.methods.toJson = function toJson() {
         socketId: this.socketId,
         username: this.name,
         speed: this.speed,
+        carModel: this.carModel,
+        racesCount: this.racesCount,
+        averageSpeed: this.averageSpeed,
     };
 };
 

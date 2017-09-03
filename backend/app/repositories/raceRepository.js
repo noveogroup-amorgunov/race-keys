@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async getNotFinishedRacesByUser(user) {
-        const userPlayers = await Player.find({ user });
+        const userPlayers = await Player.find({ user, finished: { $ne: true } });
         return Race
             .find({ $or: [
                 {

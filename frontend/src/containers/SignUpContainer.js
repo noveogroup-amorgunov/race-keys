@@ -14,9 +14,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        register: (credentials) => {
-            return dispatch(actions.register(credentials)).then(
-                (action) => !action.errorCode && ownProps.history.push('/')
+        register: (credentials, car) => {
+            return dispatch(actions.register(credentials, car)).then(
+                action => !action.errorCode && ownProps.history.push('/')
             );
         }
     };

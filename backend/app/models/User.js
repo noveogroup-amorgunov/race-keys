@@ -7,10 +7,13 @@ const userSchema = mongoose.Schema({
     name: String,
     login: {
         type: String,
-        unique: true
+        unique: true,
     },
     game: {
-        car: String,
+        car: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Car',
+        },
         races: {
             type: Number,
             default: 0,
@@ -19,19 +22,12 @@ const userSchema = mongoose.Schema({
             type: Number,
             default: 0,
         },
-        score: Number,
-        points: Number,
+        maxSpeed: {
+            type: Number,
+            default: 0,
+        }
     },
     password: String,
-    car: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car'
-    },
-    resetPassword: {
-        token: String,
-        date: Date,
-        attempts: Number
-    },
 });
 
 userSchema.plugin(mongoosePaginate);

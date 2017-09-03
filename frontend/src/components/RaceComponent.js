@@ -159,9 +159,9 @@ export default class RaceComponent extends React.Component {
                     }
                 </div>
 
-                {!me.readyToPlay
+                {!me.readyToPlay && status === gameStatuses.WAIT_PLAYERS
                     ? (<a onClick={this.props.readyToPlay} className="button">Ready to play</a>)
-                    : (<div className="-wait-players">You are ready to play!</div>)
+                    : (<div className="-wait-players">You are ready to play! Await another players</div>)
                 }
 
                 <div className="stripes">

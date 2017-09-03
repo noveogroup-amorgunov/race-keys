@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import locale from '@/locale';
 
+import CarComponent from '@/components/CarComponent';
+
 export default class RaceStripeComponent extends React.Component {
     static propTypes = {
         isCurrentPlayer: PropTypes.bool,
@@ -11,7 +13,7 @@ export default class RaceStripeComponent extends React.Component {
     };
 
     updatePositions() {
-        const $car = ReactDOM.findDOMNode(this.refs.car);
+        const $car = ReactDOM.findDOMNode(this.refs.car).children[0];
         const $stripeDesc = ReactDOM.findDOMNode(this.refs.stripeDesc);
         const $stripe = ReactDOM.findDOMNode(this.refs.stripe);
         const { sourceText } = this.props;
@@ -33,7 +35,7 @@ export default class RaceStripeComponent extends React.Component {
 
     render() {
         const {
-            races = -1,
+            racesCount = -1,
             finished,
             isCurrentPlayer,
             readyToPlay,
@@ -42,7 +44,9 @@ export default class RaceStripeComponent extends React.Component {
             errorsInPrint,
             finishedTime,
             speed,
-            sourceText
+            averageSpeed,
+            carModel,
+            sourceText,
         } = this.props;
 
         const errorInPercents = (((errorsInPrint || 0) * 100) / sourceText.length).toFixed(2);
@@ -55,28 +59,24 @@ export default class RaceStripeComponent extends React.Component {
             <div ref="stripe" className='stripe'>
                 <div ref="stripeDesc" className='stripe-desc'>
                     <span className={readyToPlay ? 'stripe-ready stripe-ready-yes' : 'stripe-ready'}></span>
-                    {isCurrentPlayer
-                        ? (<strong>It's you</strong>)
-                        : (<span>{username}
-                            {races > 10 &&
-                                (<i className="award" title="A medal for 10 runs texts"></i>)
-                            }
-                            {races > 0 &&
-                                (<span className="stripe-desc-stats">races: <strong>{races}</strong></span>)
-                            }
-                        </span>)
-                    }
+                    <span>
+                        {isCurrentPlayer ? (<strong>It's you</strong>) : username }
+                        {racesCount > 10 &&
+                            (<i className="award" title="A medal for 10 runs texts"></i>)
+                        }
+                        {racesCount > 0 &&
+                            (<span className="stripe-desc-stats">races: <strong>{racesCount}</strong></span>)
+                        }
+                    </span>
                 </div>
                 {finished &&
                     (<div className='stripe-result'>
                         <span>{place} Place&nbsp;&nbsp;&nbsp;{time}&nbsp;&nbsp;&nbsp;{speed.toFixed(2)} chars/min&nbsp;&nbsp;&nbsp;{errorsInPrint} errors ({errorInPercents}%)</span>
                     </div>)
                 }
-                <div className={finished ? 'car-wrapper car-wrapper-finished' : 'car-wrapper'}>
-                    <div ref="car" className='car'>
-                        <div className='car-body'>
-                        </div>
-                    </div>
+                <div ref="car" className={finished ? 'car-wrapper car-wrapper-finished' : 'car-wrapper'}>
+                    <CarComponent
+                        model={carModel} />
                 </div>
             </div>
         );

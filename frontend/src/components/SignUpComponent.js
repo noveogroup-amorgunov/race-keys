@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import locale from '../locale';
+import CarComponent from '@/components/CarComponent';
 
 export default class RegisterComponent extends React.Component {
     static propTypes = {
@@ -17,7 +18,8 @@ export default class RegisterComponent extends React.Component {
             form: {
                 username: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                car: null,
             }
         };
     }
@@ -25,6 +27,17 @@ export default class RegisterComponent extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             errorMessage: nextProps.errorCode ? locale.errors[nextProps.errorCode] : null
+        });
+    }
+
+    changeCar(event) {
+        console.log(event.currentTarget.dataset.index);
+        event.preventDefault();
+        this.setState({
+            form: {
+                ...this.state.form,
+                car: event.currentTarget.dataset.index,
+            }
         });
     }
 
@@ -57,7 +70,7 @@ export default class RegisterComponent extends React.Component {
         return this.props.register({
             login: form.username,
             password: form.password
-        });
+        }, form.car);
     }
 
     render() {
@@ -66,6 +79,9 @@ export default class RegisterComponent extends React.Component {
             return <Redirect to='/'/>;
         }
 
+        // TODO: load cars for backend
+        const cars = [...Array(10).keys()].map(i => i + 1);
+        const carClasses = 'car-list-item car-wrapper';
         return (
             <form
                 onSubmit={this._handleFormSubmit} >
@@ -87,6 +103,22 @@ export default class RegisterComponent extends React.Component {
                     value={form.confirmPassword}
                     onChange={this._handleInputChange.bind(this, 'confirmPassword')}
                 />
+
+                <div className="car-list">
+                    Select car from list:
+                    <br/><br/>
+                    {cars.map(carModel => (
+                        <div
+                            onClick={::this.changeCar}
+                            data-index={carModel}
+                            key={carModel}
+                            className={+carModel === +form.car ? `${carClasses} active` : carClasses}>
+                            <CarComponent model={carModel} />
+                        </div>
+                    ))}
+                </div>
+                <hr className='light' />
+
                 {errorMessage && <div className="danger">
                     {errorMessage}
                 </div>}

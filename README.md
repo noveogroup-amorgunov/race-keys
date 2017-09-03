@@ -25,16 +25,18 @@
 - ~Bug: set initial state to game by collection's doc data~
 - ~Task: Text from SOURCE!~
 - ~Bug: Hide text before start~
-- 1 Task: Add car images
-- 2 Feature: Collect users stats
-- 3 Bug: LEAVE_RACE if server is reloaded (uodate socket id)
-- 4 Feature: Select car into sign up
-- 5 Task: Add finish popup
-- 6 Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
-- 7 Feature: global loader
-- 8 Task: Add timer
-- 9 Task: Update players state
-- 10 Bug: move and crop images to server
+- ~Task: Add car images~
+- ~Feature: Collect users stats~
+- ~Feature: Select car into sign up~
+- ~Task: Update players state~
+- 1 Bug: LEAVE_RACE if server is reloaded (uodate socket id)
+- 2 Task: Add finish popup
+- 3 Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
+- 4 Feature: global loader
+- 5 Task: Add timer
+- 6 Bug: move and crop images to server
+- 7 Featire: add mobile screen styles
+- 8 Task: migrations for texts and add getRandomText static method
 
 
 ## Requirements

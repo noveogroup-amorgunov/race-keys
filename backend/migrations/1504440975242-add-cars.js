@@ -5,44 +5,44 @@ const { Car } = require('../app/models');
 
 const cars = [
     {
-        model: 'Duesenberg Speedster',
-        image: '1.png',
+        name: 'Duesenberg Speedster',
+        model: '1',
     },
     {
-        model: 'Ferrari 250 Testa Rossa',
-        image: '2.png',
+        name: 'Ferrari 250 Testa Rossa',
+        model: '2',
     },
     {
-        model: 'Dodge Viper',
-        image: '3.png',
+        name: 'Dodge Viper',
+        model: '3',
     },
     {
-        model: 'Ferrari FX Concept',
-        image: '4.png',
+        name: 'Ferrari FX Concept',
+        model: '4',
     },
     {
-        model: 'Smart Fortwo',
-        image: '5.png',
+        name: 'Smart Fortwo',
+        model: '5',
     },
     {
-        model: 'Bugatti Veyron',
-        image: '6.png',
+        name: 'Bugatti Veyron',
+        model: '6',
     },
     {
-        model: 'Lamborghini Murcielago',
-        image: '7.png',
+        name: 'Lamborghini Murcielago',
+        model: '7',
     },
     {
-        model: 'Ferrari Zobin',
-        image: '8.png',
+        name: 'Ferrari Zobin',
+        model: '8',
     },
     {
-        model: 'Batmobile',
-        image: '9.png',
+        name: 'Batmobile',
+        model: '9',
     },
     {
-        model: 'F1',
-        image: '10.png',
+        name: 'F1',
+        model: '10',
     },
 ];
 
