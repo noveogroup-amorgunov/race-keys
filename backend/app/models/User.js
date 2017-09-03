@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema({
         points: Number,
     },
     password: String,
+    car: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Car'
+    },
     resetPassword: {
         token: String,
         date: Date,

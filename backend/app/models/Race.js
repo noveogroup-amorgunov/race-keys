@@ -38,6 +38,7 @@ raceSchema.methods.toJson = function toJson() {
         startedAt: this.startedAt,
         createdAt: this.createdAt,
         text: this.text.text,
+        textSource: this.text.source,
         players: this.getPlayers().map(player => player.toJson()),
         status: this.status,
     };
@@ -83,14 +84,18 @@ raceSchema.methods.playerFinishRace = async function playerFinishRace(player) {
     const finishedPlayerCount = this.players
         .reduce((acc, p) => p.isFinished(), 0);
 
-    const playPeriod = Date.now() - this.data.startedAt;
-    await player.finish(finishedPlayerCount + 1, playPeriod).save();
+    const playPeriod = Date.now() - +this.startedAt;
+    const speed = (this.text.text.length * 1000 * 60) / (playPeriod);
+
+    player.finish(finishedPlayerCount + 1, playPeriod, speed);
+    await player.save();
 
     // if all player finished, end game
-    if (finishedPlayerCount + 1 === this.players.length) {
-        return this.endGame();
+    if (finishedPlayerCount + 1 >= this.players.length) {
+        this.endGame();
+        await this.save();
     }
-    return this;
+    return { player };
 };
 
 raceSchema.methods.isAllPlayersReadyToPlay = function isAllPlayersReadyToPlay() {

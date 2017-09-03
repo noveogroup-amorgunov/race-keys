@@ -13,7 +13,8 @@ const playerSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    finishedTime: Date,
+    speed: Number,
+    finishedTime: Number,
     socketId: String,
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     name: String,
@@ -48,6 +49,7 @@ playerSchema.methods.toJson = function toJson() {
         finishedTime: this.finishedTime,
         socketId: this.socketId,
         username: this.name,
+        speed: this.speed,
     };
 };
 
@@ -67,8 +69,9 @@ playerSchema.methods.changePositionInText = function changePositionInText(positi
 };
 
 
-playerSchema.methods.finish = function readyToPlay(place, time) {
+playerSchema.methods.finish = function readyToPlay(place, time, speed) {
     this.set('finishedTime', time);
+    this.set('speed', speed);
     this.set('finished', true);
     this.set('place', place);
     return this;
