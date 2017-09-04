@@ -36,9 +36,9 @@ class Game extends EventEmitter {
 
     userEnterNewChar(char) {
         const data = this.data;
-        console.log(data.currentChunkIndex + '[' + data.currentIndex + ']' + data.chunks[data.currentChunkIndex][data.currentIndex] + '===' + char);
-        console.log(`data.chunks.length: ${data.chunks.length}`);
-        console.log(`data.chunks[data.currentChunkIndex].length: ${data.chunks[data.currentChunkIndex].length}`);
+        // console.log(data.currentChunkIndex + '[' + data.currentIndex + ']' + data.chunks[data.currentChunkIndex][data.currentIndex] + '===' + char);
+        // console.log(`data.chunks.length: ${data.chunks.length}`);
+        // console.log(`data.chunks[data.currentChunkIndex].length: ${data.chunks[data.currentChunkIndex].length}`);
         if (data.chunks[data.currentChunkIndex][data.currentIndex] === char) {
             this.emit('displayErrorText', false);
             data.isError = false;

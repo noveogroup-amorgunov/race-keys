@@ -29,14 +29,17 @@
 - ~Feature: Collect users stats~
 - ~Feature: Select car into sign up~
 - ~Task: Update players state~
-- 1 Bug: LEAVE_RACE if server is reloaded (uodate socket id)
+- ~Feature: delete players from not started races if server is reload~
+- ~Task: add constraint for cars count~
+- ~Bug: check why delete players~
+- ~Task: migrations for texts and add getRandomText static method~
+- 1 Bug: LEAVE_RACE if server is reloaded (update socket id)
 - 2 Task: Add finish popup
 - 3 Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
 - 4 Feature: global loader
 - 5 Task: Add timer
-- 6 Bug: move and crop images to server
-- 7 Featire: add mobile screen styles
-- 8 Task: migrations for texts and add getRandomText static method
+- 6 Bug: ~move~ and crop images to server
+- 7 Feature: add mobile screen styles
 
 
 ## Requirements

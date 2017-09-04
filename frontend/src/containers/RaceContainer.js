@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import RaceComponent from '@/components/RaceComponent';
 import { actions, selectors } from '@/ducks/races';
 import { selectors as appSelectors } from '@/ducks/app';
+import { selectors as userSelectors } from '@/ducks/user';
 
 
 class RaceContainer extends React.Component {
@@ -68,6 +69,7 @@ export default connect(state => ({
     errorCode: selectors.selectErrorCode(state),
     currentRaceState: selectors.selectCurrentRaceState(state),
     screenWidth: appSelectors.selectScreenWidth(state),
+    socketId: userSelectors.selectSocketId(state),
 }), {
     fetchRace: actions.fetchRace,
     joinRace: actions.joinRaceRequest,

@@ -8,6 +8,12 @@ module.exports = {
             .populate(['players', 'text']);
     },
 
+    async deletePlayersFromNotStartedRaces() {
+        const notStartedRaces = await Race.find({ status: Race.statuses.WAIT_PLAYERS });
+        const playerIds = notStartedRaces.reduce((acc, item) => acc.concat(item.players), []);
+        await Player.remove({ _id: { $in: playerIds } });
+    },
+
     async getNotFinishedRacesByUser(user) {
         const userPlayers = await Player.find({ user, finished: { $ne: true } });
         return Race
@@ -31,7 +37,7 @@ module.exports = {
     },
 
     async createRace() {
-        const text = await Text.findOne();
+        const text = await Text.getRandom();
         const race = await (new Race({ text: text.id })).save();
 
         return Race

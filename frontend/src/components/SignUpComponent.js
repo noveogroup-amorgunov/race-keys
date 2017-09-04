@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import locale from '../locale';
 import CarComponent from '@/components/CarComponent';
+import { CAR_COUNT } from '@/constants';
 
 export default class RegisterComponent extends React.Component {
     static propTypes = {
@@ -31,7 +32,6 @@ export default class RegisterComponent extends React.Component {
     }
 
     changeCar(event) {
-        console.log(event.currentTarget.dataset.index);
         event.preventDefault();
         this.setState({
             form: {
@@ -80,7 +80,7 @@ export default class RegisterComponent extends React.Component {
         }
 
         // TODO: load cars for backend
-        const cars = [...Array(10).keys()].map(i => i + 1);
+        const cars = [...Array(CAR_COUNT).keys()].map(i => i + 1);
         const carClasses = 'car-list-item car-wrapper';
         return (
             <form

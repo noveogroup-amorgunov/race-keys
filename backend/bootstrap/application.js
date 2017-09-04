@@ -5,12 +5,16 @@ const config = require('../config');
 const mongoose = require('./mongoose');
 const redis = require('./redis');
 const socketHandler = require('../app/services/socketHandler');
+const raceRepository = require('../app/repositories/raceRepository');
 
 class Application extends Koa {
     async start() {
         logger.notice('App enviroment (process.env.NODE_ENV): %s', process.env.NODE_ENV);
         await this.connectRedis();
         await this.connectMongoose();
+
+        // delete players from all not started races
+        await raceRepository.deletePlayersFromNotStartedRaces();
 
         this.createSocketServer();
 
@@ -30,8 +34,8 @@ class Application extends Koa {
             logger.notice('Listening io server on host %s:%s', config.socket.host, config.socket.port);
         });
 
+        // socket middleware on connction
         io.use(socketHandler(io));
-        // io.on('connection', socketHandler(io));
     }
 
     async stop() {

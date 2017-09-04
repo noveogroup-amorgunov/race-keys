@@ -5,6 +5,7 @@ export const HOST_URL = process.env.HOST_URL;
 export const SOCKET_STORE_KEY = 'socket';
 export const LOCAL_STORAGE_KEY = 'race.keys';
 export const RACES_PER_PAGE = 5;
+export const CAR_COUNT = 15;
 
 export const Errors = {
     INVALID_USERNAME_OR_PASSWORD: 'INVALID_USERNAME_OR_PASSWORD',

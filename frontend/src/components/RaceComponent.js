@@ -78,7 +78,10 @@ export default class RaceComponent extends React.Component {
 
         const formattedText = `${text.substring(0, start)}<span>${text.substring(start, end)}</span>${text.substring(end, text.length)}`;
         setTimeout(() => {
-            (ReactDOM.findDOMNode(this.refs.text).innerHTML = formattedText);
+            const $text = ReactDOM.findDOMNode(this.refs.text);
+            if ($text) {
+                $text.innerHTML = formattedText;
+            }
         }, 150);
     }
 
@@ -159,9 +162,11 @@ export default class RaceComponent extends React.Component {
                     }
                 </div>
 
-                {!me.readyToPlay && status === gameStatuses.WAIT_PLAYERS
-                    ? (<a onClick={this.props.readyToPlay} className="button">Ready to play</a>)
-                    : (<div className="-wait-players">You are ready to play! Await another players</div>)
+                {!me.readyToPlay && status === gameStatuses.WAIT_PLAYERS &&
+                    (<a onClick={this.props.readyToPlay} className="button">Ready to play</a>)
+                }
+                {me.readyToPlay && status === gameStatuses.WAIT_PLAYERS &&
+                    (<div className="-wait-players">You are ready to play! Await another players</div>)
                 }
 
                 <div className="stripes">

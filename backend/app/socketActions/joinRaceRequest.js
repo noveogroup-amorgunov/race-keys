@@ -62,7 +62,8 @@ module.exports = async (io, action, socket) => {
             }
 
             gameState = await race.getGameState(player);
-            notify(gameTypes.GAME_OVER, gameState, socket.id);
+            notify(gameTypes.JOIN_RACE_SUCCESS, { gameState, socketId: socket.id }, socket.id);
+            // notify(gameTypes.GAME_OVER, gameState, socket.id);
             break;
         default:
     }
