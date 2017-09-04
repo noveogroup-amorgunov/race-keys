@@ -1,4 +1,5 @@
 @import "stylesheets/normalize";
+@import "stylesheets/media-queries";
 
 body {
     background-color: #fdfdfd;
@@ -19,6 +20,10 @@ html, body {
 }
 
 main {
+    @include tablet-landscape-and-below {
+        padding: 5px;
+    }
+
     background-color: #fff;
     // max-width: 1260px;
     max-width: 1024px;
@@ -239,6 +244,7 @@ form {
     position: relative;
     height: 100%;
     width: 100%;
+    margin-top: 5px;
 
     &-finished {
         opacity: 0.5;
@@ -315,6 +321,31 @@ form {
     background-color: transparent;
 }
 
+.car-body-11 {
+    background: white url('./images/cars/11.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-12 {
+    background: white url('./images/cars/12.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-13 {
+    background: white url('./images/cars/13.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-14 {
+    background: white url('./images/cars/14.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-15 {
+    background: white url('./images/cars/15.png') no-repeat;
+    background-color: transparent;
+}
+
 .stripe {
     width: 96%;
     height: 60px;
@@ -381,7 +412,7 @@ form {
     position: absolute;
     right: -13px;
     top: 5px;
-    background: white url(http://klavogonki.ru/img/awards-4.gif) no-repeat 0% 0%;
+    background: white url('./images/awards.gif') no-repeat 0% 0%;
 }
 
 .finish-line {
@@ -483,6 +514,7 @@ form {
     }
 
     &-item {
+        margin-bottom: 15px;
         display: inline-block;
         height: auto;
         width: auto;
