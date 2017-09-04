@@ -21,7 +21,7 @@ html, body {
 
 main {
     @include tablet-landscape-and-below {
-        padding: 5px;
+        padding: 30px 5px;
     }
 
     background-color: #fff;
@@ -60,10 +60,17 @@ main {
         float: right;
 
         .button {
+            @include tablet-landscape-and-below {
+                margin-left: 5px;
+                margin-bottom: 5px;
+            }
             margin-left: 10px;
         }
 
         span {
+            @include mobile-only {
+                display: none;
+            }
             line-height: 36px;
         }
     }
@@ -89,8 +96,8 @@ main {
             margin: 0 auto; /* Gives that scrolling effect as the typing happens */
             letter-spacing: .10em; /* Adjust as needed */
             animation: 
-                // typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
+            // typing 3.5s steps(40, end),
+            blink-caret .75s step-end infinite;
             /*Set our animation play state to paused initially */
             animation-play-state: paused; 
 
@@ -128,16 +135,24 @@ main {
     outline: none;
 }
 .button, .button.button--truncated .icon {
+    @include tablet-landscape-and-below {
+        line-height: 25px;
+    }
     line-height: 35px;
 }
 .button {
+    @include tablet-landscape-and-below {
+        padding: 0px 6px;
+        height: 27px;
+        font-size: 12px;
+    }
+
     display: inline-block;
     position: relative;
     height: 37px;
     padding: 0 16px;
     color: rgba(0,0,0,.44);
     background: rgba(0,0,0,0);
-    font-size: 12px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
@@ -203,12 +218,27 @@ form {
 }
 
 .race {
+    @include tablet-landscape-and-below {
+        text-align: center;
+    }
     &-header {
         margin-bottom: 5px;
     }
 }
 
 .race-preview {
+    @include tablet-landscape-and-below {
+        padding: 5px;
+        margin: 5px;
+        width: 29%;
+        overflow: hidden;
+    }
+    @include mobile-only {
+        padding: 5px;
+        margin: 5px;
+        width: 45%;
+        overflow: hidden;
+    }
     width: 30%;
     display: inline-block;
     background-color: #fafafa;
@@ -442,14 +472,32 @@ form {
     color: #aaa;
 }
 
+.share {
+    float: right;
+    width: 40%;
+    text-align: center;
+}
+
+.text-wrapper {
+    text-align: left;
+    width: 50%;
+
+    .text {
+        span {
+            background-color: #f5f5ba;
+        }
+    }
+}
+
 .share, .text-wrapper {
+    @include tablet-landscape-and-below {
+        padding: 5%;
+        width: 90%;
+        float: none;
+    }
     margin: 25px 10px;
     background: #f3f3f3;
     padding: 20px;
-    width: 50%;
-    text-align: center;
-
-
 
     input {
         margin-top: 10px;
@@ -465,26 +513,11 @@ form {
     }
 }
 
-.text-wrapper {
-    text-align: left;
-
-    .text {
-        span {
-            background-color: #f5f5ba;
-        }
-    }
-}
-
 .text-finished, .text-wait-players {
     text-align: center;
     overflow: hidden;
     min-height: 90px;
     line-height: 30px;
-}
-
-.share {
-    float: right;
-    width: 40%;
 }
 
 .-wait-players {

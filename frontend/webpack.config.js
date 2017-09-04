@@ -93,6 +93,7 @@ module.exports = {
         // inline: false,
         contentBase: publicFolder,
         historyApiFallback: true,
+        disableHostCheck: true,
     },
     resolve: {
         modules: ['src', 'node_modules'],
