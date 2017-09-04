@@ -1,25 +1,29 @@
 require('dotenv-extended').load();
 require('./utils');
-
+const { User } = require('../app/models');
 const userRepository = require('../app/repositories/userRepository');
 
-const data = {
-    user1: {
-        login: 'mike',
-        password: '123'
+const users = [{
+    login: 'mike',
+    password: '123',
+    game: {
+        races: 11,
+        averageSpeed: 230,
+        maxSpeed: 234,
     },
-    user2: {
-        login: 'piter',
-        password: '123'
-    },
-};
+}, {
+    login: 'piter',
+    password: '123'
+}];
 
 exports.up = async (next) => {
-    await userRepository.createUser(data.user1);
-    await userRepository.createUser(data.user2);
+    await Promise.all(users.map(async (userData) => {
+        await userRepository.createUser(userData);
+    }));
     next();
 };
 
-exports.down = (next) => {
+exports.down = async (next) => {
+    await User.remove({});
     next();
 };

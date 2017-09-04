@@ -1,6 +1,6 @@
 require('dotenv-extended').load();
 require('./utils');
-
+const { Race } = require('../app/models');
 const raceRepository = require('../app/repositories/raceRepository');
 
 exports.up = async (next) => {
@@ -8,6 +8,7 @@ exports.up = async (next) => {
     next();
 };
 
-exports.down = (next) => {
+exports.down = async (next) => {
+    await Race.remove({});
     next();
 };

@@ -44,6 +44,26 @@ const cars = [
         name: 'F1',
         model: '10',
     },
+    {
+        name: 'Caterpillar 247B',
+        model: '11',
+    },
+    {
+        name: 'Streetcar',
+        model: '12',
+    },
+    {
+        name: 'Volkswagen Beetle',
+        model: '13',
+    },
+    {
+        name: 'Tractor',
+        model: '14',
+    },
+    {
+        name: 'Hummer H3',
+        model: '15',
+    },
 ];
 
 exports.up = async (next) => {
