@@ -37,6 +37,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/app.js",
+    "dev": "node_modules/.bin/nodemon bin/app.js",
     "migrate": "./node_modules/.bin/migrate --template-file migrations/template.js"
   },
   "keywords": [],
