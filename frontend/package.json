@@ -41,7 +41,7 @@
     "babel-polyfill": "^6.26.0",
     "dotenv-extended": "^2.0.1",
     "history": "^4.6.3",
-    "lodash": "^4.17.4",
+    "lodash.assign": "^4.2.0",
     "lodash.uniqby": "^4.7.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",

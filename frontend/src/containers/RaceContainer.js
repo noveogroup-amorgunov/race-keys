@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 
 import RaceComponent from '@/components/RaceComponent';
 import { actions, selectors } from '@/ducks/races';
-import { selectors as appSelectors } from '@/ducks/app';
+import { selectors as appSelectors, actions as appActions, modalTypes } from '@/ducks/app';
 import { selectors as userSelectors } from '@/ducks/user';
-
 
 class RaceContainer extends React.Component {
     static propTypes = {
@@ -14,9 +13,6 @@ class RaceContainer extends React.Component {
         joinRace: PropTypes.func.isRequired,
         leaveRace: PropTypes.func.isRequired,
         readyToPlay: PropTypes.func.isRequired,
-        // makeErrorInText: PropTypes.func.makeErrorInText,
-        // movingForward: PropTypes.func.movingForward,
-        // finishRace: PropTypes.func.finishRace,
     };
 
     constructor(props) {
@@ -55,6 +51,7 @@ class RaceContainer extends React.Component {
                 race={this.props.currentRace}
                 errorCode={this.props.errorCode}
                 gameState={this.props.currentRaceState}
+                finishRaceOpenModal={this.props.finishRaceOpenModal}
                 makeErrorInText={this.props.makeErrorInText.bind(this, this.raceId)}
                 movingForward={this.props.movingForward.bind(this, this.raceId)}
                 finishRace={this.props.finishRace.bind(this, this.raceId)}
@@ -71,6 +68,7 @@ export default connect(state => ({
     screenWidth: appSelectors.selectScreenWidth(state),
     socketId: userSelectors.selectSocketId(state),
 }), {
+    finishRaceOpenModal: appActions.openModal.bind(null, modalTypes.FINISH_RACE),
     fetchRace: actions.fetchRace,
     joinRace: actions.joinRaceRequest,
     makeErrorInText: actions.makeErrorInTextRequest,

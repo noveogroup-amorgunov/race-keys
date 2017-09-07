@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import _ from 'lodash';
+import assign from 'lodash.assign';
 
 let instance = null;
 
@@ -16,7 +16,7 @@ const Store = function Store() {
     this._storage = {};
 };
 
-_.extend(Store.prototype, {
+assign(Store.prototype, {
     _serialize(value) {
         return JSON.stringify(value);
     },

@@ -5,6 +5,7 @@ import React from 'react';
 
 import { selectors as userSelectors, actions as userActions } from '@/ducks/user';
 import { selectors as authSelectors, actions as authActions } from '@/ducks/auth';
+import { modalTypes, actions as appActions } from '@/ducks/app';
 import AppComponent from '@/components/AppComponent';
 
 class AppContainer extends React.Component {
@@ -33,7 +34,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         fetchUser: bindActionCreators(userActions.fetchUser, dispatch),
         logout: () => {
-            dispatch(authActions.logoutUser()).then(() => ownProps.history.push('/login'));
+            dispatch(appActions.openModal(modalTypes.CONFIRM_LOGOUT, {
+                logout: () => dispatch(authActions.logoutUser()).then(() => ownProps.history.push('/login'))
+            }));
         }
     };
 }

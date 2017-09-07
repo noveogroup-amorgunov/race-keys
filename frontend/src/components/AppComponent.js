@@ -10,6 +10,7 @@ import {
     RacesContainer,
     CreateRaceContainer,
     RaceContainer,
+    ModalContainer,
 } from '../containers';
 
 function AppComponent(props) {
@@ -29,6 +30,7 @@ function AppComponent(props) {
                 </Switch>
             </main>
             <footer></footer>
+            <ModalContainer />
         </div>
     );
 }

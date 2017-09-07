@@ -48,6 +48,18 @@ export default class RaceComponent extends React.Component {
                 nextProps.gameState.me.position,
             );
         }
+
+        if (this.props.gameState.me && !this.props.gameState.me.finished && nextProps.gameState.me.finished) {
+            const sourceTextLength = this.game.data.sourceText.length;
+            const errorsInPercents = (((nextProps.gameState.me.errorsInPrint || 0) * 100) / sourceTextLength).toFixed(2)
+
+            this.props.finishRaceOpenModal({
+                data: {
+                    ...nextProps.gameState.me,
+                    errorsInPercents,
+                }
+            });
+        }
     }
 
     componentWillMount() {

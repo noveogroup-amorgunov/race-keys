@@ -1,11 +1,9 @@
-import _ from 'lodash';
 import uniqBy from 'lodash.uniqby';
-
 import types from './types';
 
 function changeStateOnChangeRace(state, action) {
     const items = [...state.items];
-    const index = _.findIndex(items, { id: action.race.id });
+    const index = items.map(item => item.id).indexOf(action.race.id);
     items.splice(index, 1, action.race);
     return {
         ...state,
