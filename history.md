@@ -1,12 +1,9 @@
 ## @todolist
 
 - 1 Bug: LEAVE_RACE if server is reloaded (update socket id)
-- 2 Task: Add finish popup
 - 3 Bug: *game* when user type wrong char, not clear it and write right char, game continue. (check enters part of word)
 - 4 Feature: global loader
 - 5 Task: Add timer
-- 6 Bug: ~move~ and crop images to server
-
 
 ## fixed in v0.1
 
@@ -42,3 +39,5 @@
 - ~Bug: check why delete players~
 - ~Task: migrations for texts and add getRandomText static method~
 - ~Feature: add mobile screen styles~
+- ~Task: Add finish popup~
+- ~Bug: move and crop images to server~

@@ -1,0 +1,314 @@
+.race {
+    @include tablet-landscape-and-below {
+        text-align: center;
+    }
+    &-header {
+        margin-bottom: 5px;
+    }
+}
+
+.race-preview {
+    @include tablet-landscape-and-below {
+        padding: 5px;
+        margin: 5px;
+        width: 29%;
+        overflow: hidden;
+    }
+    @include mobile-only {
+        padding: 5px;
+        margin: 5px;
+        width: 45%;
+        overflow: hidden;
+    }
+    width: 30%;
+    display: inline-block;
+    background-color: #fafafa;
+    padding: 10px;
+    margin: 10px;
+    border-bottom: 5px solid #eee;
+    border-radius: 2px;
+
+    &-in-process {
+        background-color: #faffae;
+    }
+}
+
+
+
+.race-preview-title {
+    font-size: .8em;
+    font-weight: bold;
+    color: #999;
+}
+
+.car-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: 5px;
+
+    &-finished {
+        opacity: 0.5;
+    }
+}
+
+.car {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 50px;
+    border: 0px;
+    background: rgb(119, 119, 119);
+    overflow: hidden;
+    transition: opacity 0.5s;
+    transition: all 0.1s;
+}
+
+.car-body {
+    background: white url('./images/cars/1.png') no-repeat;
+    background-color: transparent;
+    height: 50px;
+    width: 150px;
+}
+
+.car-body-1 {
+    background: white url('./images/cars/1.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-2 {
+    background: white url('./images/cars/2.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-3 {
+    background: white url('./images/cars/3.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-4 {
+    background: white url('./images/cars/4.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-5 {
+    background: white url('./images/cars/5.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-6 {
+    background: white url('./images/cars/6.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-7 {
+    background: white url('./images/cars/7.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-8 {
+    background: white url('./images/cars/8.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-9 {
+    background: white url('./images/cars/9.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-10 {
+    background: white url('./images/cars/10.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-11 {
+    background: white url('./images/cars/11.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-12 {
+    background: white url('./images/cars/12.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-13 {
+    background: white url('./images/cars/13.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-14 {
+    background: white url('./images/cars/14.png') no-repeat;
+    background-color: transparent;
+}
+
+.car-body-15 {
+    background: white url('./images/cars/15.png') no-repeat;
+    background-color: transparent;
+}
+
+.stripe {
+    width: 96%;
+    height: 60px;
+    border-bottom: 2px dashed #45bfef;
+    padding-left: 100px;
+    position: relative;
+}
+
+.stripes {
+    width: 100%;
+    position: relative;
+}
+
+.stripe-desc {
+    position: absolute;
+    left: 8px;
+    bottom: 7px;
+    width: 80px;
+    height: 30px;
+    // border-bottom: 2px dashed red;
+    text-align: right;
+
+    &-stats {
+        font-size: .8em;
+        color: #999;
+        display: block;
+        margin-left: 14px;
+        margin-top: -4px;
+    }
+
+    span {
+        position: relative;
+    }
+}
+
+.stripe-result {
+    position: absolute;
+    bottom: 8px;
+    height: 30px;
+
+    font-size: 1.3em;
+    font-weight: bold;
+
+    position: absolute;
+    left: 8px;
+    width: 60%;
+}
+
+.stripe-ready {
+    border-radius: 50%;
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    margin-right: 6px;
+    background-color: red;
+    &-yes {
+        background-color: #33a9ec;
+    }
+}
+
+.award {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: -13px;
+    top: 5px;
+    background: white url('./images/awards.gif') no-repeat 0% 0%;
+}
+
+.finish-line {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    background: url('./images/finish-line.png');
+    background-position: -2px 0px;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 17px;
+    background-color: #231f20;
+
+    &:after {
+        content: 'finish';
+        display: block;
+        position: absolute;
+        top: -14px;
+        left: -6px;
+        color: #666;
+        font-weight: bold;
+        font-size: .8em;
+    }
+}
+
+
+
+.share {
+    float: right;
+    width: 40%;
+    text-align: center;
+}
+
+.text-wrapper {
+    text-align: left;
+    width: 50%;
+
+    .text {
+        span {
+            background-color: #f5f5ba;
+        }
+    }
+}
+
+.share, .text-wrapper {
+    @include tablet-landscape-and-below {
+        padding: 5%;
+        width: 90%;
+        float: none;
+    }
+    margin: 25px 10px;
+    background: #f3f3f3;
+    padding: 20px;
+
+    input {
+        margin-top: 10px;
+    }
+
+    input.error {
+        border: 1px solid red;
+        background: rgb(255, 249, 249);
+    }
+
+    span.hint {
+        color: #999;
+    }
+}
+
+.text-finished, .text-wait-players {
+    text-align: center;
+    overflow: hidden;
+    min-height: 90px;
+    line-height: 30px;
+}
+
+.-wait-players {
+
+}
+
+.car-list {
+    position: relative;
+
+    .car {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .active .car {
+        background-color: #1763e4;
+    }
+
+    &-item {
+        margin-bottom: 15px;
+        display: inline-block;
+        height: auto;
+        width: auto;
+    }
+}

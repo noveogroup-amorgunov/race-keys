@@ -26,6 +26,18 @@ const actions = {
             type: types.SCREEN_RESIZE,
             screenWidth: width
         };
+    },
+    openModal(modalType, modalProps) {
+        return {
+            type: types.OPEN_MODAL,
+            modalType,
+            modalProps
+        };
+    },
+    hideModal() {
+        return {
+            type: types.HIDE_MODAL,
+        };
     }
 };
 
