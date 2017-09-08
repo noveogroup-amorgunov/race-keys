@@ -71,7 +71,7 @@ export default class RaceStripeComponent extends React.Component {
                 </div>
                 {finished &&
                     (<div className='stripe-result'>
-                        <span>{place} Place&nbsp;&nbsp;&nbsp;{time}&nbsp;&nbsp;&nbsp;{speed.toFixed(2)} chars/min&nbsp;&nbsp;&nbsp;{errorsInPrint} errors ({errorInPercents}%)</span>
+                        <span>{place} Place&nbsp;&nbsp;&nbsp;{time}&nbsp;&nbsp;&nbsp;{speed.toFixed(2)} chars/min&nbsp;&nbsp;&nbsp;{errorsInPrint || 0} errors ({errorInPercents}%)</span>
                     </div>)
                 }
                 <div ref="car" className={finished ? 'car-wrapper car-wrapper-finished' : 'car-wrapper'}>

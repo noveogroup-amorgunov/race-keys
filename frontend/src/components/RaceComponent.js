@@ -16,12 +16,18 @@ export default class RaceComponent extends React.Component {
         readyToPlay: PropTypes.func.isRequired,
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = { timer: 0 };
+    }
+
     copyShareLink(event) {
         event.currentTarget.select();
         document.execCommand('copy');
     }
 
-    initGame(sourceText, position) {
+    initGame({ text: sourceText, startedAt }, position) {
         this.game = new Game({ sourceText, position });
 
         this.game.on('displayErrorText', this.displayErrorText.bind(this));
@@ -35,7 +41,18 @@ export default class RaceComponent extends React.Component {
         });
 
         this.game.start();
+        const secondAlreadyPassed = Math.round((Date.now() - new Date(startedAt)) / 1000);
+        this.setState({ timer: secondAlreadyPassed });
+
+        this.timerInverval = setInterval(() => {
+            this.setState({ timer: this.state.timer + 1 });
+        }, 1000);
+
         setTimeout(() => ReactDOM.findDOMNode(this.refs.textInput).focus(), 150);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerInverval);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -44,7 +61,7 @@ export default class RaceComponent extends React.Component {
             this.props.gameState.game.status === gameStatuses.IN_PROCESS)
         ) {
             this.initGame(
-                nextProps.gameState.game.text,
+                nextProps.gameState.game,
                 nextProps.gameState.me.position,
             );
         }
@@ -65,7 +82,7 @@ export default class RaceComponent extends React.Component {
     componentWillMount() {
         if (this.props.gameState.game.text && this.props.gameState.game.status === gameStatuses.IN_PROCESS) {
             this.initGame(
-                this.props.gameState.game.text,
+                this.props.gameState.game,
                 this.props.gameState.me.position,
             );
         }
@@ -123,6 +140,11 @@ export default class RaceComponent extends React.Component {
         const { me, others: players } = gameState;
         const { status, text, textSource } = gameState.game;
 
+        const formattedTime = moment()
+            .startOf('day')
+            .seconds(this.state.timer)
+            .format('mm:ss');
+
         return (
             <div className='race'>
                 {status === gameStatuses.WAIT_PLAYERS
@@ -151,6 +173,7 @@ export default class RaceComponent extends React.Component {
                 <div className="text-wrapper">
                     {status === gameStatuses.IN_PROCESS && !me.finished &&
                         (<div>
+                            <div className="timer">{formattedTime}</div>
                             <div ref="text" className="text">
                                 {text}
                             </div>

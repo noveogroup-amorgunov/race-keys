@@ -250,6 +250,20 @@
 .text-wrapper {
     text-align: left;
     width: 50%;
+    position: relative;
+
+    .timer {
+        position: absolute;
+        font-weight: bold;
+        color: #fff;
+        background: #333;
+        width: 100%;
+        line-height: 35px;
+        height: 35px;
+        top: -20px;
+        left: 0px;
+        text-align: center;
+    }
 
     .text {
         span {
